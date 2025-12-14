@@ -1,4 +1,4 @@
-import { Connection, PublicKey, Transaction, SystemProgram, Keypair } from '@solana/web3.js'
+import { Connection, PublicKey, Transaction, SystemProgram, Keypair, TransactionInstruction } from '@solana/web3.js'
 import {
   TOKEN_2022_PROGRAM_ID,
   createMint,
@@ -47,7 +47,13 @@ export async function bindCreatorSoul(connection: Connection, creatorPubkey: Pub
   tx.add(createMintToInstruction(soulMint.publicKey, ata, creatorPubkey, 1, [], TOKEN_2022_PROGRAM_ID))
 
   // Optional: on-chain memo for audit (creator|mint)
-  // You can add memo program instruction here if desired
+  const memoProgramId = new PublicKey('MemoSq4gqABAXKb96qnH8TysNcWxMyWCqXgDLGmfcQb')
+  const memoContent = `Binding Creator ${creatorPubkey.toBase58()} to Soul ${soulMint.publicKey.toBase58()}`
+  tx.add(new TransactionInstruction({
+    keys: [{ pubkey: creatorPubkey, isSigner: true, isWritable: true }],
+    programId: memoProgramId,
+    data: Buffer.from(memoContent, 'utf-8'),
+  }))
 
   // Partial sign with mint keypair
   tx.partialSign(soulMint)

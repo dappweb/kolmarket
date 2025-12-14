@@ -110,6 +110,11 @@
       "not_connected": "未接続",
       "connect_btn": "接続",
       "disconnect_btn": "切断",
+      "bind_soul_btn": "Soulをバインド",
+      "soul_bound": "Soulバインド済み",
+      "bind_success": "Soulバインド成功: {{mint}}",
+      "bind_fail": "Soulバインド失敗",
+      "bind_required": "続行するにはSoulをバインドしてください",
       "start_valuation": "評価開始"
     },
     "phase2": {

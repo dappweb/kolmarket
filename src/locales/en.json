@@ -110,6 +110,11 @@
       "not_connected": "Not Connected",
       "connect_btn": "Connect",
       "disconnect_btn": "Disconnect",
+      "bind_soul_btn": "Bind Soul",
+      "soul_bound": "Soul Bound",
+      "bind_success": "Soul Bound Successfully: {{mint}}",
+      "bind_fail": "Soul Binding Failed",
+      "bind_required": "Please bind Soul to continue",
       "start_valuation": "Start Valuation"
     },
     "phase2": {

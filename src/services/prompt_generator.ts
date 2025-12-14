@@ -1,3 +1,5 @@
+import { SocialAccount } from '../../types';
+import { ValuationResponse } from './valuation';
 
 export interface KOLProfile {
   name: string;

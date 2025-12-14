@@ -110,6 +110,11 @@
       "not_connected": "未连接",
       "connect_btn": "连接",
       "disconnect_btn": "断开",
+      "bind_soul_btn": "绑定 Soul",
+      "soul_bound": "Soul 已绑定",
+      "bind_success": "Soul 绑定成功: {{mint}}",
+      "bind_fail": "Soul 绑定失败",
+      "bind_required": "请先绑定 Soul 才能继续",
       "start_valuation": "开始估值"
     },
     "phase2": {

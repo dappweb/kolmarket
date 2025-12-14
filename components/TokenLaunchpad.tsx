@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Youtube, Instagram, Twitter, CheckCircle, Lock, ArrowRight, BarChart3, Coins, Rocket, Loader2, Users, Brain, X, Wallet } from 'lucide-react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import type { Transaction } from '@solana/web3.js';
 import toast from 'react-hot-toast';
 import { useTranslation, Trans } from 'react-i18next';
 import { LaunchPhase, SocialAccount, TokenConfig, ProjectCategory } from '../types';
@@ -179,9 +180,9 @@ const TokenLaunchpad: React.FC = () => {
       // @ts-ignore wallet provider
       const provider = window.solana
       if (!provider?.publicKey) {
-        return toast.error('请先连接钱包')
+        return toast.error(t('launchpad.phase1.connect_wallet_title'))
       }
-      const { Connection, Transaction, PublicKey } = await import('@solana/web3.js')
+      const { Connection, Transaction: TransactionClass, PublicKey } = await import('@solana/web3.js')
       const connection = new Connection('https://api.devnet.solana.com')
       const res = await bindCreatorSoul(connection, new PublicKey(provider.publicKey.toBase58()), async (tx: Transaction) => {
         tx.feePayer = provider.publicKey
@@ -192,10 +193,10 @@ const TokenLaunchpad: React.FC = () => {
         return sig
       })
       setSoulMint(res.soulMint.toBase58())
-      toast.success(`Soul 绑定成功: ${res.soulMint.toBase58()}`)
+      toast.success(t('launchpad.phase1.bind_success', { mint: res.soulMint.toBase58() }))
     } catch (e) {
       console.error(e)
-      toast.error('Soul 绑定失败')
+      toast.error(t('launchpad.phase1.bind_fail'))
     }
   }
 
@@ -322,11 +323,17 @@ const TokenLaunchpad: React.FC = () => {
                   onClick={handleBindSoul}
                   className="px-6 py-2 rounded-full border border-white/10 text-white hover:bg-white/10 transition-all"
                 >
-                  {soulMint ? `Soul 已绑定 (${soulMint.slice(0,4)}...${soulMint.slice(-4)})` : '绑定 Soul'}
+                  {soulMint ? `${t('launchpad.phase1.soul_bound')} (${soulMint.slice(0,4)}...${soulMint.slice(-4)})` : t('launchpad.phase1.bind_soul_btn')}
                 </button>
                 <button
-                  onClick={() => setPhase(2)}
-                  disabled={!accounts.some(a => a.connected)}
+                  onClick={() => {
+                    if (!soulMint) {
+                      toast.error(t('launchpad.phase1.bind_required'))
+                      return
+                    }
+                    setPhase(2)
+                  }}
+                  disabled={!accounts.some(a => a.connected) || !soulMint}
                   className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
                 >
                   {t('launchpad.phase1.start_valuation')} <ArrowRight size={20} />
