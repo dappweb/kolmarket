@@ -1,25 +1,26 @@
 import React from 'react';
+import { useTranslation, Trans } from 'react-i18next';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Users, Bot, Briefcase } from 'lucide-react';
 
-const data = [
-  {
-    name: '创作者经济',
-    TAM: 7000,
-    SAM: 2100,
-    SOM: 21,
-    unit: '亿美元'
-  },
-  {
-    name: '生成式 AI 服务',
-    TAM: 13000,
-    SAM: 2600,
-    SOM: 13,
-    unit: '亿美元'
-  },
-];
-
 const MarketAnalysis: React.FC = () => {
+  const { t } = useTranslation();
+
+  const data = [
+    {
+      name: t('market_analysis.creator_economy_title'),
+      TAM: 7000,
+      SAM: 2100,
+      SOM: 21,
+    },
+    {
+      name: t('market_analysis.ai_service_title'),
+      TAM: 13000,
+      SAM: 2600,
+      SOM: 13,
+    },
+  ];
+
   return (
     <section id="market" className="py-24 bg-dark-bg relative">
        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_left,_var(--tw-gradient-stops))] from-blue-900/10 via-transparent to-transparent -z-10"></div>
@@ -28,13 +29,15 @@ const MarketAnalysis: React.FC = () => {
         <div className="mb-16 text-center lg:text-left">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-4">
             <TrendingUp size={16} />
-            <span>Market Analysis</span>
+            <span>{t('market_analysis.badge')}</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">市场机遇与规模</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{t('market_analysis.title')}</h2>
           <p className="text-xl text-gray-400 max-w-3xl">
-            我们正处于创作者经济 (<span className="text-white font-semibold">$700B</span>) 与生成式 AI (<span className="text-white font-semibold">$1.3T</span>) 的黄金交汇点。
-            <br className="hidden md:block" />
-            KOLMarket.ai 通过独特的"数字生命"模式，捕捉这两个万亿级市场的核心价值。
+            <Trans i18nKey="market_analysis.desc">
+              我们正处于创作者经济 (<span className="text-white font-semibold">$700B</span>) 与生成式 AI (<span className="text-white font-semibold">$1.3T</span>) 的黄金交汇点。
+              <br className="hidden md:block" />
+              KOLMarket.ai 通过独特的"数字生命"模式，捕捉这两个万亿级市场的核心价值。
+            </Trans>
           </p>
         </div>
 
@@ -44,7 +47,7 @@ const MarketAnalysis: React.FC = () => {
             
             <h3 className="text-lg font-semibold text-white mb-8 text-center flex items-center justify-center gap-2">
               <TrendingUp className="text-blue-500" size={20} />
-              TAM / SAM / SOM 分析 (单位: 亿美元)
+              {t('market_analysis.chart_title')}
             </h3>
             <ResponsiveContainer width="100%" height="85%">
               <BarChart
@@ -61,9 +64,9 @@ const MarketAnalysis: React.FC = () => {
                   itemStyle={{ color: '#f8fafc', padding: '4px 0' }}
                 />
                 <Legend wrapperStyle={{ paddingTop: '20px' }} />
-                <Bar dataKey="TAM" fill="#3b82f6" name="TAM (潜在市场总额)" radius={[4, 4, 0, 0]} animationDuration={1500} />
-                <Bar dataKey="SAM" fill="#8b5cf6" name="SAM (可服务市场)" radius={[4, 4, 0, 0]} animationDuration={1500} animationBegin={200} />
-                <Bar dataKey="SOM" fill="#eab308" name="SOM (目标市场)" radius={[4, 4, 0, 0]} animationDuration={1500} animationBegin={400} />
+                <Bar dataKey="TAM" fill="#3b82f6" name={t('market_analysis.tam')} radius={[4, 4, 0, 0]} animationDuration={1500} />
+                <Bar dataKey="SAM" fill="#8b5cf6" name={t('market_analysis.sam')} radius={[4, 4, 0, 0]} animationDuration={1500} animationBegin={200} />
+                <Bar dataKey="SOM" fill="#eab308" name={t('market_analysis.som')} radius={[4, 4, 0, 0]} animationDuration={1500} animationBegin={400} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -75,10 +78,9 @@ const MarketAnalysis: React.FC = () => {
                   <Users className="text-blue-400 h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white mb-2">创作者经济</h4>
+                  <h4 className="text-xl font-bold text-white mb-2">{t('market_analysis.creator_economy_title')}</h4>
                   <p className="text-gray-400 leading-relaxed">
-                    SOM 目标：5年内捕获 <span className="text-blue-400 font-bold">1%</span> 的市场份额，对应 <span className="text-white font-bold">$21亿</span> 的年影响力资产交易额。
-                    聚焦全球拥有10万+高粘性粉丝的头部KOL。
+                    {t('market_analysis.creator_economy_desc')}
                   </p>
                 </div>
               </div>
@@ -90,14 +92,14 @@ const MarketAnalysis: React.FC = () => {
                   <Bot className="text-purple-400 h-6 w-6" />
                 </div>
                 <div>
-                  <h4 className="text-xl font-bold text-white mb-2">AI Agent 服务</h4>
+                  <h4 className="text-xl font-bold text-white mb-2">{t('market_analysis.ai_service_title')}</h4>
                   <p className="text-gray-400 leading-relaxed">
-                    SOM 目标：5年内占据 <span className="text-purple-400 font-bold">0.5%</span> 的高附加值数字服务市场，
-                    对应 <span className="text-white font-bold">$13亿</span> 收入。提供咨询、设计、编程等全自动闭环服务。
+                    {t('market_analysis.ai_service_desc')}
                   </p>
                 </div>
               </div>
             </div>
+
 
             <div className="bg-dark-card p-8 rounded-2xl border border-white/5 hover:border-yellow-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/5 group relative overflow-hidden">
                <div className="absolute top-0 right-0 px-4 py-1.5 bg-gradient-to-bl from-yellow-500/20 to-transparent text-yellow-500 text-xs font-bold rounded-bl-2xl border-b border-l border-yellow-500/10">

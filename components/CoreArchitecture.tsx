@@ -1,18 +1,21 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Network, Bot, HandMetal, ArrowRight, Database, Coins, Cpu } from 'lucide-react';
 
 const CoreArchitecture: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="features" className="py-20 bg-dark-bg relative border-b border-white/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 text-blue-400 text-sm font-medium mb-4">
             <Network size={16} />
-            <span>Ecosystem Architecture</span>
+            <span>{t('core_architecture.badge')}</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">经济闭环与核心架构</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{t('core_architecture.title')}</h2>
           <p className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto">
-            构建“创造-交易-应用”的完整数字生命经济循环系统。
+            {t('core_architecture.desc')}
           </p>
         </div>
 
@@ -28,22 +31,22 @@ const CoreArchitecture: React.FC = () => {
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-sm font-bold text-purple-500 uppercase tracking-widest mb-2">Pillar I</div>
-                <h3 className="text-2xl font-bold text-white mb-4">数字生命铸造厂</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">{t('core_architecture.pillar_1_title')}</h3>
                 <p className="text-gray-400 mb-6 min-h-[48px]">
-                  通过 <span className="text-orange-400 font-semibold">Cloudflare AI</span> 深度学习与大数据分析，将社交影响力转化为可编程的智能数字资产。
+                  {t('core_architecture.pillar_1_desc')}
                 </p>
                 <ul className="space-y-3 text-sm text-gray-500">
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                    <span>全平台社交数据聚合清洗</span>
+                    <span>{t('core_architecture.pillar_1_point_1')}</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                    <span>AVM 影响力价值评估模型</span>
+                    <span>{t('core_architecture.pillar_1_point_2')}</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                    <span>个性化 AI Agent 训练</span>
+                    <span>{t('core_architecture.pillar_1_point_3')}</span>
                   </li>
                 </ul>
               </div>
@@ -56,22 +59,22 @@ const CoreArchitecture: React.FC = () => {
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-sm font-bold text-blue-500 uppercase tracking-widest mb-2">Pillar II</div>
-                <h3 className="text-2xl font-bold text-white mb-4">价值交换网络</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">{t('core_architecture.pillar_2_title')}</h3>
                 <p className="text-gray-400 mb-6 min-h-[48px]">
-                  提供高流动性的交易市场，通过供需博弈实时发现数字生命的真实价值。
+                  {t('core_architecture.pillar_2_desc')}
                 </p>
                 <ul className="space-y-3 text-sm text-gray-500">
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>AMM + 订单薄混合交易引擎</span>
+                    <span>{t('core_architecture.pillar_2_point_1')}</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>影响力指数衍生品合约</span>
+                    <span>{t('core_architecture.pillar_2_point_2')}</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>粉丝持仓分红与权益机制</span>
+                    <span>{t('core_architecture.pillar_2_point_3')}</span>
                   </li>
                 </ul>
               </div>
@@ -84,22 +87,22 @@ const CoreArchitecture: React.FC = () => {
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-sm font-bold text-yellow-500 uppercase tracking-widest mb-2">Pillar III</div>
-                <h3 className="text-2xl font-bold text-white mb-4">智能体应用层</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">{t('core_architecture.pillar_3_title')}</h3>
                 <p className="text-gray-400 mb-6 min-h-[48px]">
-                  释放数字生命的生产力，执行现实世界的商业任务并创造实际收益。
+                  {t('core_architecture.pillar_3_desc')}
                 </p>
                 <ul className="space-y-3 text-sm text-gray-500">
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
-                    <span>去中心化任务接单广场</span>
+                    <span>{t('core_architecture.pillar_3_point_1')}</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
-                    <span>具身智能硬件控制协议</span>
+                    <span>{t('core_architecture.pillar_3_point_2')}</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
-                    <span>RWA 收益回购销毁</span>
+                    <span>{t('core_architecture.pillar_3_point_3')}</span>
                   </li>
                 </ul>
               </div>
