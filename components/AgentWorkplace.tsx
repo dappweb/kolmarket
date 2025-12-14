@@ -1,7 +1,11 @@
 import React from 'react';
-import { Terminal, Code, PenTool, BarChart3, Globe, Cpu, Zap, DollarSign, RefreshCcw } from 'lucide-react';
+import { Terminal, Cpu, Zap, DollarSign, RefreshCcw, Globe } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
+import { AGENT_TASKS, BUYBACK_LOGS, WORKPLACE_STATS } from '../src/data/mockData';
 
 const AgentWorkplace: React.FC = () => {
+  const { t } = useTranslation();
+
   return (
     <section id="agent-workplace" className="py-20 bg-dark-bg border-t border-white/5 relative overflow-hidden">
        {/* Background Grid */}
@@ -12,22 +16,22 @@ const AgentWorkplace: React.FC = () => {
           <div>
             <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-yellow-500/10 text-yellow-400 text-sm font-medium mb-4">
               <Cpu size={16} />
-              <span>Agent Action Gateway</span>
+              <span>{t('agent_workplace.badge')}</span>
             </div>
-            <h2 className="text-3xl font-bold text-white mb-2">智能体工作台</h2>
+            <h2 className="text-3xl font-bold text-white mb-2">{t('agent_workplace.title')}</h2>
             <p className="text-gray-400 max-w-xl">
-              数字生命在此自主接单、执行任务并创造商业价值。收益将自动注入智能合约用于回购代币。
+              {t('agent_workplace.desc')}
             </p>
           </div>
           
           <div className="flex gap-4">
              <div className="bg-dark-card border border-white/10 px-6 py-3 rounded-xl">
-               <div className="text-xs text-gray-400 mb-1">24h 自动执行任务</div>
-               <div className="text-2xl font-mono font-bold text-white">1,284</div>
+               <div className="text-xs text-gray-400 mb-1">{t('agent_workplace.stats.tasks_24h')}</div>
+               <div className="text-2xl font-mono font-bold text-white">{WORKPLACE_STATS.tasks24h}</div>
              </div>
              <div className="bg-dark-card border border-white/10 px-6 py-3 rounded-xl">
-               <div className="text-xs text-gray-400 mb-1">创造总价值 (USDT)</div>
-               <div className="text-2xl font-mono font-bold text-green-400">$45,290</div>
+               <div className="text-xs text-gray-400 mb-1">{t('agent_workplace.stats.total_value')}</div>
+               <div className="text-2xl font-mono font-bold text-green-400">{WORKPLACE_STATS.totalValue}</div>
              </div>
           </div>
         </div>
@@ -37,16 +41,11 @@ const AgentWorkplace: React.FC = () => {
           <div className="lg:col-span-2 space-y-6">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               <Terminal size={18} className="text-blue-400" /> 
-              实时任务执行流
+              {t('agent_workplace.tasks.title')}
             </h3>
             
             <div className="bg-dark-card border border-white/10 rounded-2xl overflow-hidden">
-              {[
-                { type: 'code', icon: Code, title: 'Python 脚本生成: 链上数据清洗', agent: 'TechVisionary', status: 'Running', reward: '$50', time: '2s ago' },
-                { type: 'content', icon: PenTool, title: '生成 2026 Crypto 行业趋势研报', agent: 'CryptoAnalyst', status: 'Processing', reward: '$120', time: '5s ago' },
-                { type: 'analysis', icon: BarChart3, title: '市场情绪分析: BTC 波动率预测', agent: 'AI Researcher', status: 'Completed', reward: '$30', time: '12s ago' },
-                { type: 'web', icon: Globe, title: '全网宏观经济新闻抓取与摘要', agent: 'NewsBot', status: 'Running', reward: '$15', time: '15s ago' },
-              ].map((task, idx) => (
+              {AGENT_TASKS.map((task, idx) => (
                 <div key={idx} className="p-4 border-b border-white/5 hover:bg-white/5 transition-colors flex items-center justify-between group">
                   <div className="flex items-center gap-4">
                     <div className={`p-2 rounded-lg ${
@@ -57,11 +56,11 @@ const AgentWorkplace: React.FC = () => {
                       <task.icon size={20} />
                     </div>
                     <div>
-                      <div className="text-white font-medium text-sm group-hover:text-blue-400 transition-colors">{task.title}</div>
+                      <div className="text-white font-medium text-sm group-hover:text-blue-400 transition-colors">{t(task.titleKey)}</div>
                       <div className="text-xs text-gray-500 flex items-center gap-2">
-                        <span>Agent: {task.agent}</span>
+                        <span>{t('agent_workplace.tasks.agent')}: {task.agent}</span>
                         <span>•</span>
-                        <span className="text-yellow-500/80">Reward: {task.reward}</span>
+                        <span className="text-yellow-500/80">{t('agent_workplace.tasks.reward')}: {task.reward}</span>
                       </div>
                     </div>
                   </div>
@@ -75,7 +74,7 @@ const AgentWorkplace: React.FC = () => {
               ))}
               
               <div className="p-3 bg-black/20 text-center">
-                <button className="text-xs text-gray-400 hover:text-white transition-colors">查看所有任务节点</button>
+                <button className="text-xs text-gray-400 hover:text-white transition-colors">{t('agent_workplace.tasks.view_all')}</button>
               </div>
             </div>
           </div>
@@ -84,7 +83,7 @@ const AgentWorkplace: React.FC = () => {
           <div className="space-y-6">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               <RefreshCcw size={18} className="text-green-400" /> 
-              价值回馈机制
+              {t('agent_workplace.value.title')}
             </h3>
 
             <div className="bg-gradient-to-br from-green-900/20 to-blue-900/20 border border-green-500/30 rounded-2xl p-6 relative overflow-hidden">
@@ -93,26 +92,31 @@ const AgentWorkplace: React.FC = () => {
               </div>
               
               <div className="relative z-10">
-                <div className="text-sm text-gray-400 mb-2">本周回购销毁池</div>
-                <div className="text-3xl font-mono font-bold text-white mb-6">$12,450.00</div>
+                <div className="text-sm text-gray-400 mb-2">{t('agent_workplace.value.pool_title')}</div>
+                <div className="text-3xl font-mono font-bold text-white mb-6">{WORKPLACE_STATS.poolValue}</div>
                 
                 <div className="space-y-4">
                   <div className="flex justify-between text-sm border-b border-white/10 pb-2">
-                    <span className="text-gray-400">TechVisionary</span>
-                    <span className="text-green-400 font-mono">+$450 (Buyback)</span>
+                    <span className="text-gray-400">{t('agent_workplace.value.buyback_log')}</span>
                   </div>
-                  <div className="flex justify-between text-sm border-b border-white/10 pb-2">
-                    <span className="text-gray-400">CryptoAnalyst</span>
-                    <span className="text-green-400 font-mono">+$320 (Buyback)</span>
-                  </div>
-                  <div className="flex justify-between text-sm border-b border-white/10 pb-2">
-                    <span className="text-gray-400">AI Researcher</span>
-                    <span className="text-green-400 font-mono">+$180 (Buyback)</span>
-                  </div>
+                  {BUYBACK_LOGS.map((log, idx) => (
+                    <div key={idx} className="flex justify-between items-center text-xs">
+                       <div className="flex items-center gap-2">
+                         <span className="text-blue-400 font-mono">{log.tx}</span>
+                         <span className="text-gray-500">{log.time}</span>
+                       </div>
+                       <div className="flex items-center gap-2">
+                         <span className="text-white font-bold">{log.amount}</span>
+                         <span className="text-red-400 bg-red-500/10 px-1.5 py-0.5 rounded">{t('agent_workplace.value.burn')}</span>
+                       </div>
+                    </div>
+                  ))}
                 </div>
 
-                <div className="mt-6 pt-4 border-t border-white/10 text-xs text-gray-500 leading-relaxed">
-                  * 智能体执行任务获得的收益，80% 将自动用于在二级市场回购并销毁其对应的 KOL 代币，从而推高币价。
+                <div className="mt-6 pt-4 border-t border-white/10 text-center">
+                  <button className="text-xs text-green-400 hover:text-green-300 flex items-center justify-center gap-1">
+                    {t('agent_workplace.value.view_contract')} <Globe size={10} />
+                  </button>
                 </div>
               </div>
             </div>

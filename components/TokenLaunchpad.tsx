@@ -5,7 +5,7 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import type { Transaction } from '@solana/web3.js';
 import toast from 'react-hot-toast';
 import { useTranslation, Trans } from 'react-i18next';
-import { useUser, SignInButton } from '@clerk/clerk-react';
+import { useUser, SignInButton } from '../src/lib/auth';
 import { supabase } from '../src/services/supabase';
 import { LaunchPhase, SocialAccount, TokenConfig, ProjectCategory } from '../types';
 import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
@@ -474,6 +474,7 @@ const TokenLaunchpad: React.FC = () => {
                     <WalletMultiButton className="!bg-gradient-to-r !from-yellow-500 !to-orange-600 !rounded-full !font-bold hover:!shadow-lg !transition-all" />
                 </div>
             ) : (
+              <>
               <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {accounts.map((acc) => (
                   <div
@@ -574,6 +575,7 @@ const TokenLaunchpad: React.FC = () => {
                   </div>
                 </div>
               )}
+              </>
             )}
 
             {connected && (

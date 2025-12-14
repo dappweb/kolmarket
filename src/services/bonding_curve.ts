@@ -10,6 +10,25 @@ export interface MarketState {
   totalSupply: bigint;
 }
 
+// Helper to serialize BigInt for JSON storage
+const serializeState = (state: MarketState) => {
+  return JSON.stringify(state, (_, v) => typeof v === 'bigint' ? v.toString() + 'n' : v);
+};
+
+// Helper to deserialize BigInt from JSON storage
+const deserializeState = (json: string): MarketState | null => {
+  try {
+    return JSON.parse(json, (_, v) => {
+      if (typeof v === 'string' && v.endsWith('n')) {
+        return BigInt(v.slice(0, -1));
+      }
+      return v;
+    });
+  } catch (e) {
+    return null;
+  }
+};
+
 // Initial Configuration matching lib.rs
 const INITIAL_VIRTUAL_SOL = BigInt(30 * 1_000_000_000); // 30 SOL initial virtual liquidity (higher for lower slippage)
 const INITIAL_SUPPLY = BigInt(1_000_000_000 * 1_000_000); // 1B tokens (6 decimals)
@@ -18,6 +37,63 @@ const INITIAL_VIRTUAL_TOKEN = INITIAL_SUPPLY; // All supply in virtual pool init
 // In-memory state store (mocking on-chain account storage)
 // In a real app, this would be fetched from Solana account data
 const marketStates: Record<string, MarketState> = {};
+
+// Load persisted states on module init
+try {
+  const stored = localStorage.getItem('kolmarket_bonding_curves');
+  if (stored) {
+    const parsed = JSON.parse(stored);
+    Object.keys(parsed).forEach(key => {
+      // Deserialize each market state
+      const stateStr = parsed[key];
+      // If it was stored as a stringified object with 'n' suffix values
+      // We might need a custom parser if we stored it as a string
+      // But let's assume we store the whole map as a string, and inside are stringified states?
+      // Simpler approach: Store the whole map, and use the reviver.
+    });
+  }
+} catch (e) {
+  console.warn("Failed to load bonding curve states", e);
+}
+
+// Re-implement load/save with a cleaner approach
+const STORAGE_KEY = 'kolmarket_bonding_curves_v1';
+
+const saveStates = () => {
+  const serialized: Record<string, any> = {};
+  Object.entries(marketStates).forEach(([key, state]) => {
+    serialized[key] = {
+      virtualSolReserves: state.virtualSolReserves.toString(),
+      virtualTokenReserves: state.virtualTokenReserves.toString(),
+      realSolReserves: state.realSolReserves.toString(),
+      k: state.k.toString(),
+      totalSupply: state.totalSupply.toString()
+    };
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(serialized));
+};
+
+const loadStates = () => {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY);
+    if (!raw) return;
+    const parsed = JSON.parse(raw);
+    Object.entries(parsed).forEach(([key, val]: [string, any]) => {
+      marketStates[key] = {
+        virtualSolReserves: BigInt(val.virtualSolReserves),
+        virtualTokenReserves: BigInt(val.virtualTokenReserves),
+        realSolReserves: BigInt(val.realSolReserves),
+        k: BigInt(val.k),
+        totalSupply: BigInt(val.totalSupply)
+      };
+    });
+  } catch (e) {
+    console.error("Failed to load market states", e);
+  }
+};
+
+// Initialize loading
+loadStates();
 
 export const getOrCreateMarket = (tokenSymbol: string): MarketState => {
   if (!marketStates[tokenSymbol]) {
@@ -28,6 +104,7 @@ export const getOrCreateMarket = (tokenSymbol: string): MarketState => {
       k: INITIAL_VIRTUAL_SOL * INITIAL_VIRTUAL_TOKEN,
       totalSupply: INITIAL_SUPPLY
     };
+    saveStates();
   }
   return marketStates[tokenSymbol];
 };
@@ -98,6 +175,7 @@ export const executeSwap = (tokenSymbol: string, direction: 'buy' | 'sell', amou
      state.realSolReserves -= solOutLamports;
   }
   
+  saveStates();
   return state;
 };
 

@@ -1,4 +1,35 @@
 {
+  "agent_workplace": {
+    "badge": "Agent Action Gateway",
+    "title": "智能体工作台",
+    "desc": "数字生命在此自主接单、执行任务并创造商业价值。收益将自动注入智能合约用于回购代币。",
+    "stats": {
+      "tasks_24h": "24h 自动执行任务",
+      "total_value": "创造总价值 (USDT)"
+    },
+    "tasks": {
+      "title": "实时任务执行流",
+      "agent": "Agent",
+      "reward": "Reward",
+      "status": "Status",
+      "view_all": "查看所有任务节点",
+      "types": {
+        "code": "Python 脚本生成: 链上数据清洗",
+        "content": "生成 2026 Crypto 行业趋势研报",
+        "analysis": "市场情绪分析: BTC 波动率预测",
+        "web": "全网宏观经济新闻抓取与摘要"
+      }
+    },
+    "value": {
+      "title": "价值回馈机制",
+      "pool_title": "本周回购销毁池",
+      "buyback_log": "实时回购记录",
+      "tx": "Tx",
+      "amount": "金额",
+      "burn": "销毁",
+      "view_contract": "查看合约"
+    }
+  },
   "nav": {
     "home": "首页",
     "launchpad": "发行资产",

@@ -5,7 +5,7 @@ import { NavItem } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useTranslation } from 'react-i18next';
-import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '../src/lib/auth';
 
 const Header: React.FC = () => {
   const { t, i18n } = useTranslation();

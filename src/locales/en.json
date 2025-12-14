@@ -1,4 +1,35 @@
 {
+  "agent_workplace": {
+    "badge": "Agent Action Gateway",
+    "title": "Agent Workplace",
+    "desc": "Digital lives autonomously accept orders, execute tasks, and create commercial value here. Earnings are automatically injected into smart contracts for token buybacks.",
+    "stats": {
+      "tasks_24h": "24h Automated Tasks",
+      "total_value": "Total Value Created (USDT)"
+    },
+    "tasks": {
+      "title": "Real-time Task Execution Flow",
+      "agent": "Agent",
+      "reward": "Reward",
+      "status": "Status",
+      "view_all": "View All Task Nodes",
+      "types": {
+        "code": "Python Script: On-chain Data Cleaning",
+        "content": "Generate 2026 Crypto Industry Trend Report",
+        "analysis": "Market Sentiment Analysis: BTC Volatility Prediction",
+        "web": "Global Macro News Scraping & Summary"
+      }
+    },
+    "value": {
+      "title": "Value Feedback Mechanism",
+      "pool_title": "Weekly Buyback & Burn Pool",
+      "buyback_log": "Real-time Buyback Log",
+      "tx": "Tx",
+      "amount": "Amount",
+      "burn": "Burn",
+      "view_contract": "View Contract"
+    }
+  },
   "nav": {
     "home": "Home",
     "launchpad": "Launchpad",
