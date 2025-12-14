@@ -1,7 +1,8 @@
 
 import React, { useState } from 'react';
-import { Hammer, Music, Smile, MessageSquare, Zap, Lock, Users, Star } from 'lucide-react';
+import { Hammer, Music, Smile, MessageSquare, Zap, Lock, Users, Star, Loader2, CheckCircle } from 'lucide-react';
 import { useWallet } from '@solana/wallet-adapter-react';
+import toast from 'react-hot-toast';
 
 interface Skill {
   id: string;
@@ -19,8 +20,9 @@ interface Skill {
 const SkillForge: React.FC = () => {
   const { connected } = useWallet();
   const [activeTab, setActiveTab] = useState<'motion' | 'voice' | 'expression'>('motion');
+  const [loadingId, setLoadingId] = useState<string | null>(null);
 
-  const skills: Skill[] = [
+  const [skills, setSkills] = useState<Skill[]>([
     {
       id: 'dance_01',
       name: 'Signature Moonwalk',
@@ -57,7 +59,30 @@ const SkillForge: React.FC = () => {
       maxMint: 8000,
       status: 'funding'
     }
-  ];
+  ]);
+
+  const handleMint = (skill: Skill) => {
+    if (!connected) {
+        toast.error("Please connect your wallet first!");
+        return;
+    }
+
+    setLoadingId(skill.id);
+    
+    // Simulate minting process
+    setTimeout(() => {
+        setSkills(prev => prev.map(s => {
+            if (s.id === skill.id) {
+                const newCount = Math.min(s.mintedCount + 500, s.maxMint); // Add 500 KMT contribution
+                const newStatus = newCount >= s.maxMint ? 'live' : s.status;
+                return { ...s, mintedCount: newCount, status: newStatus };
+            }
+            return s;
+        }));
+        setLoadingId(null);
+        toast.success(`Successfully contributed to ${skill.name}!`);
+    }, 2000);
+  };
 
   return (
     <div className="bg-dark-card border border-white/10 rounded-3xl p-8 mt-12">
@@ -144,14 +169,23 @@ const SkillForge: React.FC = () => {
                 </div>
 
                 <button 
-                    disabled={skill.status === 'live'}
+                    onClick={() => handleMint(skill)}
+                    disabled={skill.status === 'live' || loadingId === skill.id}
                     className={`w-full mt-6 py-3 rounded-xl font-bold flex items-center justify-center gap-2 transition-all ${
                         skill.status === 'live'
                         ? 'bg-white/10 text-gray-500 cursor-not-allowed'
-                        : 'bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20'
+                        : 'bg-orange-500 hover:bg-orange-600 text-white shadow-lg shadow-orange-500/20 active:scale-95'
                     }`}
                 >
-                    {skill.status === 'live' ? 'Minting Completed' : (
+                    {skill.status === 'live' ? (
+                        <>
+                            <CheckCircle size={18} /> Minting Completed
+                        </>
+                    ) : loadingId === skill.id ? (
+                        <>
+                            <Loader2 className="animate-spin" size={18} /> Processing...
+                        </>
+                    ) : (
                         <>
                             <Hammer size={18} />
                             Mint for {skill.mintPrice / 100} KMT

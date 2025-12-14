@@ -19,6 +19,7 @@ const Header: React.FC = () => {
     { label: t('nav.exchange'), href: '/exchange' },
     { label: t('nav.foundry'), href: '/foundry' },
     { label: t('nav.intelligence'), href: '/intelligence' },
+    { label: 'Dashboard', href: '/dashboard' },
   ];
 
   const languages = [

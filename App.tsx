@@ -16,6 +16,7 @@ const FoundryPage = lazy(() => import('./pages/FoundryPage'));
 const IntelligencePage = lazy(() => import('./pages/IntelligencePage'));
 const WhitepaperPage = lazy(() => import('./pages/WhitepaperPage'));
 const DocsPage = lazy(() => import('./pages/DocsPage'));
+const CreatorDashboardPage = lazy(() => import('./pages/CreatorDashboardPage'));
 
 const App: React.FC = () => {
   return (
@@ -51,6 +52,7 @@ const App: React.FC = () => {
                   <Route path="/intelligence" element={<IntelligencePage />} />
                   <Route path="/whitepaper" element={<WhitepaperPage />} />
                   <Route path="/docs" element={<DocsPage />} />
+                  <Route path="/dashboard" element={<CreatorDashboardPage />} />
                 </Routes>
               </Suspense>
             </main>
