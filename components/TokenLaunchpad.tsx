@@ -43,6 +43,13 @@ const TokenLaunchpad: React.FC = () => {
     }
   }, [accounts]);
 
+  // Traffic Stats State
+  const [trafficStats, setTrafficStats] = useState<{
+    totalViews: number;
+    avgViews: number;
+    recentVideos: Array<{ title: string; views: number; likes: number; publishedAt: string }>;
+  } | null>(null);
+
   // Auto-check on mount if returning from OAuth
   React.useEffect(() => {
     const checkGoogleLink = async () => {
@@ -52,29 +59,37 @@ const TokenLaunchpad: React.FC = () => {
          );
          
          if (googleAccount) {
-            // Auto-connect flow for YouTube if Google is linked
-            // We use a small delay to ensure UX isn't jarring
             setTimeout(() => {
                 const email = googleAccount.emailAddress;
-                // Only auto-connect if we haven't already (check state again inside)
                 setAccounts(prev => {
                     if (prev.find(a => a.platform === 'youtube' && a.connected)) return prev;
                     
                     const handle = email.split('@')[0];
-                    toast.success(`Detected Google Account: ${email}. Syncing YouTube data...`);
+                    toast.success(`Detected Google Account: ${email}. Syncing Traffic Data...`);
                     
-                    // Trigger the same logic as "click connect" but programmatic
-                    // Since we can't await inside setState, we just update state directly here 
-                    // mimicking the "success" result of the manual click handler
-                    
-                    // Save to Supabase (fire and forget)
+                    // Generate Traffic Data
+                    const mockTraffic = {
+                        totalViews: Math.floor(Math.random() * 5000000) + 1000000,
+                        avgViews: Math.floor(Math.random() * 50000) + 10000,
+                        recentVideos: [
+                            { title: "How to Build on Solana", views: 45000, likes: 3200, publishedAt: "2 days ago" },
+                            { title: "KOLMarket Launch Day", views: 28000, likes: 1500, publishedAt: "5 days ago" },
+                            { title: "Crypto Trends 2025", views: 105000, likes: 8900, publishedAt: "1 week ago" }
+                        ]
+                    };
+                    setTrafficStats(mockTraffic);
+
+                    // Save to Supabase
                     supabase.from('social_accounts').upsert({
                         user_id: user.id,
                         platform: 'youtube',
                         handle: handle,
-                        followers: 50000, // Default mock for auto-connect
+                        followers: 50000,
                         engagement_rate: 3.5,
-                        verified: true
+                        verified: true,
+                        total_views: mockTraffic.totalViews,
+                        avg_views: mockTraffic.avgViews,
+                        recent_videos_json: mockTraffic.recentVideos
                     }, { onConflict: 'user_id, platform' }).then(({ error }) => {
                         if (error) console.error('Supabase auto-save error:', error);
                     });
@@ -130,6 +145,18 @@ const TokenLaunchpad: React.FC = () => {
            // Simulate verification delay
            await new Promise(resolve => setTimeout(resolve, 1500));
            
+           // Mock Traffic Data
+           const mockTraffic = {
+              totalViews: Math.floor(Math.random() * 5000000) + 1000000,
+              avgViews: Math.floor(Math.random() * 50000) + 10000,
+              recentVideos: [
+                  { title: "Solana Summer 2025", views: 45000, likes: 3200, publishedAt: "2 days ago" },
+                  { title: "KOLMarket Tutorial", views: 28000, likes: 1500, publishedAt: "5 days ago" },
+                  { title: "Bitcoin vs Ethereum", views: 105000, likes: 8900, publishedAt: "1 week ago" }
+              ]
+           };
+           setTrafficStats(mockTraffic);
+
            const verifiedAccount = {
              platform: 'youtube',
              handle: handle,
@@ -154,7 +181,10 @@ const TokenLaunchpad: React.FC = () => {
                handle: handle,
                followers: verifiedAccount.followers,
                engagement_rate: verifiedAccount.engagementRate,
-               verified: true
+               verified: true,
+               total_views: mockTraffic.totalViews,
+               avg_views: mockTraffic.avgViews,
+               recent_videos_json: mockTraffic.recentVideos
              }, { onConflict: 'user_id, platform' });
              
              if (error) console.error('Supabase error:', error);
@@ -444,11 +474,18 @@ const TokenLaunchpad: React.FC = () => {
                     <WalletMultiButton className="!bg-gradient-to-r !from-yellow-500 !to-orange-600 !rounded-full !font-bold hover:!shadow-lg !transition-all" />
                 </div>
             ) : (
-              <div className="grid grid-cols-1 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                 {accounts.map((acc) => (
-                  <div key={acc.platform} className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${acc.connected ? 'bg-blue-500/10 border-blue-500/50' : 'bg-white/5 border-white/10 hover:border-white/20'}`}>
-                    <div className="flex items-center gap-4">
-                      <div className={`p-3 rounded-lg ${
+                  <div
+                    key={acc.platform}
+                    className={`p-6 rounded-xl border transition-all ${
+                      acc.connected
+                        ? 'bg-blue-500/10 border-blue-500/50'
+                        : 'bg-white/5 border-white/10 hover:border-yellow-500/50 hover:bg-white/10'
+                    }`}
+                  >
+                    <div className="flex justify-between items-start mb-4">
+                      <div className={`p-3 rounded-full ${
                         acc.platform === 'youtube' ? 'bg-red-500/20 text-red-500' :
                         acc.platform === 'twitter' ? 'bg-blue-400/20 text-blue-400' :
                         'bg-pink-500/20 text-pink-500'
@@ -457,44 +494,86 @@ const TokenLaunchpad: React.FC = () => {
                         {acc.platform === 'twitter' && <Twitter size={24} />}
                         {acc.platform === 'instagram' && <Instagram size={24} />}
                       </div>
-                      <div>
-                        <div className="text-white font-medium capitalize">{acc.platform}</div>
-                        <div className="text-sm text-gray-400">
-                          {acc.connected ? (
-                            <span className="flex items-center gap-2 text-green-400">
-                              <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
-                              {t('launchpad.phase1.connected')}: {acc.handle}
-                            </span>
-                          ) : t('launchpad.phase1.not_connected')}
-                        </div>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center gap-2">
+                      {acc.connected ? (
+                        <CheckCircle className="text-blue-500" size={24} />
+                      ) : (
                         <button
                           onClick={() => openConnectModal(acc.platform)}
-                          disabled={acc.connected || loading}
-                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                            acc.connected 
-                              ? 'bg-transparent text-gray-500 hidden' 
-                              : 'bg-white text-black hover:bg-gray-200'
-                          }`}
+                          className="px-4 py-1.5 rounded-full bg-white/10 hover:bg-white/20 text-sm transition-all"
                         >
-                          {loading && !acc.connected ? <Loader2 className="animate-spin" size={16} /> : t('launchpad.phase1.connect_btn')}
+                          {t('launchpad.phase1.connect_btn')}
                         </button>
-                        
-                        {acc.connected && (
-                            <button 
-                                onClick={() => handleDisconnect(acc.platform)}
-                                className="px-4 py-2 rounded-lg text-sm font-medium border border-red-500/30 text-red-500 hover:bg-red-500/10 transition-all"
-                            >
-                                {t('launchpad.phase1.disconnect_btn')}
-                            </button>
-                        )}
+                      )}
                     </div>
+                    <h4 className="text-lg font-bold text-white capitalize mb-1">{acc.platform}</h4>
+                    {acc.connected ? (
+                      <div>
+                        <p className="text-gray-400 text-sm mb-2">@{acc.handle}</p>
+                        <div className="flex gap-4 text-sm">
+                          <div>
+                            <span className="block text-white font-bold">{formatNumber(acc.followers)}</span>
+                            <span className="text-gray-500">Followers</span>
+                          </div>
+                          <div>
+                            <span className="block text-white font-bold">{acc.engagementRate}%</span>
+                            <span className="text-gray-500">Eng. Rate</span>
+                          </div>
+                        </div>
+                      </div>
+                    ) : (
+                      <p className="text-gray-500 text-sm">Connect to verify influence</p>
+                    )}
                   </div>
                 ))}
               </div>
+
+              {/* Traffic Analysis Dashboard */}
+              {trafficStats && (
+                <div className="mt-8 bg-gray-900/50 rounded-xl border border-white/10 p-6 animate-fade-in-up">
+                  <div className="flex items-center gap-3 mb-6">
+                    <div className="p-2 bg-purple-500/20 rounded-lg text-purple-400">
+                      <BarChart3 size={24} />
+                    </div>
+                    <h3 className="text-xl font-bold text-white">Video Traffic Analysis</h3>
+                  </div>
+                  
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                    <div className="bg-black/20 p-4 rounded-lg">
+                        <p className="text-gray-400 text-sm mb-1">Total Views</p>
+                        <p className="text-2xl font-bold text-white">{trafficStats.totalViews.toLocaleString()}</p>
+                    </div>
+                    <div className="bg-black/20 p-4 rounded-lg">
+                        <p className="text-gray-400 text-sm mb-1">Avg. Views / Video</p>
+                        <p className="text-2xl font-bold text-white">{trafficStats.avgViews.toLocaleString()}</p>
+                    </div>
+                    <div className="bg-black/20 p-4 rounded-lg">
+                        <p className="text-gray-400 text-sm mb-1">Content Score</p>
+                        <p className="text-2xl font-bold text-green-400">A+</p>
+                    </div>
+                  </div>
+
+                  <h4 className="text-white font-bold mb-4 text-sm uppercase tracking-wider text-gray-500">Recent Videos Performance</h4>
+                  <div className="space-y-3">
+                    {trafficStats.recentVideos.map((video, idx) => (
+                        <div key={idx} className="flex items-center justify-between bg-white/5 p-4 rounded-lg hover:bg-white/10 transition-colors">
+                          <div className="flex items-center gap-4">
+                              <div className="w-12 h-12 bg-gray-700 rounded flex items-center justify-center text-gray-400 font-bold">
+                                {idx + 1}
+                              </div>
+                              <div>
+                                <p className="text-white font-medium">{video.title}</p>
+                                <p className="text-gray-500 text-xs">{video.publishedAt}</p>
+                              </div>
+                          </div>
+                          <div className="text-right">
+                              <p className="text-white font-bold">{video.views.toLocaleString()} views</p>
+                              <p className="text-gray-500 text-xs">{video.likes.toLocaleString()} likes</p>
+                          </div>
+                        </div>
+                    ))}
+                  </div>
+                </div>
+              )}
             )}
 
             {connected && (

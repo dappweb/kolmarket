@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
-import { ArrowDown, Settings, RefreshCw } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ArrowDown, Settings, RefreshCw, Loader2 } from 'lucide-react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import { calculateBuyOutput, calculateSellOutput, executeSwap, getCurrentPrice } from '../../services/bonding_curve';
+import toast from 'react-hot-toast';
 
 interface SwapInterfaceProps {
   tokenSymbol: string;
@@ -13,32 +15,61 @@ const SwapInterface: React.FC<SwapInterfaceProps> = ({ tokenSymbol, tokenBalance
   const [fromAmount, setFromAmount] = useState<string>('');
   const [toAmount, setToAmount] = useState<string>('');
   const [direction, setDirection] = useState<'buy' | 'sell'>('buy'); // buy: SOL -> Token, sell: Token -> SOL
-  
-  const SOL_PRICE = 145.5; // Mock SOL price
-  const TOKEN_PRICE = 0.0045; // Mock Token price
+  const [priceImpact, setPriceImpact] = useState<number>(0);
+  const [currentPrice, setCurrentPrice] = useState<number>(0);
+  const [loading, setLoading] = useState(false);
+
+  // Initialize Price
+  useEffect(() => {
+      setCurrentPrice(getCurrentPrice(tokenSymbol));
+  }, [tokenSymbol]);
 
   const handleFromChange = (val: string) => {
     setFromAmount(val);
     if (!val) {
       setToAmount('');
+      setPriceImpact(0);
       return;
     }
     const amount = parseFloat(val);
-    if (isNaN(amount)) return;
+    if (isNaN(amount) || amount <= 0) return;
 
     if (direction === 'buy') {
       // SOL -> Token
-      setToAmount(((amount * SOL_PRICE) / TOKEN_PRICE).toFixed(2));
+      const { tokenOut, priceImpact } = calculateBuyOutput(tokenSymbol, amount);
+      setToAmount(tokenOut.toFixed(2));
+      setPriceImpact(priceImpact);
     } else {
       // Token -> SOL
-      setToAmount(((amount * TOKEN_PRICE) / SOL_PRICE).toFixed(4));
+      const { solOut, priceImpact } = calculateSellOutput(tokenSymbol, amount);
+      setToAmount(solOut.toFixed(4));
+      setPriceImpact(priceImpact);
     }
+  };
+
+  const handleSwap = async () => {
+    if (!fromAmount || parseFloat(fromAmount) <= 0) return;
+    
+    setLoading(true);
+    // Simulate transaction delay
+    await new Promise(resolve => setTimeout(resolve, 1500));
+    
+    executeSwap(tokenSymbol, direction, parseFloat(fromAmount));
+    
+    toast.success(`Swap successful! ${direction === 'buy' ? 'Bought' : 'Sold'} ${tokenSymbol}`);
+    
+    // Reset and update price
+    setFromAmount('');
+    setToAmount('');
+    setCurrentPrice(getCurrentPrice(tokenSymbol));
+    setLoading(false);
   };
 
   const switchDirection = () => {
     setDirection(prev => prev === 'buy' ? 'sell' : 'buy');
-    setFromAmount(toAmount);
-    handleFromChange(toAmount); // Recalculate based on new direction logic
+    setFromAmount('');
+    setToAmount('');
+    setPriceImpact(0);
   };
 
   return (
@@ -124,15 +155,29 @@ const SwapInterface: React.FC<SwapInterfaceProps> = ({ tokenSymbol, tokenBalance
       {/* Price Info */}
       <div className="flex justify-between text-sm text-gray-400 mb-4 px-2">
         <span>Rate</span>
-        <span>1 {tokenSymbol} ≈ 0.00003 SOL</span>
+        <span>1 {tokenSymbol} ≈ {currentPrice.toFixed(6)} SOL</span>
       </div>
+      
+      {priceImpact > 0 && (
+         <div className="flex justify-between text-sm text-gray-400 mb-4 px-2">
+            <span>Price Impact</span>
+            <span className={priceImpact > 5 ? 'text-red-500 font-bold' : 'text-green-400'}>
+                {priceImpact.toFixed(2)}%
+            </span>
+         </div>
+      )}
 
       {/* Action Button */}
       {!connected ? (
         <WalletMultiButton className="!w-full !justify-center !bg-yellow-500 !text-black !font-bold !rounded-lg" />
       ) : (
-        <button className="w-full py-4 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold text-lg hover:shadow-lg hover:shadow-yellow-500/20 transition-all">
-          {direction === 'buy' ? 'Buy' : 'Sell'} {tokenSymbol}
+        <button 
+          onClick={handleSwap}
+          disabled={loading || !fromAmount}
+          className="w-full py-4 rounded-lg bg-gradient-to-r from-yellow-500 to-orange-500 text-black font-bold text-lg hover:shadow-lg hover:shadow-yellow-500/20 transition-all disabled:opacity-50 disabled:cursor-not-allowed flex justify-center items-center gap-2"
+        >
+          {loading && <Loader2 className="animate-spin" size={20} />}
+          {loading ? 'Swapping...' : `${direction === 'buy' ? 'Buy' : 'Sell'} ${tokenSymbol}`}
         </button>
       )}
     </div>
