@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { TrendingUp, TrendingDown, Info, Search, Wallet, Clock, BarChart2, ArrowUpRight, ArrowDownRight } from 'lucide-react';
+import { TrendingUp, TrendingDown, Info, Search, Wallet, Clock, BarChart2, ArrowUpRight, ArrowDownRight, Brain, Loader } from 'lucide-react';
 import { Platform } from '../types';
 import { TradingChart } from './TradingChart';
+import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
 
 interface MarketItem {
   id: string;
@@ -84,11 +85,31 @@ const InfluenceMarket: React.FC = () => {
   const [usdtBalance, setUsdtBalance] = useState<number>(10000);
   const [portfolio, setPortfolio] = useState<PortfolioItem[]>([]);
   const [timeframe, setTimeframe] = useState('1H');
+  const [isAnalyzing, setIsAnalyzing] = useState(false);
+  const [aiAnalysis, setAiAnalysis] = useState<ValuationResponse | null>(null);
 
   useEffect(() => {
     setChartData(generateCandleData(selectedToken.price));
     setOrderBook(generateOrderBook(selectedToken.price));
+    setAiAnalysis(null); // Reset analysis on token change
   }, [selectedToken]);
+
+  const handleAiAnalysis = async () => {
+    setIsAnalyzing(true);
+    try {
+        const result = await analyzeInfluence({
+            kolName: selectedToken.kolName,
+            platform: selectedToken.platform,
+            followers: selectedToken.marketCap / 10, // Mock followers count derivation
+            engagementRate: 5.5 // Mock engagement rate
+        });
+        setAiAnalysis(result);
+    } catch (e) {
+        console.error("AI Analysis failed", e);
+    } finally {
+        setIsAnalyzing(false);
+    }
+  };
 
   const formatCurrency = (val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
 
@@ -170,7 +191,36 @@ const InfluenceMarket: React.FC = () => {
                    <h2 className="text-2xl font-bold text-white flex items-center gap-2">
                      {selectedToken.tokenSymbol} <span className="text-gray-500 text-sm">/ USDT</span>
                    </h2>
-                   <div className="text-xs text-blue-400 font-mono">AVM Score: {selectedToken.avmScore}</div>
+                   <div className="flex items-center gap-2 mt-1">
+                        <div className="text-xs text-blue-400 font-mono bg-blue-500/10 px-2 py-1 rounded border border-blue-500/20">
+                            AVM Score: {aiAnalysis ? aiAnalysis.score : selectedToken.avmScore}
+                        </div>
+                        <button 
+                            onClick={handleAiAnalysis}
+                            disabled={isAnalyzing}
+                            className="flex items-center gap-1 text-[10px] bg-purple-500/20 text-purple-300 px-2 py-1 rounded border border-purple-500/30 hover:bg-purple-500/30 transition-colors"
+                        >
+                            {isAnalyzing ? <Loader size={12} className="animate-spin" /> : <Brain size={12} />}
+                            {isAnalyzing ? 'Analyzing...' : 'AI Valuation'}
+                        </button>
+                   </div>
+                   {aiAnalysis && (
+                        <div className="absolute top-20 left-0 z-50 mt-2 p-4 bg-gray-900 border border-purple-500/50 rounded-xl shadow-2xl w-80 text-left backdrop-blur-md">
+                            <div className="flex justify-between items-start mb-2">
+                                <h4 className="text-purple-400 font-bold text-sm flex items-center gap-2">
+                                    <Brain size={14} /> Cloudflare AI Analysis
+                                </h4>
+                                <button onClick={() => setAiAnalysis(null)} className="text-gray-500 hover:text-white">×</button>
+                            </div>
+                            <p className="text-xs text-gray-300 leading-relaxed mb-3">
+                                {aiAnalysis.reasoning}
+                            </p>
+                            <div className="flex justify-between items-center text-xs border-t border-white/10 pt-2">
+                                <span className="text-gray-500">Est. Market Cap</span>
+                                <span className="text-white font-mono">{formatCurrency(aiAnalysis.marketCap)}</span>
+                            </div>
+                        </div>
+                   )}
                  </div>
               </div>
 

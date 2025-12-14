@@ -1,7 +1,7 @@
 {
   "nav": {
     "home": "홈",
-    "launchpad": "런치패드",
+    "launchpad": "자산 발행",
     "exchange": "거래소",
     "foundry": "파운드리",
     "intelligence": "인텔리전스",
@@ -10,20 +10,83 @@
     "connect": "지갑 연결"
   },
   "hero": {
-    "subtitle": "차세대 디지털 라이프 경제",
-    "title_1": "영향력 자산화",
+    "badge": "차세대 디지털 라이프 경제",
+    "title_1": "영향력을 자산으로",
     "title_2": "AI 기반 디지털 라이프",
-    "desc": "KOL의 영향력이 거래 가능한 자산으로 주조되는 곳. 우리는 AI와 블록체인을 사용하여 디지털 신원에 자율적인 생명력과 경제적 가치를 부여합니다.",
+    "desc": "여기서 KOL의 영향력은 거래 가능한 자산으로 주조됩니다. 우리는 AI와 블록체인을 사용하여 디지털 신원에 자율적인 진화 생명력과 경제적 가치를 부여합니다.",
     "cta_launch": "자산 발행",
-    "cta_explore": "시장 탐색"
+    "cta_explore": "시장 탐색",
+    "feature_1_title": "영향력 토큰화",
+    "feature_1_desc": "개인 브랜드와 영향력을 온체인 자산으로 변환하여 가치의 자유로운 유통과 즉각적인 수익화를 실현합니다.",
+    "feature_2_title": "AI 에이전트",
+    "feature_2_desc": "24/7 자동화된 디지털 아바타가 KOL을 대신하여 상호 작용, 거래 및 커뮤니티 관리를 처리합니다.",
+    "feature_3_title": "가치 앵커",
+    "feature_3_desc": "스마트 계약이 수익을 자동으로 분배하여 토큰 가치가 실제 영향력 수익에 엄격하게 고정되도록 보장합니다."
+  },
+  "market_analysis": {
+    "badge": "시장 분석",
+    "title": "시장 기회 및 규모",
+    "desc": "우리는 크리에이터 경제(7,000억 달러)와 생성형 AI(1.3조 달러)의 황금 교차점에 있습니다. KOLMarket.ai는 독특한 '디지털 라이프' 모델을 통해 이 두 조 달러 시장의 핵심 가치를 포착합니다.",
+    "chart_title": "TAM / SAM / SOM 분석 (단위: 10억 달러)",
+    "tam": "TAM (총 잠재 시장)",
+    "sam": "SAM (유효 시장)",
+    "som": "SOM (수익 시장)",
+    "creator_economy_title": "크리에이터 경제",
+    "creator_economy_desc": "SOM 목표: 5년 내 시장 점유율 1% 확보, 연간 21억 달러의 영향력 자산 거래량에 해당. 10만 명 이상의 높은 충성도 팬을 보유한 상위 KOL에 집중.",
+    "ai_service_title": "AI 에이전트 서비스",
+    "ai_service_desc": "SOM 목표: 5년 내 고부가가치 디지털 서비스 시장의 0.5% 점유, 13억 달러 수익에 해당. 컨설팅, 디자인, 프로그래밍 등 완전 자동화된 폐쇄 루프 서비스를 제공합니다."
+  },
+  "core_architecture": {
+    "badge": "생태계 아키텍처",
+    "title": "경제 루프 및 핵심 아키텍처",
+    "desc": "'창조-거래-응용'의 완전한 디지털 라이프 경제 순환 시스템을 구축합니다.",
+    "pillar_1_title": "디지털 라이프 파운드리",
+    "pillar_1_desc": "AI 딥러닝과 빅데이터 분석을 통해 사회적 영향력을 프로그래밍 가능한 지능형 디지털 자산으로 변환합니다.",
+    "pillar_1_point_1": "전 플랫폼 소셜 데이터 집계 및 정제",
+    "pillar_1_point_2": "AVM 영향력 가치 평가 모델",
+    "pillar_1_point_3": "개인화된 AI 에이전트 훈련",
+    "pillar_2_title": "가치 교환 네트워크",
+    "pillar_2_desc": "높은 유동성의 거래 시장을 제공하여 수요와 공급을 통해 디지털 라이프의 진정한 가치를 실시간으로 발견합니다.",
+    "pillar_2_point_1": "AMM + 오더북 하이브리드 엔진",
+    "pillar_2_point_2": "영향력 지수 파생상품",
+    "pillar_2_point_3": "팬 보유 배당 및 권리 메커니즘",
+    "pillar_3_title": "에이전트 애플리케이션 계층",
+    "pillar_3_desc": "디지털 라이프의 생산성을 해방하여 실제 세계의 상업적 작업을 수행하고 실제 수익을 창출합니다.",
+    "pillar_3_point_1": "탈중앙화 작업 마켓플레이스",
+    "pillar_3_point_2": "체화된 지능형 하드웨어 제어 프로토콜",
+    "pillar_3_point_3": "크로스 게임/메타버스 상호 운용성"
+  },
+  "influence_market": {
+    "wallet_balance": "지갑 잔액",
+    "last_price": "현재 가격",
+    "change_24h": "24시간 변동",
+    "volume_24h": "24시간 거래량",
+    "order_book": "오더북",
+    "spread": "스프레드",
+    "price": "가격",
+    "amount": "수량",
+    "total": "합계",
+    "buy": "매수",
+    "sell": "매도",
+    "avail": "가능",
+    "insufficient_balance": "잔액 부족",
+    "insufficient_holdings": "보유량 부족",
+    "tradingview_mode": "트레이딩뷰 모드"
+  },
+  "footer": {
+    "whitepaper": "백서",
+    "docs": "문서",
+    "privacy": "개인정보 처리방침",
+    "terms": "서비스 약관",
+    "rights": "All rights reserved."
   },
   "whitepaper": {
     "title": "KMT 생태계 백서",
     "subtitle": "디지털 라이프의 경제 엔진",
-    "intro": "KOL Market Token (KMT)은 디지털 라이프 창조와 상호 작용의 가치를 포착하도록 설계된 KOLMarket 생태계의 거버넌스 및 유틸리티 토큰입니다。",
+    "intro": "KOL Market Token (KMT)은 디지털 라이프 창조와 상호 작용의 가치를 포착하기 위해 설계된 KOLMarket 생태계의 거버넌스 및 유틸리티 토큰입니다.",
     "burn_title": "디플레이션 소각 메커니즘",
-    "burn_desc": "우리는 프로토콜 수익을 사용하여 KMT를 바이백하고 소각하는 엄격한 '소각 증명' 전략을 구현하여 장기적인 가치 상승을 보장합니다。",
+    "burn_desc": "우리는 엄격한 '소각 증명(Proof of Burn)' 전략을 시행하여 프로토콜 수익을 사용하여 KMT를 환매하고 소각하여 장기적인 가치 상승을 보장합니다.",
     "solana_title": "Solana 기반",
-    "solana_desc": "Solana의 높은 처리량과 낮은 지연 시간을 활용하여 AI 에이전트의 실시간 마이크로 트랜잭션을 지원합니다."
+    "solana_desc": "Solana의 높은 처리량과 낮은 지연 시간을 활용하여 AI 에이전트의 실시간 마이크로 트랜잭션을 실현합니다."
   }
 }

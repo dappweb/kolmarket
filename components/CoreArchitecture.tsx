@@ -30,7 +30,7 @@ const CoreArchitecture: React.FC = () => {
                 <div className="text-sm font-bold text-purple-500 uppercase tracking-widest mb-2">Pillar I</div>
                 <h3 className="text-2xl font-bold text-white mb-4">数字生命铸造厂</h3>
                 <p className="text-gray-400 mb-6 min-h-[48px]">
-                  通过 AI 深度学习与大数据分析，将社交影响力转化为可编程的智能数字资产。
+                  通过 <span className="text-orange-400 font-semibold">Cloudflare AI</span> 深度学习与大数据分析，将社交影响力转化为可编程的智能数字资产。
                 </p>
                 <ul className="space-y-3 text-sm text-gray-500">
                   <li className="flex items-center gap-2 justify-center lg:justify-start">

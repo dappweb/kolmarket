@@ -10,20 +10,83 @@
     "connect": "Connect Wallet"
   },
   "hero": {
-    "subtitle": "Next Gen Digital Life Economy",
+    "badge": "Next Gen Digital Life Economy",
     "title_1": "Influence as Asset",
-    "title_2": "AI Digital Life",
-    "desc": "Where KOL influence is minted as tradable assets. We use AI and Blockchain to give digital identity autonomous life and economic value.",
+    "title_2": "AI Driven Digital Life",
+    "desc": "Here, KOL influence is minted as tradable assets. We use AI and Blockchain to empower digital identities with autonomous evolutionary vitality and economic value.",
     "cta_launch": "Launch Asset",
-    "cta_explore": "Explore Market"
+    "cta_explore": "Explore Market",
+    "feature_1_title": "Influence Tokenization",
+    "feature_1_desc": "Transform personal brand and influence into on-chain assets, enabling free circulation and instant monetization of value.",
+    "feature_2_title": "AI Agent",
+    "feature_2_desc": "24/7 automated digital avatars handling interactions, transactions, and community management for KOLs.",
+    "feature_3_title": "Value Anchor",
+    "feature_3_desc": "Smart contracts automatically distribute revenue, ensuring token value is strictly anchored to actual influence earnings."
+  },
+  "market_analysis": {
+    "badge": "Market Analysis",
+    "title": "Market Opportunities & Scale",
+    "desc": "We are at the golden intersection of the Creator Economy ($700B) and Generative AI ($1.3T). KOLMarket.ai captures the core value of these two trillion-dollar markets through a unique \"Digital Life\" model.",
+    "chart_title": "TAM / SAM / SOM Analysis (Unit: $B)",
+    "tam": "TAM (Total Addressable Market)",
+    "sam": "SAM (Serviceable Available Market)",
+    "som": "SOM (Serviceable Obtainable Market)",
+    "creator_economy_title": "Creator Economy",
+    "creator_economy_desc": "SOM Goal: Capture 1% market share within 5 years, corresponding to $2.1B annual influence asset transaction volume. Focusing on top KOLs with 100k+ high-stickiness fans.",
+    "ai_service_title": "AI Agent Service",
+    "ai_service_desc": "SOM Goal: Occupy 0.5% of the high value-added digital service market within 5 years, corresponding to $1.3B revenue. Providing fully automated closed-loop services like consulting, design, and programming."
+  },
+  "core_architecture": {
+    "badge": "Ecosystem Architecture",
+    "title": "Economic Loop & Core Architecture",
+    "desc": "Building a complete \"Creation-Transaction-Application\" digital life economic cycle system.",
+    "pillar_1_title": "Digital Life Foundry",
+    "pillar_1_desc": "Transforming social influence into programmable intelligent digital assets through AI deep learning and big data analysis.",
+    "pillar_1_point_1": "Cross-platform social data aggregation & cleaning",
+    "pillar_1_point_2": "AVM Influence Valuation Model",
+    "pillar_1_point_3": "Personalized AI Agent Training",
+    "pillar_2_title": "Value Exchange Network",
+    "pillar_2_desc": "Providing a high-liquidity trading market to discover the true value of digital lives through real-time supply and demand.",
+    "pillar_2_point_1": "AMM + Order Book Hybrid Engine",
+    "pillar_2_point_2": "Influence Index Derivatives",
+    "pillar_2_point_3": "Fan Holding Dividends & Rights",
+    "pillar_3_title": "Agent Application Layer",
+    "pillar_3_desc": "Unleashing digital life productivity to execute real-world commercial tasks and generate actual revenue.",
+    "pillar_3_point_1": "Decentralized Task Marketplace",
+    "pillar_3_point_2": "Embodied Intelligence Control Protocol",
+    "pillar_3_point_3": "Cross-Game/Metaverse Interoperability"
+  },
+  "influence_market": {
+    "wallet_balance": "WALLET BALANCE",
+    "last_price": "Last Price",
+    "change_24h": "24h Change",
+    "volume_24h": "24h Volume",
+    "order_book": "Order Book",
+    "spread": "Spread",
+    "price": "Price",
+    "amount": "Amount",
+    "total": "Total",
+    "buy": "Buy",
+    "sell": "Sell",
+    "avail": "Avail",
+    "insufficient_balance": "Insufficient Balance",
+    "insufficient_holdings": "Insufficient Holdings",
+    "tradingview_mode": "TradingView Mode"
+  },
+  "footer": {
+    "whitepaper": "Whitepaper",
+    "docs": "Docs",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Service",
+    "rights": "All rights reserved."
   },
   "whitepaper": {
     "title": "KMT Ecosystem Whitepaper",
-    "subtitle": "The Economic Engine of Digital Life",
+    "subtitle": "Economic Engine of Digital Life",
     "intro": "KOL Market Token (KMT) is the governance and utility token of the KOLMarket ecosystem, designed to capture the value of digital life creation and interaction.",
     "burn_title": "Deflationary Burn Mechanism",
-    "burn_desc": "We implement a rigorous 'Proof of Burn' strategy where protocol revenue is used to buy back and burn KMT, ensuring long-term value appreciation.",
+    "burn_desc": "We implement a strict \"Proof of Burn\" strategy, where protocol revenue is used to buy back and burn KMT, ensuring long-term value appreciation.",
     "solana_title": "Powered by Solana",
-    "solana_desc": "Leveraging Solana's high throughput and low latency to enable real-time micro-transactions for AI agents."
+    "solana_desc": "Leveraging Solana's high throughput and low latency to enable real-time micro-transactions for AI Agents."
   }
 }
