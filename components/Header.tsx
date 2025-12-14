@@ -54,9 +54,9 @@ const Header: React.FC = () => {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
               <div className="bg-yellow-500 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                <span className="font-bold text-black text-xl">K</span>
+                <span className="font-bold text-black text-xl">C</span>
               </div>
-              <span className="font-bold text-2xl tracking-tighter text-white">KOLMarket.ai</span>
+              <span className="font-bold text-2xl tracking-tighter text-white">COGITO</span>
             </Link>
           </div>
           
