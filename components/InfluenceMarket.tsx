@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { useTranslation } from 'react-i18next';
 import { TrendingUp, TrendingDown, Info, Search, Wallet, Clock, BarChart2, ArrowUpRight, ArrowDownRight, Brain, Loader } from 'lucide-react';
 import { Platform, ProjectCategory } from '../types';
 import { TradingChart } from './TradingChart';
@@ -104,6 +105,7 @@ const generateOrderBook = (basePrice: number): OrderBookItem[] => {
 };
 
 const InfluenceMarket: React.FC = () => {
+  const { t } = useTranslation();
   const [selectedToken, setSelectedToken] = useState<MarketItem>(mockMarketData[0]);
   const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All');
   const [chartData, setChartData] = useState<any[]>([]);
@@ -148,7 +150,7 @@ const InfluenceMarket: React.FC = () => {
 
     if (tradeType === 'buy') {
       const totalCost = numAmount * selectedToken.price;
-      if (totalCost > usdtBalance) return alert('Insufficient Balance');
+      if (totalCost > usdtBalance) return alert(t('influence_market.insufficient_balance'));
       setUsdtBalance(prev => prev - totalCost);
       setPortfolio(prev => {
         const existing = prev.find(p => p.tokenSymbol === selectedToken.tokenSymbol);
@@ -158,7 +160,7 @@ const InfluenceMarket: React.FC = () => {
       });
     } else {
       const holding = portfolio.find(p => p.tokenSymbol === selectedToken.tokenSymbol);
-      if (!holding || holding.amount < numAmount) return alert('Insufficient Holdings');
+      if (!holding || holding.amount < numAmount) return alert(t('influence_market.insufficient_holdings'));
       setUsdtBalance(prev => prev + (numAmount * selectedToken.price));
       setPortfolio(prev => prev.map(p => p.tokenSymbol === selectedToken.tokenSymbol ? { ...p, amount: p.amount - numAmount } : p).filter(p => p.amount > 0));
     }
@@ -188,7 +190,7 @@ const InfluenceMarket: React.FC = () => {
                                 : 'bg-dark-card border border-white/5 text-gray-400 hover:text-white hover:bg-white/5'
                         }`}
                     >
-                        {cat}
+                        {t(`categories.${cat.toLowerCase()}`)}
                     </button>
                 ))}
             </div>
@@ -214,7 +216,7 @@ const InfluenceMarket: React.FC = () => {
           <div className="flex items-center gap-3 bg-dark-card px-4 py-2 rounded-xl border border-white/5">
              <Wallet size={16} className="text-yellow-500" />
              <div className="flex flex-col items-end leading-none">
-               <span className="text-[10px] text-gray-400">WALLET BALANCE</span>
+               <span className="text-[10px] text-gray-400">{t('influence_market.wallet_balance')}</span>
                <span className="text-sm font-mono font-bold text-white">{formatCurrency(usdtBalance)}</span>
              </div>
           </div>
@@ -242,7 +244,7 @@ const InfluenceMarket: React.FC = () => {
                    </h2>
                    <div className="flex items-center gap-2 mt-1">
                         <div className="text-xs text-blue-400 font-mono bg-blue-500/10 px-2 py-1 rounded border border-blue-500/20">
-                            AVM Score: {aiAnalysis ? aiAnalysis.score : selectedToken.avmScore}
+                            {t('influence_market_add.avm_score')}: {aiAnalysis ? aiAnalysis.score : selectedToken.avmScore}
                         </div>
                         <button 
                             onClick={handleAiAnalysis}
@@ -250,14 +252,14 @@ const InfluenceMarket: React.FC = () => {
                             className="flex items-center gap-1 text-[10px] bg-purple-500/20 text-purple-300 px-2 py-1 rounded border border-purple-500/30 hover:bg-purple-500/30 transition-colors"
                         >
                             {isAnalyzing ? <Loader size={12} className="animate-spin" /> : <Brain size={12} />}
-                            {isAnalyzing ? 'Analyzing...' : 'AI Valuation'}
+                            {isAnalyzing ? t('influence_market_add.analyzing') : t('influence_market_add.ai_valuation')}
                         </button>
                    </div>
                    {aiAnalysis && (
                         <div className="absolute top-20 left-0 z-50 mt-2 p-4 bg-gray-900 border border-purple-500/50 rounded-xl shadow-2xl w-80 text-left backdrop-blur-md">
                             <div className="flex justify-between items-start mb-2">
                                 <h4 className="text-purple-400 font-bold text-sm flex items-center gap-2">
-                                    <Brain size={14} /> Cloudflare AI Analysis
+                                    <Brain size={14} /> {t('influence_market_add.ai_valuation')}
                                 </h4>
                                 <button onClick={() => setAiAnalysis(null)} className="text-gray-500 hover:text-white">×</button>
                             </div>
@@ -265,7 +267,7 @@ const InfluenceMarket: React.FC = () => {
                                 {aiAnalysis.reasoning}
                             </p>
                             <div className="flex justify-between items-center text-xs border-t border-white/10 pt-2">
-                                <span className="text-gray-500">Est. Market Cap</span>
+                                <span className="text-gray-500">{t('influence_market_add.est_market_cap')}</span>
                                 <span className="text-white font-mono">{formatCurrency(aiAnalysis.marketCap)}</span>
                             </div>
                         </div>
@@ -275,20 +277,20 @@ const InfluenceMarket: React.FC = () => {
 
               <div className="flex gap-8">
                 <div>
-                  <div className="text-xs text-gray-500 mb-1">Last Price</div>
+                  <div className="text-xs text-gray-500 mb-1">{t('influence_market.last_price')}</div>
                   <div className={`text-xl font-mono font-bold ${selectedToken.change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                     {formatCurrency(selectedToken.price)}
                   </div>
                 </div>
                 <div>
-                  <div className="text-xs text-gray-500 mb-1">24h Change</div>
+                  <div className="text-xs text-gray-500 mb-1">{t('influence_market.change_24h')}</div>
                   <div className={`text-xl font-mono font-bold flex items-center ${selectedToken.change24h >= 0 ? 'text-green-400' : 'text-red-400'}`}>
                     {selectedToken.change24h >= 0 ? <TrendingUp size={16} className="mr-1"/> : <TrendingDown size={16} className="mr-1"/>}
                     {Math.abs(selectedToken.change24h)}%
                   </div>
                 </div>
                 <div className="hidden sm:block">
-                  <div className="text-xs text-gray-500 mb-1">24h Volume</div>
+                  <div className="text-xs text-gray-500 mb-1">{t('influence_market.volume_24h')}</div>
                   <div className="text-xl font-mono font-bold text-white">
                     {new Intl.NumberFormat('en-US', { notation: "compact" }).format(selectedToken.volume24h)}
                   </div>
@@ -312,7 +314,7 @@ const InfluenceMarket: React.FC = () => {
                  <div className="flex-1"></div>
                  <div className="flex items-center gap-2 text-xs text-gray-500">
                    <BarChart2 size={14} />
-                   TradingView Mode
+                   {t('influence_market.tradingview_mode')}
                  </div>
                </div>
 
@@ -329,14 +331,14 @@ const InfluenceMarket: React.FC = () => {
             {/* Order Book */}
             <div className="bg-dark-card rounded-2xl border border-white/5 p-4 flex-1 flex flex-col min-h-[300px]">
               <h3 className="text-sm font-bold text-white mb-4 flex justify-between">
-                <span>Order Book</span>
-                <span className="text-gray-500 text-xs font-normal">Spread: 0.1%</span>
+                <span>{t('influence_market.order_book')}</span>
+                <span className="text-gray-500 text-xs font-normal">{t('influence_market.spread')}: 0.1%</span>
               </h3>
               
               <div className="flex text-xs text-gray-500 mb-2 px-2">
-                <div className="w-1/3 text-left">Price</div>
-                <div className="w-1/3 text-right">Amount</div>
-                <div className="w-1/3 text-right">Total</div>
+                <div className="w-1/3 text-left">{t('influence_market.price')}</div>
+                <div className="w-1/3 text-right">{t('influence_market.amount')}</div>
+                <div className="w-1/3 text-right">{t('influence_market.total')}</div>
               </div>
 
               <div className="flex-1 overflow-hidden space-y-0.5 font-mono text-xs">
@@ -376,36 +378,36 @@ const InfluenceMarket: React.FC = () => {
                    onClick={() => setTradeType('buy')}
                    className={`flex-1 py-2 rounded text-sm font-bold transition-all ${tradeType === 'buy' ? 'bg-green-500 text-white' : 'text-gray-400 hover:text-white'}`}
                  >
-                   Buy
+                   {t('influence_market.buy')}
                  </button>
                  <button 
                    onClick={() => setTradeType('sell')}
                    className={`flex-1 py-2 rounded text-sm font-bold transition-all ${tradeType === 'sell' ? 'bg-red-500 text-white' : 'text-gray-400 hover:text-white'}`}
                  >
-                   Sell
+                   {t('influence_market.sell')}
                  </button>
                </div>
 
                <div className="space-y-4">
                  <div>
                    <div className="flex justify-between text-xs text-gray-400 mb-1">
-                     <span>Avail</span>
+                     <span>{t('influence_market.avail')}</span>
                      <span>{tradeType === 'buy' ? `${formatCurrency(usdtBalance)}` : `${currentHolding} ${selectedToken.tokenSymbol}`}</span>
                    </div>
                    <div className="relative">
-                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">Price</div>
+                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{t('influence_market.price')}</div>
                      <input 
                        type="text" 
                        value={selectedToken.price}
                        disabled
                        className="w-full bg-dark-bg border border-white/10 rounded-lg py-2 pl-12 pr-3 text-right text-white font-mono text-sm"
-                     />
-                   </div>
-                 </div>
+                    />
+                  </div>
+                </div>
 
                  <div>
                    <div className="relative">
-                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">Amount</div>
+                     <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-sm">{t('influence_market.amount')}</div>
                      <input 
                        type="number" 
                        value={amount}
@@ -436,7 +438,7 @@ const InfluenceMarket: React.FC = () => {
                  </div>
 
                  <div className="pt-2 border-t border-white/5 flex justify-between items-center">
-                   <span className="text-xs text-gray-400">Total</span>
+                   <span className="text-xs text-gray-400">{t('influence_market.total')}</span>
                    <span className="text-sm font-bold text-white">
                      {formatCurrency(parseFloat(amount || '0') * selectedToken.price)}
                    </span>
@@ -447,7 +449,7 @@ const InfluenceMarket: React.FC = () => {
                    className={`w-full py-3 rounded-lg font-bold text-sm transition-all hover:brightness-110 active:scale-95
                      ${tradeType === 'buy' ? 'bg-green-500 text-white' : 'bg-red-500 text-white'}`}
                  >
-                   {tradeType === 'buy' ? `Buy ${selectedToken.tokenSymbol}` : `Sell ${selectedToken.tokenSymbol}`}
+                   {tradeType === 'buy' ? `${t('influence_market.buy')} ${selectedToken.tokenSymbol}` : `${t('influence_market.sell')} ${selectedToken.tokenSymbol}`}
                  </button>
                </div>
             </div>

@@ -88,5 +88,94 @@
     "burn_desc": "We implement a strict \"Proof of Burn\" strategy, where protocol revenue is used to buy back and burn KMT, ensuring long-term value appreciation.",
     "solana_title": "Powered by Solana",
     "solana_desc": "Leveraging Solana's high throughput and low latency to enable real-time micro-transactions for AI Agents."
+  },
+  "launchpad": {
+    "title": "Influence Asset Launchpad",
+    "subtitle": "In just three steps, transform your social influence into tradable digital assets.",
+    "steps": {
+      "connect": "Connect Platform",
+      "valuation": "AVM Valuation",
+      "issue": "Issue Asset",
+      "finish": "Finish"
+    },
+    "phase1": {
+      "title": "Aggregate Your Social Influence",
+      "desc": "We will read your public data via secure API and evaluate market value through the AVM model.",
+      "connect_wallet_title": "Please Connect Wallet First",
+      "connect_wallet_desc": "You need to connect a Solana wallet to verify identity and proceed with token issuance.",
+      "connected": "Connected",
+      "not_connected": "Not Connected",
+      "connect_btn": "Connect",
+      "disconnect_btn": "Disconnect",
+      "start_valuation": "Start Valuation"
+    },
+    "phase2": {
+      "analyzing": "AVM Intelligent Valuation in Progress...",
+      "analyzing_desc": "AI value model analysis based on multi-dimensional data",
+      "followers": "Followers",
+      "engagement": "Engagement Rate",
+      "est_market_cap": "Estimated Initial Market Cap",
+      "calculating": "Calculating...",
+      "confidence": "*Valuation based on KOLMarket AVM V1.0 algorithm model, confidence 98.5%",
+      "confirm_btn": "Confirm Valuation and Proceed to Issue"
+    },
+    "phase3": {
+      "title": "Configure Your Influence Token",
+      "desc": "Define token parameters, ready to start TGE (Token Generation Event)",
+      "ai_report": "Cloudflare AI Valuation Report",
+      "avm_score": "AVM Score:",
+      "suggested_cap": "Suggested Cap:",
+      "llm_prompt": "Digital Life On-Chain Protocol (LLM Prompt)",
+      "prompt_note": "* This Prompt will be permanently minted in the genesis block as the Agent's initial personality configuration.",
+      "category": "Project Category",
+      "token_name": "Token Name",
+      "token_symbol": "Token Symbol (Ticker)",
+      "total_supply": "Total Supply",
+      "initial_price": "Initial Issue Price (Based on Valuation)",
+      "lockup_title": "Lock-up Mechanism Explanation",
+      "lockup_desc": "Creator tokens will follow a 12-month linear vesting period. The first 3 months are a lock-up period, followed by 10% release per month. This ensures long-term value alignment.",
+      "crowd_minting": "Fan Co-Minting (Crowd-Minting)",
+      "crowd_desc1": "The birth of digital life requires computing power and storage costs. You can invite fans to pay KMT to co-complete the minting.",
+      "crowd_desc2": "✨ Contributors will become 'Genesis Partners', permanently enjoying 5% operational dividends of the digital life.",
+      "current_fee": "Current Minting Fee:",
+      "input_amount": "Enter Payment Amount",
+      "balance": "Balance:",
+      "need_more": "Need {{amount}} more KMT to complete minting",
+      "fee_sufficient": "Fee sufficient, ready to mint (You will become a major shareholder)",
+      "issue_btn": "Pay KMT and Mint",
+      "deploying": "Deploying Contract..."
+    },
+    "phase4": {
+      "success": "Issuance Successful!",
+      "success_desc": "Congratulations! Your digital life asset <0>${symbol}</0> has been successfully deployed to the blockchain network. Trading pair has been established on KOLMarket DEX.",
+      "contract_addr": "Contract Address",
+      "init_market_cap": "Initial Market Cap",
+      "liquidity_pool": "Liquidity Pool",
+      "liquidity_added": "Added (100% Locked)",
+      "back_btn": "Back to Console"
+    },
+    "modal": {
+      "verify_title": "Verify {{platform}} Ownership",
+      "verify_desc": "Since currently in demo mode, please enter your account Handle, we will simulate OAuth verification process.",
+      "handle_label": "{{platform}} Handle",
+      "verify_note": "* After verification passes, the system will automatically crawl public fan data and interaction metrics.",
+      "verify_btn": "Verify and Connect"
+    }
+  },
+  "categories": {
+    "all": "All",
+    "gaming": "Gaming",
+    "defi": "DeFi",
+    "social": "Social",
+    "ai": "AI",
+    "music": "Music",
+    "art": "Art",
+    "other": "Other"
+  },
+  "influence_market_add": {
+    "avm_score": "AVM Score",
+    "ai_valuation": "AI Valuation",
+    "analyzing": "Analyzing...",
+    "est_market_cap": "Est. Market Cap"
   }
 }

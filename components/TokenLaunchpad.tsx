@@ -3,12 +3,14 @@ import { Youtube, Instagram, Twitter, CheckCircle, Lock, ArrowRight, BarChart3, 
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import toast from 'react-hot-toast';
+import { useTranslation, Trans } from 'react-i18next';
 import { LaunchPhase, SocialAccount, TokenConfig, ProjectCategory } from '../types';
 import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
 import { verifySocialAccount, saveAccounts, getStoredAccounts, clearAccounts } from '../src/services/social';
 import { generateDigitalLifePrompt, formatPromptForContract } from '../src/services/prompt_generator';
 
 const TokenLaunchpad: React.FC = () => {
+  const { t } = useTranslation();
   const { connected } = useWallet();
   const [phase, setPhase] = useState<LaunchPhase>(1);
   const [loading, setLoading] = useState(false);
@@ -179,11 +181,11 @@ const TokenLaunchpad: React.FC = () => {
         <div className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-green-500/10 text-green-400 text-sm font-medium mb-4">
             <Rocket size={16} />
-            <span>Creator Launchpad</span>
+            <span>{t('launchpad.title')}</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">影响力资产发行控制台</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">{t('launchpad.title')}</h2>
           <p className="text-gray-400 max-w-2xl mx-auto">
-            只需三步，将您的社交影响力转化为可交易的数字资产。
+            {t('launchpad.subtitle')}
           </p>
         </div>
 
@@ -194,10 +196,10 @@ const TokenLaunchpad: React.FC = () => {
                style={{ width: `${((phase - 1) / 3) * 100}%` }}></div>
 
           {[
-            { id: 1, label: '绑定平台', icon: Users },
-            { id: 2, label: 'AVM 估值', icon: BarChart3 },
-            { id: 3, label: '发行资产', icon: Coins },
-            { id: 4, label: '完成', icon: CheckCircle }
+            { id: 1, label: t('launchpad.steps.connect'), icon: Users },
+            { id: 2, label: t('launchpad.steps.valuation'), icon: BarChart3 },
+            { id: 3, label: t('launchpad.steps.issue'), icon: Coins },
+            { id: 4, label: t('launchpad.steps.finish'), icon: CheckCircle }
           ].map((step) => (
             <div key={step.id} className="flex flex-col items-center gap-2 bg-dark-bg px-2">
               <div className={`w-10 h-10 rounded-full flex items-center justify-center border-2 transition-all duration-300
@@ -218,8 +220,8 @@ const TokenLaunchpad: React.FC = () => {
           {phase === 1 && (
             <div className="space-y-8 animate-fade-in-up">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-white mb-2">聚合您的社交影响力</h3>
-                <p className="text-gray-400">我们将通过安全 API 读取您的公开数据，并通过 AVM 模型评估市场价值。</p>
+                <h3 className="text-2xl font-bold text-white mb-2">{t('launchpad.phase1.title')}</h3>
+                <p className="text-gray-400">{t('launchpad.phase1.desc')}</p>
               </div>
             
             {!connected ? (
@@ -227,9 +229,9 @@ const TokenLaunchpad: React.FC = () => {
                     <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mb-4 text-yellow-500">
                         <Wallet size={32} />
                     </div>
-                    <h4 className="text-xl font-bold text-white mb-2">请先连接钱包</h4>
+                    <h4 className="text-xl font-bold text-white mb-2">{t('launchpad.phase1.connect_wallet_title')}</h4>
                     <p className="text-gray-400 mb-6 text-center max-w-sm">
-                        您需要连接 Solana 钱包以验证身份并进行后续的代币发行操作。
+                        {t('launchpad.phase1.connect_wallet_desc')}
                     </p>
                     <WalletMultiButton className="!bg-gradient-to-r !from-yellow-500 !to-orange-600 !rounded-full !font-bold hover:!shadow-lg !transition-all" />
                 </div>
@@ -253,9 +255,9 @@ const TokenLaunchpad: React.FC = () => {
                           {acc.connected ? (
                             <span className="flex items-center gap-2 text-green-400">
                               <span className="w-1.5 h-1.5 rounded-full bg-green-400"></span>
-                              已连接: {acc.handle}
+                              {t('launchpad.phase1.connected')}: {acc.handle}
                             </span>
-                          ) : '未连接'}
+                          ) : t('launchpad.phase1.not_connected')}
                         </div>
                       </div>
                     </div>
@@ -270,7 +272,7 @@ const TokenLaunchpad: React.FC = () => {
                               : 'bg-white text-black hover:bg-gray-200'
                           }`}
                         >
-                          {loading && !acc.connected ? <Loader2 className="animate-spin" size={16} /> : '连接'}
+                          {loading && !acc.connected ? <Loader2 className="animate-spin" size={16} /> : t('launchpad.phase1.connect_btn')}
                         </button>
                         
                         {acc.connected && (
@@ -278,7 +280,7 @@ const TokenLaunchpad: React.FC = () => {
                                 onClick={() => handleDisconnect(acc.platform)}
                                 className="px-4 py-2 rounded-lg text-sm font-medium border border-red-500/30 text-red-500 hover:bg-red-500/10 transition-all"
                             >
-                                断开
+                                {t('launchpad.phase1.disconnect_btn')}
                             </button>
                         )}
                     </div>
@@ -294,7 +296,7 @@ const TokenLaunchpad: React.FC = () => {
                   disabled={!accounts.some(a => a.connected)}
                   className="px-8 py-3 rounded-full bg-gradient-to-r from-blue-500 to-blue-600 text-white font-bold hover:shadow-lg hover:shadow-blue-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
                 >
-                  开始估值 <ArrowRight size={20} />
+                  {t('launchpad.phase1.start_valuation')} <ArrowRight size={20} />
                 </button>
               </div>
              )}
@@ -305,8 +307,8 @@ const TokenLaunchpad: React.FC = () => {
           {phase === 2 && (
             <div className="space-y-8 animate-fade-in-up">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-white mb-2">AVM 智能估值中...</h3>
-                <p className="text-gray-400">基于多维度数据的 AI 价值模型分析</p>
+                <h3 className="text-2xl font-bold text-white mb-2">{t('launchpad.phase2.analyzing')}</h3>
+                <p className="text-gray-400">{t('launchpad.phase2.analyzing_desc')}</p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
@@ -314,10 +316,10 @@ const TokenLaunchpad: React.FC = () => {
                   <div key={acc.platform} className="bg-white/5 p-6 rounded-2xl border border-white/10 text-center">
                     <div className="text-gray-400 text-sm uppercase tracking-wider mb-2">{acc.platform}</div>
                     <div className="text-2xl font-bold text-white mb-1">{formatNumber(acc.followers)}</div>
-                    <div className="text-sm text-blue-400">粉丝数量</div>
+                    <div className="text-sm text-blue-400">{t('launchpad.phase2.followers')}</div>
                     <div className="mt-4 pt-4 border-t border-white/5">
                       <div className="text-xl font-bold text-white">{acc.engagementRate}%</div>
-                      <div className="text-xs text-gray-500">互动率</div>
+                      <div className="text-xs text-gray-500">{t('launchpad.phase2.engagement')}</div>
                     </div>
                   </div>
                 ))}
@@ -325,11 +327,11 @@ const TokenLaunchpad: React.FC = () => {
 
               <div className="bg-gradient-to-r from-blue-900/20 to-purple-900/20 p-8 rounded-2xl border border-blue-500/30 text-center relative overflow-hidden">
                 <div className="absolute inset-0 bg-blue-500/5 animate-pulse-slow"></div>
-                <h4 className="text-lg text-gray-300 mb-2 relative z-10">预计市场初始市值 (Market Cap)</h4>
+                <h4 className="text-lg text-gray-300 mb-2 relative z-10">{t('launchpad.phase2.est_market_cap')}</h4>
                 <div className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-purple-400 mb-4 relative z-10">
                   {loading ? (
                     <span className="inline-flex items-center gap-2">
-                      <Loader2 className="animate-spin" /> 计算中...
+                      <Loader2 className="animate-spin" /> {t('launchpad.phase2.calculating')}
                     </span>
                   ) : (
                     formatCurrency(valuation || 1500000) // Fallback for display before calculation finishes
@@ -337,7 +339,7 @@ const TokenLaunchpad: React.FC = () => {
                 </div>
                 {!loading && (
                    <div className="text-sm text-gray-400 relative z-10">
-                    *估值基于 KOLMarket AVM V1.0 算法模型，置信度 98.5%
+                    {t('launchpad.phase2.confidence')}
                   </div>
                 )}
               </div>
@@ -347,7 +349,7 @@ const TokenLaunchpad: React.FC = () => {
                   onClick={calculateValuation}
                   className="px-8 py-3 rounded-full bg-gradient-to-r from-purple-500 to-pink-600 text-white font-bold hover:shadow-lg hover:shadow-purple-500/25 transition-all flex items-center gap-2"
                 >
-                  {loading ? '分析中...' : '确认估值并前往发行'} <ArrowRight size={20} />
+                  {loading ? t('launchpad.phase2.analyzing') : t('launchpad.phase2.confirm_btn')} <ArrowRight size={20} />
                 </button>
               </div>
             </div>
@@ -357,8 +359,8 @@ const TokenLaunchpad: React.FC = () => {
           {phase === 3 && (
             <div className="space-y-8 animate-fade-in-up">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-white mb-2">配置您的影响力代币</h3>
-                <p className="text-gray-400">定义代币参数，准备启动 TGE (Token Generation Event)</p>
+                <h3 className="text-2xl font-bold text-white mb-2">{t('launchpad.phase3.title')}</h3>
+                <p className="text-gray-400">{t('launchpad.phase3.desc')}</p>
               </div>
 
               {aiAnalysis && (
@@ -367,18 +369,18 @@ const TokenLaunchpad: React.FC = () => {
                         <Brain size={64} className="text-purple-500" />
                     </div>
                     <h4 className="text-purple-400 font-bold mb-2 flex items-center gap-2">
-                        <Brain size={18} /> Cloudflare AI 估值报告
+                        <Brain size={18} /> {t('launchpad.phase3.ai_report')}
                     </h4>
                     <p className="text-gray-300 text-sm mb-4 leading-relaxed">
                         {aiAnalysis.reasoning}
                     </p>
                     <div className="flex items-center gap-4 text-sm">
                         <div className="bg-dark-bg/50 px-3 py-1.5 rounded-lg border border-white/10">
-                            <span className="text-gray-500 mr-2">AVM 评分:</span>
+                            <span className="text-gray-500 mr-2">{t('launchpad.phase3.avm_score')}</span>
                             <span className="text-white font-bold">{aiAnalysis.score}/100</span>
                         </div>
                         <div className="bg-dark-bg/50 px-3 py-1.5 rounded-lg border border-white/10">
-                            <span className="text-gray-500 mr-2">建议市值:</span>
+                            <span className="text-gray-500 mr-2">{t('launchpad.phase3.suggested_cap')}</span>
                             <span className="text-green-400 font-bold font-mono">{formatCurrency(aiAnalysis.marketCap)}</span>
                         </div>
                     </div>
@@ -386,13 +388,13 @@ const TokenLaunchpad: React.FC = () => {
                     {generatedPrompt && (
                         <div className="mt-4 pt-4 border-t border-purple-500/20">
                             <h5 className="text-xs font-bold text-purple-300 mb-2 flex items-center gap-2">
-                                <Lock size={12} /> 数字生命链上协议 (LLM Prompt)
+                                <Lock size={12} /> {t('launchpad.phase3.llm_prompt')}
                             </h5>
                             <div className="bg-black/50 p-3 rounded-lg border border-white/5 font-mono text-[10px] text-gray-400 break-all h-20 overflow-y-auto custom-scrollbar">
                                 {generatedPrompt}
                             </div>
                             <div className="text-[10px] text-gray-500 mt-1">
-                                * 此 Prompt 将永久铸造在创世区块中，作为 Agent 的初始人格配置。
+                                {t('launchpad.phase3.prompt_note')}
                             </div>
                         </div>
                     )}
@@ -401,7 +403,7 @@ const TokenLaunchpad: React.FC = () => {
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
-                  <label className="block text-sm font-medium text-gray-400 mb-2">项目分类</label>
+                  <label className="block text-sm font-medium text-gray-400 mb-2">{t('launchpad.phase3.category')}</label>
                   <div className="flex flex-wrap gap-2">
                     {['Gaming', 'DeFi', 'Social', 'AI', 'Music', 'Art', 'Other'].map((cat) => (
                       <button
@@ -413,7 +415,7 @@ const TokenLaunchpad: React.FC = () => {
                             : 'bg-white/5 text-gray-400 border-white/10 hover:border-white/20'
                         }`}
                       >
-                        {cat}
+                        {t(`categories.${cat.toLowerCase()}`)}
                       </button>
                     ))}
                   </div>
@@ -421,7 +423,7 @@ const TokenLaunchpad: React.FC = () => {
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">代币名称</label>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.token_name')}</label>
                     <input 
                       type="text" 
                       value={tokenConfig.name}
@@ -431,7 +433,7 @@ const TokenLaunchpad: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">代币符号 (Ticker)</label>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.token_symbol')}</label>
                     <input 
                       type="text" 
                       value={tokenConfig.symbol}
@@ -444,7 +446,7 @@ const TokenLaunchpad: React.FC = () => {
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">总供应量</label>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.total_supply')}</label>
                     <input 
                       type="number" 
                       value={tokenConfig.supply}
@@ -453,7 +455,7 @@ const TokenLaunchpad: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">初始发行价 (基于估值)</label>
+                    <label className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.initial_price')}</label>
                     <div className="w-full bg-white/5 border border-white/10 rounded-lg px-4 py-3 text-green-400 font-mono">
                       ${tokenConfig.price}
                     </div>
@@ -464,22 +466,22 @@ const TokenLaunchpad: React.FC = () => {
               <div className="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4 flex items-start gap-3">
                 <Lock className="text-yellow-500 mt-1 flex-shrink-0" size={18} />
                 <div className="text-sm text-yellow-200/80">
-                  <strong className="text-yellow-500 block mb-1">锁仓机制说明</strong>
-                  创作者代币将遵循 12 个月的线性释放期。前 3 个月为锁定期，随后每月释放 10%。这确保了长期价值绑定。
+                  <strong className="text-yellow-500 block mb-1">{t('launchpad.phase3.lockup_title')}</strong>
+                  {t('launchpad.phase3.lockup_desc')}
                 </div>
               </div>
 
               <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6">
                  <h4 className="text-white font-bold mb-4 flex items-center gap-2">
-                     <Coins className="text-blue-400" size={20} /> 粉丝共建铸造 (Crowd-Minting)
+                     <Coins className="text-blue-400" size={20} /> {t('launchpad.phase3.crowd_minting')}
                  </h4>
                  <div className="flex flex-col md:flex-row justify-between items-center gap-6">
                      <div className="text-sm text-gray-400 flex-1">
-                         <p className="mb-2">数字生命的诞生需要消耗算力与存储成本。您可以邀请粉丝支付 KMT 来共同完成铸造。</p>
+                         <p className="mb-2">{t('launchpad.phase3.crowd_desc1')}</p>
                          <p className="text-blue-300 bg-blue-500/10 inline-block px-2 py-1 rounded mb-2">
-                            ✨ 贡献者将成为“创世合伙人 (Genesis Partner)”，永久享有数字生命 5% 的运营分红。
+                            {t('launchpad.phase3.crowd_desc2')}
                          </p>
-                         <p>当前铸造费用: <strong className="text-white">{MINT_FEE_KMT} KMT</strong></p>
+                         <p>{t('launchpad.phase3.current_fee')} <strong className="text-white">{MINT_FEE_KMT} KMT</strong></p>
                      </div>
                      
                      <div className="flex flex-col gap-2 w-full md:w-auto">
@@ -488,25 +490,27 @@ const TokenLaunchpad: React.FC = () => {
                                 type="number" 
                                 value={paymentAmount}
                                 onChange={(e) => setPaymentAmount(Number(e.target.value))}
-                                placeholder="输入支付金额"
+                                placeholder={t('launchpad.phase3.input_amount')}
                                 className="bg-transparent text-white px-3 py-2 w-32 focus:outline-none text-right"
                              />
                              <span className="text-gray-500 pr-3 text-sm">KMT</span>
                         </div>
                         <button className="text-xs text-blue-400 hover:text-blue-300 underline text-right">
-                            余额: 5,420 KMT
+                            {t('launchpad.phase3.balance')} 5,420 KMT
                         </button>
                      </div>
                  </div>
                  
                  {paymentAmount > 0 && paymentAmount < MINT_FEE_KMT && (
                      <div className="mt-3 text-xs text-red-400 text-right">
-                         还需 {MINT_FEE_KMT - paymentAmount} KMT 才能完成铸造
+                         <Trans i18nKey="launchpad.phase3.need_more" values={{ amount: MINT_FEE_KMT - paymentAmount }}>
+                            还需 {{ amount: MINT_FEE_KMT - paymentAmount }} KMT 才能完成铸造
+                         </Trans>
                      </div>
                  )}
                  {paymentAmount >= MINT_FEE_KMT && (
                      <div className="mt-3 text-xs text-green-400 text-right flex items-center justify-end gap-1">
-                         <CheckCircle size={12} /> 费用已足额，准备铸造 (您将成为大股东)
+                         <CheckCircle size={12} /> {t('launchpad.phase3.fee_sufficient')}
                      </div>
                  )}
               </div>
@@ -518,7 +522,7 @@ const TokenLaunchpad: React.FC = () => {
                   className="px-8 py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold hover:shadow-lg hover:shadow-green-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
                 >
                   {loading ? <Loader2 className="animate-spin" /> : <Rocket size={20} />}
-                  {loading ? '合约部署中...' : '支付 KMT 并铸造'}
+                  {loading ? t('launchpad.phase3.deploying') : t('launchpad.phase3.issue_btn')}
                 </button>
               </div>
             </div>
@@ -530,24 +534,26 @@ const TokenLaunchpad: React.FC = () => {
               <div className="w-24 h-24 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
                 <Rocket className="text-green-500 w-12 h-12" />
               </div>
-              <h3 className="text-3xl font-bold text-white mb-4">发行成功!</h3>
+              <h3 className="text-3xl font-bold text-white mb-4">{t('launchpad.phase4.success')}</h3>
               <p className="text-gray-400 max-w-lg mx-auto mb-8">
-                恭喜！您的数字生命资产 <strong className="text-white">${tokenConfig.symbol}</strong> 已成功部署至区块链网络。
-                交易对已在 KOLMarket DEX 建立。
+                <Trans i18nKey="launchpad.phase4.success_desc" values={{ symbol: tokenConfig.symbol }}>
+                    恭喜！您的数字生命资产 <strong className="text-white">${tokenConfig.symbol}</strong> 已成功部署至区块链网络。
+                    交易对已在 KOLMarket DEX 建立。
+                </Trans>
               </p>
               
               <div className="bg-white/5 rounded-2xl p-6 max-w-md mx-auto border border-white/10 mb-8">
                 <div className="flex justify-between items-center py-2 border-b border-white/5">
-                  <span className="text-gray-400">合约地址</span>
+                  <span className="text-gray-400">{t('launchpad.phase4.contract_addr')}</span>
                   <span className="text-blue-400 font-mono text-sm">0x71C...9A21</span>
                 </div>
                 <div className="flex justify-between items-center py-2 border-b border-white/5">
-                  <span className="text-gray-400">初始市值</span>
+                  <span className="text-gray-400">{t('launchpad.phase4.init_market_cap')}</span>
                   <span className="text-white font-mono">{formatCurrency(valuation)}</span>
                 </div>
                 <div className="flex justify-between items-center py-2">
-                  <span className="text-gray-400">流动性池</span>
-                  <span className="text-green-400">已添加 (100% Locked)</span>
+                  <span className="text-gray-400">{t('launchpad.phase4.liquidity_pool')}</span>
+                  <span className="text-green-400">{t('launchpad.phase4.liquidity_added')}</span>
                 </div>
               </div>
 
@@ -556,11 +562,11 @@ const TokenLaunchpad: React.FC = () => {
                    setPhase(1);
                    setAccounts(prev => prev.map(a => ({...a, connected: false})));
                    setValuation(0);
-                   setTokenConfig({name: '', symbol: '', supply: 100000000, price: 0.01});
+                   setTokenConfig({name: '', symbol: '', supply: 100000000, price: 0.01, category: 'Other'});
                 }}
                 className="px-8 py-3 rounded-full border border-white/20 text-white hover:bg-white/10 transition-all"
               >
-                返回控制台
+                {t('launchpad.phase4.back_btn')}
               </button>
             </div>
           )}
@@ -577,16 +583,16 @@ const TokenLaunchpad: React.FC = () => {
                     </button>
                     
                     <h3 className="text-xl font-bold text-white mb-2 capitalize">
-                        验证 {currentPlatform} 所有权
+                        {t('launchpad.modal.verify_title', { platform: currentPlatform })}
                     </h3>
                     <p className="text-gray-400 text-sm mb-6">
-                        由于当前处于演示模式，请输入您的账号 Handle，我们将模拟 OAuth 验证流程。
+                        {t('launchpad.modal.verify_desc')}
                     </p>
                     
                     <div className="space-y-4">
                         <div>
                             <label className="block text-sm font-medium text-gray-400 mb-1">
-                                {currentPlatform} Handle
+                                {t('launchpad.modal.handle_label', { platform: currentPlatform })}
                             </label>
                             <div className="relative">
                                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">@</span>
@@ -601,7 +607,7 @@ const TokenLaunchpad: React.FC = () => {
                                 />
                             </div>
                             <p className="text-xs text-gray-500 mt-2">
-                                * 验证通过后，系统将自动抓取公开的粉丝数据与互动指标。
+                                {t('launchpad.modal.verify_note')}
                             </p>
                         </div>
                         
@@ -611,7 +617,7 @@ const TokenLaunchpad: React.FC = () => {
                                 disabled={!handleInput.trim()}
                                 className="w-full py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                             >
-                                验证并连接
+                                {t('launchpad.modal.verify_btn')}
                             </button>
                         </div>
                     </div>

@@ -88,5 +88,94 @@
     "burn_desc": "厳格な「焼却証明（Proof of Burn）」戦略を実施し、プロトコル収益を使用してKMTを買い戻して焼却し、長期的な価値上昇を保証します。",
     "solana_title": "Solana 駆動",
     "solana_desc": "Solanaの高スループットと低遅延を活用し、AIエージェントのリアルタイムマイクロトランザクションを実現します。"
+  },
+  "launchpad": {
+    "title": "インフルエンス資産発行コンソール",
+    "subtitle": "わずか3ステップで、あなたの社会的影響力を取引可能なデジタル資産に変えます。",
+    "steps": {
+      "connect": "プラットフォーム接続",
+      "valuation": "AVM評価",
+      "issue": "資産発行",
+      "finish": "完了"
+    },
+    "phase1": {
+      "title": "社会的影響力を集約",
+      "desc": "安全なAPIを通じて公開データを読み取り、AVMモデルで市場価値を評価します。",
+      "connect_wallet_title": "まずウォレットを接続してください",
+      "connect_wallet_desc": "本人確認とトークン発行のためにSolanaウォレットを接続する必要があります。",
+      "connected": "接続済み",
+      "not_connected": "未接続",
+      "connect_btn": "接続",
+      "disconnect_btn": "切断",
+      "start_valuation": "評価開始"
+    },
+    "phase2": {
+      "analyzing": "AVMインテリジェント評価中...",
+      "analyzing_desc": "多次元データに基づくAI価値モデル分析",
+      "followers": "フォロワー数",
+      "engagement": "エンゲージメント率",
+      "est_market_cap": "推定初期時価総額 (Market Cap)",
+      "calculating": "計算中...",
+      "confidence": "*評価はKOLMarket AVM V1.0アルゴリズムモデルに基づき、信頼度は98.5%です",
+      "confirm_btn": "評価を確認して発行へ"
+    },
+    "phase3": {
+      "title": "インフルエンストークンの設定",
+      "desc": "トークンパラメータを定義し、TGE (Token Generation Event) の準備をします",
+      "ai_report": "Cloudflare AI 評価レポート",
+      "avm_score": "AVMスコア:",
+      "suggested_cap": "推奨時価総額:",
+      "llm_prompt": "デジタルライフオンチェーンプロトコル (LLM Prompt)",
+      "prompt_note": "* このプロンプトは、エージェントの初期人格設定としてジェネシスブロックに永久に鋳造されます。",
+      "category": "プロジェクト分類",
+      "token_name": "トークン名",
+      "token_symbol": "トークンシンボル (Ticker)",
+      "total_supply": "総供給量",
+      "initial_price": "初期発行価格 (評価に基づく)",
+      "lockup_title": "ロックアップメカニズムの説明",
+      "lockup_desc": "クリエイタートークンは12ヶ月の線形リリース期間に従います。最初の3ヶ月はロック期間で、その後毎月10%がリリースされます。これにより長期的な価値の結束が保証されます。",
+      "crowd_minting": "ファン共同鋳造 (Crowd-Minting)",
+      "crowd_desc1": "デジタルライフの誕生には計算能力とストレージコストが必要です。ファンを招待してKMTを支払ってもらい、共同で鋳造を完了させることができます。",
+      "crowd_desc2": "✨ 貢献者は「ジェネシスパートナー (Genesis Partner)」となり、デジタルライフの運用配当の5%を永久に享受します。",
+      "current_fee": "現在の鋳造費用:",
+      "input_amount": "支払金額を入力",
+      "balance": "残高:",
+      "need_more": "鋳造完了まであと {{amount}} KMT 必要です",
+      "fee_sufficient": "費用が十分です、鋳造の準備ができました (あなたは大株主になります)",
+      "issue_btn": "KMTを支払って鋳造",
+      "deploying": "コントラクトデプロイ中..."
+    },
+    "phase4": {
+      "success": "発行成功!",
+      "success_desc": "おめでとうございます！あなたのデジタルライフ資産 <0>${symbol}</0> はブロックチェーンネットワークに正常にデプロイされました。取引ペアはKOLMarket DEXで確立されました。",
+      "contract_addr": "コントラクトアドレス",
+      "init_market_cap": "初期時価総額",
+      "liquidity_pool": "流動性プール",
+      "liquidity_added": "追加済み (100% ロック)",
+      "back_btn": "コンソールに戻る"
+    },
+    "modal": {
+      "verify_title": "{{platform}} 所有権の確認",
+      "verify_desc": "現在はデモモードのため、アカウントハンドルを入力してください。OAuth検証プロセスをシミュレートします。",
+      "handle_label": "{{platform}} ハンドル",
+      "verify_note": "* 検証通過後、システムは公開されているファンデータとインタラクション指標を自動的に取得します。",
+      "verify_btn": "検証して接続"
+    }
+  },
+  "categories": {
+    "all": "すべて",
+    "gaming": "ゲーム",
+    "defi": "DeFi",
+    "social": "ソーシャル",
+    "ai": "AI",
+    "music": "音楽",
+    "art": "アート",
+    "other": "その他"
+  },
+  "influence_market_add": {
+    "avm_score": "AVMスコア",
+    "ai_valuation": "AI評価",
+    "analyzing": "分析中...",
+    "est_market_cap": "推定時価総額"
   }
 }

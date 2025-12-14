@@ -88,5 +88,94 @@
     "burn_desc": "我们实施严格的“燃烧证明”策略，协议收入将用于回购并销毁 KMT，确保长期价值增值。",
     "solana_title": "Solana 驱动",
     "solana_desc": "利用 Solana 的高吞吐量和低延迟，实现 AI Agent 的实时微交易。"
+  },
+  "launchpad": {
+    "title": "影响力资产发行控制台",
+    "subtitle": "只需三步，将您的社交影响力转化为可交易的数字资产。",
+    "steps": {
+      "connect": "绑定平台",
+      "valuation": "AVM 估值",
+      "issue": "发行资产",
+      "finish": "完成"
+    },
+    "phase1": {
+      "title": "聚合您的社交影响力",
+      "desc": "我们将通过安全 API 读取您的公开数据，并通过 AVM 模型评估市场价值。",
+      "connect_wallet_title": "请先连接钱包",
+      "connect_wallet_desc": "您需要连接 Solana 钱包以验证身份并进行后续的代币发行操作。",
+      "connected": "已连接",
+      "not_connected": "未连接",
+      "connect_btn": "连接",
+      "disconnect_btn": "断开",
+      "start_valuation": "开始估值"
+    },
+    "phase2": {
+      "analyzing": "AVM 智能估值中...",
+      "analyzing_desc": "基于多维度数据的 AI 价值模型分析",
+      "followers": "粉丝数量",
+      "engagement": "互动率",
+      "est_market_cap": "预计市场初始市值 (Market Cap)",
+      "calculating": "计算中...",
+      "confidence": "*估值基于 KOLMarket AVM V1.0 算法模型，置信度 98.5%",
+      "confirm_btn": "确认估值并前往发行"
+    },
+    "phase3": {
+      "title": "配置您的影响力代币",
+      "desc": "定义代币参数，准备启动 TGE (Token Generation Event)",
+      "ai_report": "Cloudflare AI 估值报告",
+      "avm_score": "AVM 评分:",
+      "suggested_cap": "建议市值:",
+      "llm_prompt": "数字生命链上协议 (LLM Prompt)",
+      "prompt_note": "* 此 Prompt 将永久铸造在创世区块中，作为 Agent 的初始人格配置。",
+      "category": "项目分类",
+      "token_name": "代币名称",
+      "token_symbol": "代币符号 (Ticker)",
+      "total_supply": "总供应量",
+      "initial_price": "初始发行价 (基于估值)",
+      "lockup_title": "锁仓机制说明",
+      "lockup_desc": "创作者代币将遵循 12 个月的线性释放期。前 3 个月为锁定期，随后每月释放 10%。这确保了长期价值绑定。",
+      "crowd_minting": "粉丝共建铸造 (Crowd-Minting)",
+      "crowd_desc1": "数字生命的诞生需要消耗算力与存储成本。您可以邀请粉丝支付 KMT 来共同完成铸造。",
+      "crowd_desc2": "✨ 贡献者将成为“创世合伙人 (Genesis Partner)”，永久享有数字生命 5% 的运营分红。",
+      "current_fee": "当前铸造费用:",
+      "input_amount": "输入支付金额",
+      "balance": "余额:",
+      "need_more": "还需 {{amount}} KMT 才能完成铸造",
+      "fee_sufficient": "费用已足额，准备铸造 (您将成为大股东)",
+      "issue_btn": "支付 KMT 并铸造",
+      "deploying": "合约部署中..."
+    },
+    "phase4": {
+      "success": "发行成功!",
+      "success_desc": "恭喜！您的数字生命资产 <0>${symbol}</0> 已成功部署至区块链网络。交易对已在 KOLMarket DEX 建立。",
+      "contract_addr": "合约地址",
+      "init_market_cap": "初始市值",
+      "liquidity_pool": "流动性池",
+      "liquidity_added": "已添加 (100% Locked)",
+      "back_btn": "返回控制台"
+    },
+    "modal": {
+      "verify_title": "验证 {{platform}} 所有权",
+      "verify_desc": "由于当前处于演示模式，请输入您的账号 Handle，我们将模拟 OAuth 验证流程。",
+      "handle_label": "{{platform}} Handle",
+      "verify_note": "* 验证通过后，系统将自动抓取公开的粉丝数据与互动指标。",
+      "verify_btn": "验证并连接"
+    }
+  },
+  "categories": {
+    "all": "全部",
+    "gaming": "游戏",
+    "defi": "DeFi",
+    "social": "社交",
+    "ai": "AI",
+    "music": "音乐",
+    "art": "艺术",
+    "other": "其他"
+  },
+  "influence_market_add": {
+    "avm_score": "AVM 评分",
+    "ai_valuation": "AI 估值",
+    "analyzing": "分析中...",
+    "est_market_cap": "预计市值"
   }
 }
