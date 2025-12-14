@@ -8,17 +8,17 @@ const Footer: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center mb-8">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
-             <div className="bg-yellow-500 p-1 rounded">
-                <span className="font-bold text-black text-lg">K</span>
+            <div className="bg-yellow-500 p-1 rounded">
+               <span className="font-bold text-black text-lg">C</span>
               </div>
-            <span className="text-2xl font-bold text-white">KOLMarket.ai</span>
+            <span className="text-2xl font-bold text-white">COGITO</span>
           </div>
           <div className="flex gap-6">
             <Link to="/whitepaper" className="text-gray-400 hover:text-white transition-colors">Whitepaper</Link>
             <Link to="/docs" className="text-gray-400 hover:text-white transition-colors">Docs</Link>
-            <a href="mailto:contact@kolmarket.ai" className="text-gray-400 hover:text-white flex items-center gap-2 transition-colors">
+            <a href="mailto:contact@cogito.ai" className="text-gray-400 hover:text-white flex items-center gap-2 transition-colors">
               <Mail size={18} />
-              contact@kolmarket.ai
+              contact@cogito.ai
             </a>
             <div className="text-gray-400 flex items-center gap-2">
               <MessageCircle size={18} />
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
         </div>
         
         <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between text-sm text-gray-500">
-          <p>© 2025 KOLMarket.ai. All rights reserved.</p>
+          <p>© 2025 COGITO. All rights reserved.</p>
           <div className="flex gap-6 mt-4 md:mt-0">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Service</a>
