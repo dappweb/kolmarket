@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Info, Search, Wallet, Clock, BarChart2, ArrowUpRight, ArrowDownRight } from 'lucide-react';
-import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar } from 'recharts';
 import { Platform } from '../types';
+import { TradingChart } from './TradingChart';
 
 interface MarketItem {
   id: string;
@@ -36,15 +36,22 @@ const mockMarketData: MarketItem[] = [
   { id: '5', kolName: 'GamingPro', avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&h=100', platform: 'youtube', tokenSymbol: 'GAME', price: 2.10, change24h: -0.5, marketCap: 21000000, avmScore: 89.5, volume24h: 890000 }
 ];
 
-// Mock Chart Data Generator
-const generateChartData = (basePrice: number) => {
+// Mock Candlestick Data Generator
+const generateCandleData = (basePrice: number) => {
   let price = basePrice;
+  const now = Math.floor(Date.now() / 1000);
   return Array.from({ length: 100 }, (_, i) => {
-    price = price * (1 + (Math.random() - 0.5) * 0.02);
+    const open = price;
+    const close = price * (1 + (Math.random() - 0.5) * 0.05);
+    const high = Math.max(open, close) * (1 + Math.random() * 0.02);
+    const low = Math.min(open, close) * (1 - Math.random() * 0.02);
+    price = close;
     return {
-      time: i,
-      price: price,
-      volume: Math.floor(Math.random() * 1000)
+      time: now - (100 - i) * 3600, // Hourly candles
+      open,
+      high,
+      low,
+      close,
     };
   });
 };
@@ -79,11 +86,12 @@ const InfluenceMarket: React.FC = () => {
   const [timeframe, setTimeframe] = useState('1H');
 
   useEffect(() => {
-    setChartData(generateChartData(selectedToken.price));
+    setChartData(generateCandleData(selectedToken.price));
     setOrderBook(generateOrderBook(selectedToken.price));
   }, [selectedToken]);
 
   const formatCurrency = (val: number) => new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(val);
+
   
   const handleExecuteTrade = () => {
     const numAmount = parseFloat(amount);
@@ -211,38 +219,7 @@ const InfluenceMarket: React.FC = () => {
 
                {/* Chart */}
                <div className="flex-1 w-full h-full min-h-0">
-                 <ResponsiveContainer width="100%" height="100%">
-                   <AreaChart data={chartData}>
-                     <defs>
-                       <linearGradient id="colorPrice" x1="0" y1="0" x2="0" y2="1">
-                         <stop offset="5%" stopColor={selectedToken.change24h >= 0 ? '#4ade80' : '#f87171'} stopOpacity={0.2}/>
-                         <stop offset="95%" stopColor={selectedToken.change24h >= 0 ? '#4ade80' : '#f87171'} stopOpacity={0}/>
-                       </linearGradient>
-                     </defs>
-                     <CartesianGrid strokeDasharray="3 3" stroke="#334155" opacity={0.3} vertical={false} />
-                     <XAxis dataKey="time" hide />
-                     <YAxis 
-                        orientation="right" 
-                        domain={['auto', 'auto']} 
-                        tick={{fill: '#94a3b8', fontSize: 11}} 
-                        axisLine={false}
-                        tickFormatter={(val) => val.toFixed(2)}
-                     />
-                     <Tooltip 
-                       contentStyle={{backgroundColor: '#0f172a', borderColor: '#334155'}}
-                       itemStyle={{color: '#f8fafc'}}
-                       formatter={(value: number) => [value.toFixed(4), 'Price']}
-                     />
-                     <Area 
-                       type="monotone" 
-                       dataKey="price" 
-                       stroke={selectedToken.change24h >= 0 ? '#4ade80' : '#f87171'} 
-                       strokeWidth={2}
-                       fillOpacity={1} 
-                       fill="url(#colorPrice)" 
-                     />
-                   </AreaChart>
-                 </ResponsiveContainer>
+                 <TradingChart data={chartData} />
                </div>
             </div>
           </div>

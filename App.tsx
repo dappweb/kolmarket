@@ -8,25 +8,28 @@ import ExchangePage from './pages/ExchangePage';
 import LaunchpadPage from './pages/LaunchpadPage';
 import FoundryPage from './pages/FoundryPage';
 import IntelligencePage from './pages/IntelligencePage';
+import { WalletContextProvider } from './components/WalletContextProvider';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <ScrollToTop />
-      <div className="min-h-screen bg-dark-bg text-white font-sans selection:bg-yellow-500 selection:text-black flex flex-col">
-        <Header />
-        <main className="flex-grow">
-          <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/exchange" element={<ExchangePage />} />
-            <Route path="/launchpad" element={<LaunchpadPage />} />
-            <Route path="/foundry" element={<FoundryPage />} />
-            <Route path="/intelligence" element={<IntelligencePage />} />
-          </Routes>
-        </main>
-        <Footer />
-      </div>
-    </Router>
+    <WalletContextProvider>
+      <Router>
+        <ScrollToTop />
+        <div className="min-h-screen bg-dark-bg text-white font-sans selection:bg-yellow-500 selection:text-black flex flex-col">
+          <Header />
+          <main className="flex-grow">
+            <Routes>
+              <Route path="/" element={<HomePage />} />
+              <Route path="/exchange" element={<ExchangePage />} />
+              <Route path="/launchpad" element={<LaunchpadPage />} />
+              <Route path="/foundry" element={<FoundryPage />} />
+              <Route path="/intelligence" element={<IntelligencePage />} />
+            </Routes>
+          </main>
+          <Footer />
+        </div>
+      </Router>
+    </WalletContextProvider>
   );
 };
 
