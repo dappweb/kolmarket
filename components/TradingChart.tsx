@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { createChart, ColorType, CrosshairMode, IChartApi } from 'lightweight-charts';
+import { createChart, ColorType, CrosshairMode, IChartApi, CandlestickSeries } from 'lightweight-charts';
 
 interface TradingChartProps {
   data: { time: string | number; open: number; high: number; low: number; close: number }[];
@@ -56,7 +56,7 @@ export const TradingChart: React.FC<TradingChartProps> = ({
       },
     });
 
-    const candlestickSeries = chart.addCandlestickSeries({
+    const candlestickSeries = chart.addSeries(CandlestickSeries, {
       upColor: '#26a69a',
       downColor: '#ef5350',
       borderVisible: false,

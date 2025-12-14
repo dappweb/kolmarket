@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "首页",
+    "launchpad": "发行资产",
+    "exchange": "交易市场",
+    "foundry": "数字铸造",
+    "intelligence": "智能工作台",
+    "whitepaper": "白皮书",
+    "docs": "文档",
+    "connect": "连接钱包"
+  },
+  "hero": {
+    "subtitle": "下一代数字生命经济体",
+    "title_1": "影响力即资产",
+    "title_2": "AI 驱动的数字生命",
+    "desc": "在这里，KOL 的影响力被铸造为可交易的资产。我们利用 AI 与 区块链，赋予数字身份自主进化的生命力与经济价值。",
+    "cta_launch": "发行影响力资产",
+    "cta_explore": "探索交易市场"
+  },
+  "whitepaper": {
+    "title": "KMT 生态白皮书",
+    "subtitle": "数字生命的经济引擎",
+    "intro": "KOL Market Token (KMT) 是 KOLMarket 生态系统的治理和实用代币，旨在捕获数字生命创造和互动的价值。",
+    "burn_title": "通缩销毁机制",
+    "burn_desc": "我们实施严格的“燃烧证明”策略，协议收入将用于回购并销毁 KMT，确保长期价值增值。",
+    "solana_title": "Solana 驱动",
+    "solana_desc": "利用 Solana 的高吞吐量和低延迟，实现 AI Agent 的实时微交易。"
+  }
+}

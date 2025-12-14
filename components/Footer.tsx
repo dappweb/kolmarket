@@ -1,5 +1,6 @@
 import React from 'react';
 import { Mail, MessageCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Footer: React.FC = () => {
   return (
@@ -13,6 +14,8 @@ const Footer: React.FC = () => {
             <span className="text-2xl font-bold text-white">KOLMarket.ai</span>
           </div>
           <div className="flex gap-6">
+            <Link to="/whitepaper" className="text-gray-400 hover:text-white transition-colors">Whitepaper</Link>
+            <Link to="/docs" className="text-gray-400 hover:text-white transition-colors">Docs</Link>
             <a href="mailto:contact@kolmarket.ai" className="text-gray-400 hover:text-white flex items-center gap-2 transition-colors">
               <Mail size={18} />
               contact@kolmarket.ai

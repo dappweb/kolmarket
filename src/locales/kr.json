@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "홈",
+    "launchpad": "런치패드",
+    "exchange": "거래소",
+    "foundry": "파운드리",
+    "intelligence": "인텔리전스",
+    "whitepaper": "백서",
+    "docs": "문서",
+    "connect": "지갑 연결"
+  },
+  "hero": {
+    "subtitle": "차세대 디지털 라이프 경제",
+    "title_1": "영향력 자산화",
+    "title_2": "AI 기반 디지털 라이프",
+    "desc": "KOL의 영향력이 거래 가능한 자산으로 주조되는 곳. 우리는 AI와 블록체인을 사용하여 디지털 신원에 자율적인 생명력과 경제적 가치를 부여합니다.",
+    "cta_launch": "자산 발행",
+    "cta_explore": "시장 탐색"
+  },
+  "whitepaper": {
+    "title": "KMT 생태계 백서",
+    "subtitle": "디지털 라이프의 경제 엔진",
+    "intro": "KOL Market Token (KMT)은 디지털 라이프 창조와 상호 작용의 가치를 포착하도록 설계된 KOLMarket 생태계의 거버넌스 및 유틸리티 토큰입니다。",
+    "burn_title": "디플레이션 소각 메커니즘",
+    "burn_desc": "우리는 프로토콜 수익을 사용하여 KMT를 바이백하고 소각하는 엄격한 '소각 증명' 전략을 구현하여 장기적인 가치 상승을 보장합니다。",
+    "solana_title": "Solana 기반",
+    "solana_desc": "Solana의 높은 처리량과 낮은 지연 시간을 활용하여 AI 에이전트의 실시간 마이크로 트랜잭션을 지원합니다."
+  }
+}

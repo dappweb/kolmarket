@@ -1,22 +1,32 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X } from 'lucide-react';
+import { Menu, X, Globe } from 'lucide-react';
 import { Link, useLocation } from 'react-router-dom';
 import { NavItem } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
-
-const navItems: NavItem[] = [
-  { label: '首页', href: '/' },
-  { label: '发行影响力资产', href: '/launchpad' },
-  { label: '交易', href: '/exchange' },
-  { label: '铸造数字生命', href: '/foundry' },
-  { label: '智能工作台', href: '/intelligence' },
-];
+import { useTranslation } from 'react-i18next';
 
 const Header: React.FC = () => {
+  const { t, i18n } = useTranslation();
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [langMenuOpen, setLangMenuOpen] = useState(false);
   const location = useLocation();
+
+  const navItems: NavItem[] = [
+    { label: t('nav.home'), href: '/' },
+    { label: t('nav.launchpad'), href: '/launchpad' },
+    { label: t('nav.exchange'), href: '/exchange' },
+    { label: t('nav.foundry'), href: '/foundry' },
+    { label: t('nav.intelligence'), href: '/intelligence' },
+  ];
+
+  const languages = [
+    { code: 'en', label: 'English' },
+    { code: 'zh', label: '中文' },
+    { code: 'jp', label: '日本語' },
+    { code: 'kr', label: '한국어' },
+  ];
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,6 +35,11 @@ const Header: React.FC = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const changeLanguage = (lang: string) => {
+    i18n.changeLanguage(lang);
+    setLangMenuOpen(false);
+  };
 
   return (
     <motion.header 
@@ -45,10 +60,10 @@ const Header: React.FC = () => {
           </div>
           
           <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-8">
+            <div className="ml-10 flex items-baseline space-x-6">
               {navItems.map((item) => (
                 <Link
-                  key={item.label}
+                  key={item.href}
                   to={item.href}
                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     location.pathname === item.href
@@ -65,6 +80,38 @@ const Header: React.FC = () => {
                   )}
                 </Link>
               ))}
+
+              {/* Language Switcher */}
+              <div className="relative">
+                <button 
+                  onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2"
+                >
+                  <Globe size={18} />
+                  <span className="uppercase text-sm">{i18n.language}</span>
+                </button>
+                <AnimatePresence>
+                  {langMenuOpen && (
+                    <motion.div 
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: 10 }}
+                      className="absolute right-0 mt-2 w-32 bg-dark-card border border-white/10 rounded-lg shadow-xl overflow-hidden"
+                    >
+                      {languages.map((lang) => (
+                        <button
+                          key={lang.code}
+                          onClick={() => changeLanguage(lang.code)}
+                          className={`w-full text-left px-4 py-2 text-sm hover:bg-white/10 ${i18n.language === lang.code ? 'text-yellow-500' : 'text-gray-300'}`}
+                        >
+                          {lang.label}
+                        </button>
+                      ))}
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
               <div className="transform scale-90">
                  <WalletMultiButton className="!bg-gradient-to-r !from-yellow-500 !to-orange-500 !text-black !font-bold !rounded-full !hover:opacity-90 !transition-opacity !text-sm !h-10" />
               </div>
@@ -94,7 +141,7 @@ const Header: React.FC = () => {
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               {navItems.map((item) => (
                 <Link
-                  key={item.label}
+                  key={item.href}
                   to={item.href}
                   className={`block px-3 py-2 rounded-md text-base font-medium ${
                     location.pathname === item.href
@@ -106,6 +153,20 @@ const Header: React.FC = () => {
                   {item.label}
                 </Link>
               ))}
+              
+              <div className="flex items-center gap-2 px-3 py-2 border-t border-white/10 mt-2">
+                 <Globe size={18} className="text-gray-400" />
+                 {languages.map((lang) => (
+                   <button
+                     key={lang.code}
+                     onClick={() => changeLanguage(lang.code)}
+                     className={`px-2 py-1 text-sm rounded ${i18n.language === lang.code ? 'bg-yellow-500/20 text-yellow-500' : 'text-gray-400'}`}
+                   >
+                     {lang.label}
+                   </button>
+                 ))}
+              </div>
+
               <div className="mt-4 px-3">
                 <WalletMultiButton className="!w-full !justify-center !bg-yellow-500 !text-black !font-bold !rounded-md" />
               </div>

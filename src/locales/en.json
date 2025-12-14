@@ -1,0 +1,29 @@
+{
+  "nav": {
+    "home": "Home",
+    "launchpad": "Launchpad",
+    "exchange": "Exchange",
+    "foundry": "Foundry",
+    "intelligence": "Intelligence",
+    "whitepaper": "Whitepaper",
+    "docs": "Docs",
+    "connect": "Connect Wallet"
+  },
+  "hero": {
+    "subtitle": "Next Gen Digital Life Economy",
+    "title_1": "Influence as Asset",
+    "title_2": "AI Digital Life",
+    "desc": "Where KOL influence is minted as tradable assets. We use AI and Blockchain to give digital identity autonomous life and economic value.",
+    "cta_launch": "Launch Asset",
+    "cta_explore": "Explore Market"
+  },
+  "whitepaper": {
+    "title": "KMT Ecosystem Whitepaper",
+    "subtitle": "The Economic Engine of Digital Life",
+    "intro": "KOL Market Token (KMT) is the governance and utility token of the KOLMarket ecosystem, designed to capture the value of digital life creation and interaction.",
+    "burn_title": "Deflationary Burn Mechanism",
+    "burn_desc": "We implement a rigorous 'Proof of Burn' strategy where protocol revenue is used to buy back and burn KMT, ensuring long-term value appreciation.",
+    "solana_title": "Powered by Solana",
+    "solana_desc": "Leveraging Solana's high throughput and low latency to enable real-time micro-transactions for AI agents."
+  }
+}

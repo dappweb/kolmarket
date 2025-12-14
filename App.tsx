@@ -8,6 +8,8 @@ import ExchangePage from './pages/ExchangePage';
 import LaunchpadPage from './pages/LaunchpadPage';
 import FoundryPage from './pages/FoundryPage';
 import IntelligencePage from './pages/IntelligencePage';
+import WhitepaperPage from './pages/WhitepaperPage';
+import DocsPage from './pages/DocsPage';
 import { WalletContextProvider } from './components/WalletContextProvider';
 
 const App: React.FC = () => {
@@ -24,6 +26,8 @@ const App: React.FC = () => {
               <Route path="/launchpad" element={<LaunchpadPage />} />
               <Route path="/foundry" element={<FoundryPage />} />
               <Route path="/intelligence" element={<IntelligencePage />} />
+              <Route path="/whitepaper" element={<WhitepaperPage />} />
+              <Route path="/docs" element={<DocsPage />} />
             </Routes>
           </main>
           <Footer />
