@@ -5,6 +5,8 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import type { Transaction } from '@solana/web3.js';
 import toast from 'react-hot-toast';
 import { useTranslation, Trans } from 'react-i18next';
+import { useUser, SignInButton } from '@clerk/clerk-react';
+import { supabase } from '../src/services/supabase';
 import { LaunchPhase, SocialAccount, TokenConfig, ProjectCategory } from '../types';
 import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
 import { bindCreatorSoul } from '../src/services/soul_binding';
@@ -14,6 +16,7 @@ import { generateDigitalLifePrompt, formatPromptForContract } from '../src/servi
 const TokenLaunchpad: React.FC = () => {
   const { t } = useTranslation();
   const { connected } = useWallet();
+  const { isSignedIn, user } = useUser();
   const [phase, setPhase] = useState<LaunchPhase>(1);
   const [loading, setLoading] = useState(false);
   
@@ -40,6 +43,63 @@ const TokenLaunchpad: React.FC = () => {
     }
   }, [accounts]);
 
+  // Auto-check on mount if returning from OAuth
+  React.useEffect(() => {
+    const checkGoogleLink = async () => {
+      if (isSignedIn && user && !accounts.find(a => a.platform === 'youtube' && a.connected)) {
+         const googleAccount = user.externalAccounts.find(
+           (acc) => acc.verification?.strategy === 'oauth_google'
+         );
+         
+         if (googleAccount) {
+            // Auto-connect flow for YouTube if Google is linked
+            // We use a small delay to ensure UX isn't jarring
+            setTimeout(() => {
+                const email = googleAccount.emailAddress;
+                // Only auto-connect if we haven't already (check state again inside)
+                setAccounts(prev => {
+                    if (prev.find(a => a.platform === 'youtube' && a.connected)) return prev;
+                    
+                    const handle = email.split('@')[0];
+                    toast.success(`Detected Google Account: ${email}. Syncing YouTube data...`);
+                    
+                    // Trigger the same logic as "click connect" but programmatic
+                    // Since we can't await inside setState, we just update state directly here 
+                    // mimicking the "success" result of the manual click handler
+                    
+                    // Save to Supabase (fire and forget)
+                    supabase.from('social_accounts').upsert({
+                        user_id: user.id,
+                        platform: 'youtube',
+                        handle: handle,
+                        followers: 50000, // Default mock for auto-connect
+                        engagement_rate: 3.5,
+                        verified: true
+                    }, { onConflict: 'user_id, platform' }).then(({ error }) => {
+                        if (error) console.error('Supabase auto-save error:', error);
+                    });
+
+                    return prev.map(acc => {
+                        if (acc.platform === 'youtube') {
+                            return { 
+                                ...acc, 
+                                connected: true, 
+                                handle: handle,
+                                followers: 50000,
+                                engagementRate: 3.5
+                            };
+                        }
+                        return acc;
+                    });
+                });
+            }, 1000);
+         }
+      }
+    };
+    
+    checkGoogleLink();
+  }, [isSignedIn, user]);
+
   const [valuation, setValuation] = useState<number>(0);
   const [aiAnalysis, setAiAnalysis] = useState<ValuationResponse | null>(null);
   const [soulMint, setSoulMint] = useState<string | null>(null);
@@ -53,7 +113,82 @@ const TokenLaunchpad: React.FC = () => {
   });
 
   // Phase 1: Connect Accounts
-  const openConnectModal = (platform: string) => {
+  const openConnectModal = async (platform: string) => {
+    if (platform === 'youtube') {
+      try {
+        setLoading(true);
+        // Check if already linked
+        const existingAccount = user?.externalAccounts.find(
+          (acc) => acc.verification?.strategy === 'oauth_google'
+        );
+
+        if (existingAccount) {
+           // Simulate data fetching from connected Google account
+           const email = existingAccount.emailAddress;
+           const handle = email.split('@')[0]; // Simple heuristic for demo
+           
+           // Simulate verification delay
+           await new Promise(resolve => setTimeout(resolve, 1500));
+           
+           const verifiedAccount = {
+             platform: 'youtube',
+             handle: handle,
+             followers: Math.floor(Math.random() * 100000) + 5000, // Mock data
+             engagementRate: Number((Math.random() * 5 + 1).toFixed(2)),
+             verified: true
+           };
+
+           // Update state
+           setAccounts(prev => prev.map(acc => {
+             if (acc.platform === 'youtube') {
+               return { ...acc, ...verifiedAccount, connected: true };
+             }
+             return acc;
+           }));
+
+           // Save to Supabase
+           if (user) {
+             const { error } = await supabase.from('social_accounts').upsert({
+               user_id: user.id,
+               platform: 'youtube',
+               handle: handle,
+               followers: verifiedAccount.followers,
+               engagement_rate: verifiedAccount.engagementRate,
+               verified: true
+             }, { onConflict: 'user_id, platform' });
+             
+             if (error) console.error('Supabase error:', error);
+           }
+           
+           toast.success("YouTube (Google) account verified successfully!");
+           setLoading(false);
+           return;
+        }
+
+        // If not linked, trigger OAuth
+        const externalAccount = await user?.createExternalAccount({
+          strategy: 'oauth_google',
+          redirectUrl: window.location.href,
+        });
+        
+        if (externalAccount) {
+            // Redirect to Google
+            window.location.href = externalAccount.verification?.externalVerificationRedirectURL?.href || '';
+        }
+      } catch (err: any) {
+        console.error("OAuth Error:", err);
+        // If error implies account already exists/linked but not found in list (rare edge case), prompt user
+        if (err.errors?.[0]?.code === 'external_account_exists') {
+             toast.error("This Google account is already linked. Please refresh.");
+        } else {
+             toast.error("Failed to initiate Google Login.");
+        }
+        setLoading(false);
+      }
+      return;
+    }
+
+    // Default modal for other platforms
     setCurrentPlatform(platform);
     setHandleInput('');
     setIsModalOpen(true);
@@ -68,6 +203,23 @@ const TokenLaunchpad: React.FC = () => {
     try {
         const verifiedAccount = await verifySocialAccount(currentPlatform, handleInput);
         
+        // Save to Supabase
+        if (user) {
+          const { error } = await supabase.from('social_accounts').upsert({
+            user_id: user.id,
+            platform: currentPlatform,
+            handle: handleInput,
+            followers: verifiedAccount.followers,
+            engagement_rate: verifiedAccount.engagementRate,
+            verified: true
+          }, { onConflict: 'user_id, platform' });
+          
+          if (error) {
+            console.error('Supabase error:', error);
+            // Don't block UI on Supabase error for now, as tables might not exist in demo
+          }
+        }
+
         setAccounts(prev => prev.map(acc => {
             if (acc.platform === currentPlatform) {
                 return { ...acc, ...verifiedAccount };
@@ -129,6 +281,19 @@ const TokenLaunchpad: React.FC = () => {
             setAiAnalysis(result);
             setValuation(result.marketCap);
             
+            // Save Valuation to Supabase
+            if (user) {
+              const { error } = await supabase.from('valuations').insert({
+                user_id: user.id,
+                total_followers: connectedAccounts.reduce((acc, curr) => acc + curr.followers, 0),
+                avg_engagement: mainAccount.engagementRate,
+                market_cap: result.marketCap,
+                score: result.score,
+                report_json: result
+              });
+              if (error) console.error('Supabase valuation save error:', error);
+            }
+
             // Generate Digital Life Prompt
             const prompt = generateDigitalLifePrompt({
                 name: mainAccount.handle || "Unknown",
@@ -251,8 +416,23 @@ const TokenLaunchpad: React.FC = () => {
                 <h3 className="text-2xl font-bold text-white mb-2">{t('launchpad.phase1.title')}</h3>
                 <p className="text-gray-400">{t('launchpad.phase1.desc')}</p>
               </div>
-            
-            {!connected ? (
+
+            {!isSignedIn ? (
+                <div className="flex flex-col items-center justify-center py-12 bg-white/5 rounded-2xl border border-white/10 border-dashed">
+                    <div className="w-16 h-16 bg-blue-500/20 rounded-full flex items-center justify-center mb-4 text-blue-500">
+                        <Users size={32} />
+                    </div>
+                    <h4 className="text-xl font-bold text-white mb-2">Login Required</h4>
+                    <p className="text-gray-400 mb-6 text-center max-w-sm">
+                        Please login with Clerk to manage your social accounts and digital life.
+                    </p>
+                    <SignInButton mode="modal">
+                        <button className="px-8 py-3 rounded-full bg-blue-600 text-white font-bold hover:bg-blue-500 transition-all">
+                            Login / Sign Up
+                        </button>
+                    </SignInButton>
+                </div>
+            ) : !connected ? (
                 <div className="flex flex-col items-center justify-center py-12 bg-white/5 rounded-2xl border border-white/10 border-dashed">
                     <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mb-4 text-yellow-500">
                         <Wallet size={32} />

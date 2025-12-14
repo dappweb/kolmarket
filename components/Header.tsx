@@ -5,6 +5,7 @@ import { NavItem } from '../types';
 import { motion, AnimatePresence } from 'framer-motion';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { useTranslation } from 'react-i18next';
+import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-react';
 
 const Header: React.FC = () => {
   const { t, i18n } = useTranslation();
@@ -54,9 +55,9 @@ const Header: React.FC = () => {
           <div className="flex items-center">
             <Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
               <div className="bg-yellow-500 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300">
-                <span className="font-bold text-black text-xl">C</span>
+                <span className="font-bold text-black text-xl">K</span>
               </div>
-              <span className="font-bold text-2xl tracking-tighter text-white">COGITO</span>
+              <span className="font-bold text-2xl tracking-tighter text-white">KOLMarket</span>
             </Link>
           </div>
           
@@ -116,6 +117,19 @@ const Header: React.FC = () => {
               <div className="transform scale-90">
                  <WalletMultiButton className="!bg-gradient-to-r !from-yellow-500 !to-orange-500 !text-black !font-bold !rounded-full !hover:opacity-90 !transition-opacity !text-sm !h-10" />
               </div>
+
+              <div className="ml-4 flex items-center">
+                <SignedOut>
+                  <SignInButton mode="modal">
+                    <button className="text-gray-300 hover:text-white font-medium">
+                      {t('nav.login') || 'Login'}
+                    </button>
+                  </SignInButton>
+                </SignedOut>
+                <SignedIn>
+                  <UserButton afterSignOutUrl="/" />
+                </SignedIn>
+              </div>
             </div>
           </div>
 
@@ -168,7 +182,19 @@ const Header: React.FC = () => {
                  ))}
               </div>
 
-              <div className="mt-4 px-3">
+              <div className="mt-4 px-3 flex flex-col gap-3">
+                <div className="flex justify-center">
+                  <SignedOut>
+                    <SignInButton mode="modal">
+                      <button className="w-full text-center py-2 rounded-md bg-white/10 text-white font-medium">
+                        {t('nav.login') || 'Login'}
+                      </button>
+                    </SignInButton>
+                  </SignedOut>
+                  <SignedIn>
+                    <UserButton afterSignOutUrl="/" />
+                  </SignedIn>
+                </div>
                 <WalletMultiButton className="!w-full !justify-center !bg-yellow-500 !text-black !font-bold !rounded-md" />
               </div>
             </div>
