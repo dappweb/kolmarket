@@ -113,7 +113,7 @@ const TokenLaunchpad: React.FC = () => {
           {[
             { id: 1, label: '绑定平台', icon: Users },
             { id: 2, label: 'AVM 估值', icon: BarChart3 },
-            { id: 3, label: '发行代币', icon: Coins },
+            { id: 3, label: '发行资产', icon: Coins },
             { id: 4, label: '完成', icon: CheckCircle }
           ].map((step) => (
             <div key={step.id} className="flex flex-col items-center gap-2 bg-dark-bg px-2">
@@ -135,8 +135,8 @@ const TokenLaunchpad: React.FC = () => {
           {phase === 1 && (
             <div className="space-y-8 animate-fade-in-up">
               <div className="text-center">
-                <h3 className="text-2xl font-bold text-white mb-2">连接您的社交账号</h3>
-                <p className="text-gray-400">我们将安全地读取您的公开数据以进行价值评估</p>
+                <h3 className="text-2xl font-bold text-white mb-2">聚合您的社交影响力</h3>
+                <p className="text-gray-400">我们将通过安全 API 读取您的公开数据，并通过 AVM 模型评估市场价值。</p>
               </div>
 
               <div className="grid grid-cols-1 gap-4">

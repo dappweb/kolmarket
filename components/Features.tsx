@@ -25,21 +25,21 @@ const Features: React.FC = () => {
                 <Network className="text-blue-400 h-9 w-9" />
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">影响力市场</h3>
-              <p className="text-xs font-bold text-blue-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">价值发现层</p>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">价值交换引擎</h3>
+              <p className="text-xs font-bold text-blue-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">资产流通层</p>
               
               <ul className="space-y-4 text-gray-400 flex-grow">
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-blue-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">影响力代币:</strong> 基于 AVM (自动估值模型) 发行，代表 KOL 未来增长潜力。</span>
+                  <span><strong className="text-gray-200">影响力代币化:</strong> 基于 AI 估值的动态资产发行。</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-blue-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">动态价格发现:</strong> 基于实时影响力指数的自动化做市。</span>
+                  <span><strong className="text-gray-200">自动化做市:</strong> 智能流动性池确保交易顺畅。</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-blue-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">社交化交易:</strong> 深度集成的社区讨论与策略分享。</span>
+                  <span><strong className="text-gray-200">社交投资网络:</strong> 跟单顶级策略，共享影响力红利。</span>
                 </li>
               </ul>
             </div>
@@ -54,21 +54,21 @@ const Features: React.FC = () => {
                 <Bot className="text-purple-400 h-9 w-9" />
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">数字生命铸造厂</h3>
-              <p className="text-xs font-bold text-purple-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">价值与行动力创造层</p>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">数字生命进化</h3>
+              <p className="text-xs font-bold text-purple-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">核心资产层</p>
               
               <ul className="space-y-4 text-gray-400 flex-grow">
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-purple-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">DLT (数字生命代币):</strong> 基于 ERC-721/1155 的股权化 NFT 资产。</span>
+                  <span><strong className="text-gray-200">DLT 资产协议:</strong> 确权、可编程的数字生命 Token。</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-purple-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">AVM 模型训练:</strong> 注入个性化知识体系与自主决策逻辑。</span>
+                  <span><strong className="text-gray-200">人格化 AI:</strong> 注入记忆、性格与专业技能的灵魂。</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-purple-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">数据隐私:</strong> 采用联邦学习技术保护 KOL 核心数据资产。</span>
+                  <span><strong className="text-gray-200">隐私计算:</strong> 联邦学习保障数据主权与安全。</span>
                 </li>
               </ul>
             </div>
@@ -83,21 +83,21 @@ const Features: React.FC = () => {
                 <HandMetal className="text-yellow-400 h-9 w-9" />
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">智能体行动网关</h3>
-              <p className="text-xs font-bold text-yellow-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">价值实现层</p>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">智能生产力</h3>
+              <p className="text-xs font-bold text-yellow-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">价值创造层</p>
               
               <ul className="space-y-4 text-gray-400 flex-grow">
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-yellow-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">数字任务广场:</strong> 全自动化的任务接单、报价与交付系统。</span>
+                  <span><strong className="text-gray-200">任务自动化:</strong> 7x24 小时全自动接单与交付。</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-yellow-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">具身智能之桥:</strong> 通过开放协议控制物理实体（机器人/IoT）。</span>
+                  <span><strong className="text-gray-200">具身智能网关:</strong> 驱动物理世界的机器人执行任务。</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-yellow-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">RWA 结算:</strong> 任务收益自动转化为现实世界的资产与法币。</span>
+                  <span><strong className="text-gray-200">收益回购:</strong> 劳动创造的价值自动回购代币。</span>
                 </li>
               </ul>
             </div>

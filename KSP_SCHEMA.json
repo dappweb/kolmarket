@@ -1,0 +1,65 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "KOL Soul Protocol (KSP-721)",
+  "description": "Standard for defining a portable Digital Soul for Humanoid Robots",
+  "type": "object",
+  "properties": {
+    "meta": {
+      "type": "object",
+      "properties": {
+        "name": { "type": "string", "description": "KOL Name" },
+        "version": { "type": "string", "description": "Soul Version (e.g., 1.0.0)" },
+        "author_did": { "type": "string", "description": "Decentralized ID of the creator" },
+        "token_mint": { "type": "string", "description": "Solana Mint Address of the KOL Token" }
+      },
+      "required": ["name", "version", "token_mint"]
+    },
+    "personality": {
+      "type": "object",
+      "description": "Cognitive layer configuration for LLMs",
+      "properties": {
+        "base_model": { "type": "string", "description": "e.g., 'llama-3-8b'" },
+        "system_prompt": { "type": "string", "description": "Core personality instructions" },
+        "lora_weights": { "type": "string", "description": "IPFS hash to LoRA weights file" },
+        "knowledge_base": { "type": "string", "description": "IPFS hash to RAG vector store" }
+      },
+      "required": ["system_prompt"]
+    },
+    "voice": {
+      "type": "object",
+      "description": "Voice synthesis configuration",
+      "properties": {
+        "provider": { "type": "string", "enum": ["elevenlabs", "azure", "openai", "custom"] },
+        "voice_id": { "type": "string", "description": "Provider specific voice ID" },
+        "sample_rate": { "type": "integer", "default": 24000 },
+        "stability": { "type": "number", "default": 0.5 },
+        "similarity_boost": { "type": "number", "default": 0.75 }
+      },
+      "required": ["provider", "voice_id"]
+    },
+    "embodiment": {
+      "type": "object",
+      "description": "Physical movement and expression mapping",
+      "properties": {
+        "avatar_url": { "type": "string", "description": "URL to 3D model (GLB/VRM) for visualization" },
+        "motion_library": { 
+          "type": "array", 
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string", "description": "Action name (e.g., 'wave_hello')" },
+              "file_url": { "type": "string", "description": "URL to animation file (FBX/BVH)" },
+              "trigger_keywords": { "type": "array", "items": { "type": "string" } }
+            }
+          }
+        },
+        "hardware_profile": {
+          "type": "string",
+          "enum": ["universal", "unitree_h1", "tesla_optimus", "figure_01"],
+          "default": "universal"
+        }
+      }
+    }
+  },
+  "required": ["meta", "personality", "voice"]
+}

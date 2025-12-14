@@ -10,9 +10,9 @@ const CoreArchitecture: React.FC = () => {
             <Network size={16} />
             <span>Ecosystem Architecture</span>
           </div>
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">经济闭环与核心支柱</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">经济闭环与核心架构</h2>
           <p className="mt-4 text-xl text-gray-400 max-w-3xl mx-auto">
-            从数据资产化到价值变现，KOLMarket 构建了一个完整的数字生命经济循环。
+            构建“创造-交易-应用”的完整数字生命经济循环系统。
           </p>
         </div>
 
@@ -30,20 +30,20 @@ const CoreArchitecture: React.FC = () => {
                 <div className="text-sm font-bold text-purple-500 uppercase tracking-widest mb-2">Pillar I</div>
                 <h3 className="text-2xl font-bold text-white mb-4">数字生命铸造厂</h3>
                 <p className="text-gray-400 mb-6 min-h-[48px]">
-                  将 KOL 的社交数据与人格特征转化为可编程的数字资产 (Token & NFT)。
+                  通过 AI 深度学习与大数据分析，将社交影响力转化为可编程的智能数字资产。
                 </p>
                 <ul className="space-y-3 text-sm text-gray-500">
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                    <span>多平台数据清洗与聚合</span>
+                    <span>全平台社交数据聚合清洗</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                    <span>AVM 自动化估值模型</span>
+                    <span>AVM 影响力价值评估模型</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-purple-500"></div>
-                    <span>AI Agent 个性化训练</span>
+                    <span>个性化 AI Agent 训练</span>
                   </li>
                 </ul>
               </div>
@@ -56,22 +56,22 @@ const CoreArchitecture: React.FC = () => {
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-sm font-bold text-blue-500 uppercase tracking-widest mb-2">Pillar II</div>
-                <h3 className="text-2xl font-bold text-white mb-4">影响力交易市场</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">价值交换网络</h3>
                 <p className="text-gray-400 mb-6 min-h-[48px]">
-                  为影响力资产提供流动性，通过市场博弈实现价值的实时发现。
+                  提供高流动性的交易市场，通过供需博弈实时发现数字生命的真实价值。
                 </p>
                 <ul className="space-y-3 text-sm text-gray-500">
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>AMM + 订单薄混合交易</span>
+                    <span>AMM + 订单薄混合交易引擎</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>影响力指数合约</span>
+                    <span>影响力指数衍生品合约</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-blue-500"></div>
-                    <span>粉丝持仓分红机制</span>
+                    <span>粉丝持仓分红与权益机制</span>
                   </li>
                 </ul>
               </div>
@@ -84,18 +84,18 @@ const CoreArchitecture: React.FC = () => {
               </div>
               <div className="text-center lg:text-left">
                 <div className="text-sm font-bold text-yellow-500 uppercase tracking-widest mb-2">Pillar III</div>
-                <h3 className="text-2xl font-bold text-white mb-4">智能体行动网关</h3>
+                <h3 className="text-2xl font-bold text-white mb-4">智能体应用层</h3>
                 <p className="text-gray-400 mb-6 min-h-[48px]">
-                  释放数字生命的生产力，执行实际任务并赚取收益，反哺代币价值。
+                  释放数字生命的生产力，执行现实世界的商业任务并创造实际收益。
                 </p>
                 <ul className="space-y-3 text-sm text-gray-500">
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
-                    <span>自动化任务接单广场</span>
+                    <span>去中心化任务接单广场</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>
-                    <span>具身智能机器人控制</span>
+                    <span>具身智能硬件控制协议</span>
                   </li>
                   <li className="flex items-center gap-2 justify-center lg:justify-start">
                     <div className="w-1.5 h-1.5 rounded-full bg-yellow-500"></div>

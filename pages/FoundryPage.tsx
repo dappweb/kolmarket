@@ -1,5 +1,6 @@
 import React from 'react';
 import { Bot, Cpu, Sparkles, ArrowRight } from 'lucide-react';
+import SoulPreview from '../components/SoulPreview';
 
 const FoundryPage: React.FC = () => {
   return (
@@ -11,21 +12,26 @@ const FoundryPage: React.FC = () => {
         </div>
         
         <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">数字生命铸造厂</h1>
-        <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-16">
-          不仅仅是 NFT，而是具备自主意识、可进化的 AI 数字分身。
+        <p className="text-xl text-gray-400 max-w-3xl mx-auto mb-12">
+          打造具备独立意识、自主进化能力的 AI 数字分身，开启您的数字永生之旅。
         </p>
+
+        {/* Soul Preview Section */}
+        <div className="mb-20 animate-fade-in-up">
+           <SoulPreview />
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">
           <div className="bg-dark-card border border-white/5 p-8 rounded-3xl hover:border-purple-500/50 transition-all group">
             <div className="w-14 h-14 bg-purple-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                <Cpu className="text-purple-400" size={28} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">1. 注入灵魂 (AI Training)</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">1. 灵魂注入 (AI Training)</h3>
             <p className="text-gray-400 mb-6">
-              上传您的社交媒体历史数据、语音样本和行为模式，训练您的专属数字双胞胎。
+              深度学习您的社交数据、语音语调与思维模式，构建高保真的数字人格模型。
             </p>
             <button className="text-purple-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
-              开始训练 <ArrowRight size={18} />
+              开始训练模型 <ArrowRight size={18} />
             </button>
           </div>
 
@@ -33,9 +39,9 @@ const FoundryPage: React.FC = () => {
             <div className="w-14 h-14 bg-blue-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                <Sparkles className="text-blue-400" size={28} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">2. 铸造 DLT 资产</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">2. 资产确权 (DLT Minting)</h3>
             <p className="text-gray-400 mb-6">
-              将训练好的 AI 模型铸造为 DLT (Digital Life Token)，确权并赋予其链上身份。
+              将 AI 模型铸造为唯一的 DLT (Digital Life Token)，确保所有权与未来收益权。
             </p>
             <button className="text-blue-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
               连接钱包铸造 <ArrowRight size={18} />
@@ -46,9 +52,9 @@ const FoundryPage: React.FC = () => {
             <div className="w-14 h-14 bg-yellow-500/20 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
                <Bot className="text-yellow-400" size={28} />
             </div>
-            <h3 className="text-2xl font-bold text-white mb-4">3. 激活行动力</h3>
+            <h3 className="text-2xl font-bold text-white mb-4">3. 赋能觉醒 (Activation)</h3>
             <p className="text-gray-400 mb-6">
-              配置智能体的工作权限（Twitter 发帖、回复邮件等），让它开始为您赚取收益。
+              配置自主行动权限（社交互动、任务接单、资产管理），激活数字生命的经济价值。
             </p>
             <button className="text-yellow-400 font-bold flex items-center gap-2 hover:gap-3 transition-all">
               前往工作台 <ArrowRight size={18} />

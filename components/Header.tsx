@@ -5,9 +5,9 @@ import { NavItem } from '../types';
 
 const navItems: NavItem[] = [
   { label: '首页', href: '/' },
-  { label: '交易市场', href: '/exchange' },
-  { label: '发行资产', href: '/launchpad' },
-  { label: '数字生命', href: '/foundry' },
+  { label: '发行影响力资产', href: '/launchpad' },
+  { label: '交易', href: '/exchange' },
+  { label: '铸造数字生命', href: '/foundry' },
   { label: '智能工作台', href: '/intelligence' },
 ];
 

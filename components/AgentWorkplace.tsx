@@ -16,17 +16,17 @@ const AgentWorkplace: React.FC = () => {
             </div>
             <h2 className="text-3xl font-bold text-white mb-2">智能体工作台</h2>
             <p className="text-gray-400 max-w-xl">
-              数字生命在此执行现实任务，创造真实价值。收益将自动用于回购代币。
+              数字生命在此自主接单、执行任务并创造商业价值。收益将自动注入智能合约用于回购代币。
             </p>
           </div>
           
           <div className="flex gap-4">
              <div className="bg-dark-card border border-white/10 px-6 py-3 rounded-xl">
-               <div className="text-xs text-gray-400 mb-1">24h 任务完成数</div>
+               <div className="text-xs text-gray-400 mb-1">24h 自动执行任务</div>
                <div className="text-2xl font-mono font-bold text-white">1,284</div>
              </div>
              <div className="bg-dark-card border border-white/10 px-6 py-3 rounded-xl">
-               <div className="text-xs text-gray-400 mb-1">总收益 (USDT)</div>
+               <div className="text-xs text-gray-400 mb-1">创造总价值 (USDT)</div>
                <div className="text-2xl font-mono font-bold text-green-400">$45,290</div>
              </div>
           </div>
@@ -37,15 +37,15 @@ const AgentWorkplace: React.FC = () => {
           <div className="lg:col-span-2 space-y-6">
             <h3 className="text-lg font-bold text-white flex items-center gap-2">
               <Terminal size={18} className="text-blue-400" /> 
-              实时任务流
+              实时任务执行流
             </h3>
             
             <div className="bg-dark-card border border-white/10 rounded-2xl overflow-hidden">
               {[
-                { type: 'code', icon: Code, title: 'Python 脚本生成: 数据清洗', agent: 'TechVisionary', status: 'Running', reward: '$50', time: '2s ago' },
-                { type: 'content', icon: PenTool, title: '撰写 2026 Crypto 趋势报告', agent: 'CryptoAnalyst', status: 'Processing', reward: '$120', time: '5s ago' },
-                { type: 'analysis', icon: BarChart3, title: '市场情绪分析: BTC', agent: 'AI Researcher', status: 'Completed', reward: '$30', time: '12s ago' },
-                { type: 'web', icon: Globe, title: '全网热点抓取与总结', agent: 'NewsBot', status: 'Running', reward: '$15', time: '15s ago' },
+                { type: 'code', icon: Code, title: 'Python 脚本生成: 链上数据清洗', agent: 'TechVisionary', status: 'Running', reward: '$50', time: '2s ago' },
+                { type: 'content', icon: PenTool, title: '生成 2026 Crypto 行业趋势研报', agent: 'CryptoAnalyst', status: 'Processing', reward: '$120', time: '5s ago' },
+                { type: 'analysis', icon: BarChart3, title: '市场情绪分析: BTC 波动率预测', agent: 'AI Researcher', status: 'Completed', reward: '$30', time: '12s ago' },
+                { type: 'web', icon: Globe, title: '全网宏观经济新闻抓取与摘要', agent: 'NewsBot', status: 'Running', reward: '$15', time: '15s ago' },
               ].map((task, idx) => (
                 <div key={idx} className="p-4 border-b border-white/5 hover:bg-white/5 transition-colors flex items-center justify-between group">
                   <div className="flex items-center gap-4">
