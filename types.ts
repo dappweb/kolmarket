@@ -47,6 +47,9 @@ export interface TokenConfig {
   symbol: string;
   supply: number;
   price: number;
+  category: ProjectCategory;
 }
+
+export type ProjectCategory = 'Gaming' | 'DeFi' | 'Social' | 'AI' | 'Music' | 'Art' | 'Other';
 
 export type LaunchPhase = 1 | 2 | 3 | 4; // 1: Bind, 2: Valuation, 3: Issue, 4: Success

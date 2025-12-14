@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { TrendingUp, TrendingDown, Info, Search, Wallet, Clock, BarChart2, ArrowUpRight, ArrowDownRight, Brain, Loader } from 'lucide-react';
-import { Platform } from '../types';
+import { Platform, ProjectCategory } from '../types';
 import { TradingChart } from './TradingChart';
 import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
 
@@ -9,6 +9,7 @@ interface MarketItem {
   kolName: string;
   avatar: string;
   platform: Platform;
+  category: ProjectCategory;
   tokenSymbol: string;
   price: number;
   change24h: number;
@@ -30,11 +31,37 @@ interface OrderBookItem {
 }
 
 const mockMarketData: MarketItem[] = [
-  { id: '1', kolName: 'TechVisionary', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100', platform: 'youtube', tokenSymbol: 'TECH', price: 4.25, change24h: 12.5, marketCap: 42500000, avmScore: 94.5, volume24h: 1200000 },
-  { id: '2', kolName: 'CryptoAnalyst', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=100&h=100', platform: 'twitter', tokenSymbol: 'COIN', price: 1.85, change24h: -2.3, marketCap: 18500000, avmScore: 88.2, volume24h: 450000 },
-  { id: '3', kolName: 'LifeStyleGuru', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100', platform: 'instagram', tokenSymbol: 'LIFE', price: 0.95, change24h: 5.8, marketCap: 9500000, avmScore: 82.1, volume24h: 120000 },
-  { id: '4', kolName: 'AI Researcher', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100', platform: 'twitter', tokenSymbol: 'AGI', price: 12.40, change24h: 24.5, marketCap: 124000000, avmScore: 98.9, volume24h: 5600000 },
-  { id: '5', kolName: 'GamingPro', avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&h=100', platform: 'youtube', tokenSymbol: 'GAME', price: 2.10, change24h: -0.5, marketCap: 21000000, avmScore: 89.5, volume24h: 890000 }
+  // Gaming
+  { id: '1', kolName: 'TechVisionary', avatar: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&h=100', platform: 'youtube', category: 'Gaming', tokenSymbol: 'TECH', price: 4.25, change24h: 12.5, marketCap: 42500000, avmScore: 94.5, volume24h: 1200000 },
+  { id: '5', kolName: 'GamingPro', avatar: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&h=100', platform: 'youtube', category: 'Gaming', tokenSymbol: 'GAME', price: 2.10, change24h: -0.5, marketCap: 21000000, avmScore: 89.5, volume24h: 890000 },
+  { id: '6', kolName: 'PixelMaster', avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&h=100', platform: 'twitch', category: 'Gaming', tokenSymbol: 'PIXEL', price: 0.85, change24h: 3.2, marketCap: 8500000, avmScore: 85.0, volume24h: 320000 },
+  { id: '7', kolName: 'RetroGamer', avatar: 'https://images.unsplash.com/photo-1633332755192-727a05c4013d?auto=format&fit=crop&w=100&h=100', platform: 'youtube', category: 'Gaming', tokenSymbol: 'RETRO', price: 1.20, change24h: -1.5, marketCap: 12000000, avmScore: 82.5, volume24h: 450000 },
+
+  // DeFi
+  { id: '2', kolName: 'CryptoAnalyst', avatar: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=100&h=100', platform: 'twitter', category: 'DeFi', tokenSymbol: 'COIN', price: 1.85, change24h: -2.3, marketCap: 18500000, avmScore: 88.2, volume24h: 450000 },
+  { id: '8', kolName: 'YieldHunter', avatar: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&h=100', platform: 'twitter', category: 'DeFi', tokenSymbol: 'YIELD', price: 15.50, change24h: 5.4, marketCap: 155000000, avmScore: 92.0, volume24h: 2100000 },
+  { id: '9', kolName: 'ChainWhale', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=100&h=100', platform: 'twitter', category: 'DeFi', tokenSymbol: 'WHALE', price: 42.00, change24h: 1.2, marketCap: 420000000, avmScore: 96.5, volume24h: 5500000 },
+  
+  // Social
+  { id: '3', kolName: 'LifeStyleGuru', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&h=100', platform: 'instagram', category: 'Social', tokenSymbol: 'LIFE', price: 0.95, change24h: 5.8, marketCap: 9500000, avmScore: 82.1, volume24h: 120000 },
+  { id: '10', kolName: 'FashionIcon', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&h=100', platform: 'instagram', category: 'Social', tokenSymbol: 'CHIC', price: 2.50, change24h: 8.9, marketCap: 25000000, avmScore: 90.5, volume24h: 890000 },
+  { id: '11', kolName: 'TravelBlogger', avatar: 'https://images.unsplash.com/photo-1520813792240-56fc4a3765a7?auto=format&fit=crop&w=100&h=100', platform: 'instagram', category: 'Social', tokenSymbol: 'TRVL', price: 1.15, change24h: 2.1, marketCap: 11500000, avmScore: 84.0, volume24h: 230000 },
+
+  // AI
+  { id: '4', kolName: 'AI Researcher', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&h=100', platform: 'twitter', category: 'AI', tokenSymbol: 'AGI', price: 12.40, change24h: 24.5, marketCap: 124000000, avmScore: 98.9, volume24h: 5600000 },
+  { id: '12', kolName: 'NeuralNet', avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=100&h=100', platform: 'twitter', category: 'AI', tokenSymbol: 'BRAIN', price: 8.80, change24h: 15.2, marketCap: 88000000, avmScore: 95.5, volume24h: 3400000 },
+  { id: '13', kolName: 'DataScientist', avatar: 'https://images.unsplash.com/photo-1531427186611-ecfd6d936c79?auto=format&fit=crop&w=100&h=100', platform: 'twitter', category: 'AI', tokenSymbol: 'DATA', price: 5.60, change24h: 6.7, marketCap: 56000000, avmScore: 93.0, volume24h: 1800000 },
+
+  // Music
+  { id: '14', kolName: 'BeatMaker', avatar: 'https://images.unsplash.com/photo-1493225255756-d9584f8606e9?auto=format&fit=crop&w=100&h=100', platform: 'youtube', category: 'Music', tokenSymbol: 'BEAT', price: 3.30, change24h: 4.5, marketCap: 33000000, avmScore: 87.5, volume24h: 670000 },
+  { id: '15', kolName: 'VocalStar', avatar: 'https://images.unsplash.com/photo-1516280440614-6697288d5d38?auto=format&fit=crop&w=100&h=100', platform: 'tiktok', category: 'Music', tokenSymbol: 'VOICE', price: 2.90, change24h: -1.2, marketCap: 29000000, avmScore: 86.0, volume24h: 540000 },
+  { id: '16', kolName: 'DJMix', avatar: 'https://images.unsplash.com/photo-1570295999919-56ceb5ecca61?auto=format&fit=crop&w=100&h=100', platform: 'youtube', category: 'Music', tokenSymbol: 'MIX', price: 1.75, change24h: 8.8, marketCap: 17500000, avmScore: 85.5, volume24h: 410000 },
+
+  // Art
+  { id: '17', kolName: 'DigitalArtist', avatar: 'https://images.unsplash.com/photo-1500917293891-ef795e70e1f6?auto=format&fit=crop&w=100&h=100', platform: 'instagram', category: 'Art', tokenSymbol: 'ART', price: 6.50, change24h: 18.2, marketCap: 65000000, avmScore: 91.5, volume24h: 1500000 },
+  { id: '18', kolName: '3DModeler', avatar: 'https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=100&h=100', platform: 'twitter', category: 'Art', tokenSymbol: 'MESH', price: 4.10, change24h: 3.5, marketCap: 41000000, avmScore: 89.0, volume24h: 890000 },
+  { id: '19', kolName: 'PixelArtist', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=100&h=100', platform: 'twitter', category: 'Art', tokenSymbol: '8BIT', price: 2.25, change24h: -4.1, marketCap: 22500000, avmScore: 83.5, volume24h: 320000 },
+  { id: '20', kolName: 'ConceptArt', avatar: 'https://images.unsplash.com/photo-1552058544-f2b08422138a?auto=format&fit=crop&w=100&h=100', platform: 'artstation', category: 'Art', tokenSymbol: 'CNCPT', price: 5.75, change24h: 9.4, marketCap: 57500000, avmScore: 92.5, volume24h: 1100000 },
 ];
 
 // Mock Candlestick Data Generator
@@ -78,6 +105,7 @@ const generateOrderBook = (basePrice: number): OrderBookItem[] => {
 
 const InfluenceMarket: React.FC = () => {
   const [selectedToken, setSelectedToken] = useState<MarketItem>(mockMarketData[0]);
+  const [selectedCategory, setSelectedCategory] = useState<ProjectCategory | 'All'>('All');
   const [chartData, setChartData] = useState<any[]>([]);
   const [orderBook, setOrderBook] = useState<OrderBookItem[]>([]);
   const [tradeType, setTradeType] = useState<'buy' | 'sell'>('buy');
@@ -138,6 +166,8 @@ const InfluenceMarket: React.FC = () => {
   };
 
   const currentHolding = portfolio.find(p => p.tokenSymbol === selectedToken.tokenSymbol)?.amount || 0;
+  
+  const filteredTokens = mockMarketData.filter(token => selectedCategory === 'All' || token.category === selectedCategory);
 
   return (
     <section id="market" className="py-12 bg-dark-bg border-t border-white/5 min-h-screen">
@@ -145,21 +175,40 @@ const InfluenceMarket: React.FC = () => {
         
         {/* Top Header: Balance & Selector */}
         <div className="flex flex-col md:flex-row justify-between items-center mb-6 gap-4">
-          <div className="flex items-center gap-4 bg-dark-card p-2 rounded-xl border border-white/5">
-            {mockMarketData.map(token => (
-              <button
-                key={token.id}
-                onClick={() => setSelectedToken(token)}
-                className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all ${
-                  selectedToken.id === token.id 
-                    ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50' 
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
-                }`}
-              >
-                <img src={token.avatar} className="w-5 h-5 rounded-full" />
-                <span className="font-bold text-sm">{token.tokenSymbol}</span>
-              </button>
-            ))}
+          <div className="flex flex-col gap-2 w-full md:w-auto">
+            {/* Category Filter */}
+            <div className="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-hide">
+                {['All', 'Gaming', 'DeFi', 'Social', 'AI', 'Music', 'Art', 'Other'].map(cat => (
+                    <button
+                        key={cat}
+                        onClick={() => setSelectedCategory(cat as any)}
+                        className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all whitespace-nowrap ${
+                            selectedCategory === cat
+                                ? 'bg-blue-500 text-white'
+                                : 'bg-dark-card border border-white/5 text-gray-400 hover:text-white hover:bg-white/5'
+                        }`}
+                    >
+                        {cat}
+                    </button>
+                ))}
+            </div>
+
+            <div className="flex items-center gap-4 bg-dark-card p-2 rounded-xl border border-white/5 overflow-x-auto w-full md:w-auto">
+                {filteredTokens.map(token => (
+                <button
+                    key={token.id}
+                    onClick={() => setSelectedToken(token)}
+                    className={`flex items-center gap-2 px-3 py-1.5 rounded-lg transition-all min-w-fit ${
+                    selectedToken.id === token.id 
+                        ? 'bg-blue-500/20 text-blue-400 border border-blue-500/50' 
+                        : 'text-gray-400 hover:text-white hover:bg-white/5'
+                    }`}
+                >
+                    <img src={token.avatar} className="w-5 h-5 rounded-full" />
+                    <span className="font-bold text-sm">{token.tokenSymbol}</span>
+                </button>
+                ))}
+            </div>
           </div>
 
           <div className="flex items-center gap-3 bg-dark-card px-4 py-2 rounded-xl border border-white/5">

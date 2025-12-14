@@ -3,7 +3,7 @@ import { Youtube, Instagram, Twitter, CheckCircle, Lock, ArrowRight, BarChart3, 
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import toast from 'react-hot-toast';
-import { LaunchPhase, SocialAccount, TokenConfig } from '../types';
+import { LaunchPhase, SocialAccount, TokenConfig, ProjectCategory } from '../types';
 import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
 import { verifySocialAccount, saveAccounts, getStoredAccounts, clearAccounts } from '../src/services/social';
 import { generateDigitalLifePrompt, formatPromptForContract } from '../src/services/prompt_generator';
@@ -44,6 +44,7 @@ const TokenLaunchpad: React.FC = () => {
     symbol: '',
     supply: 100000000,
     price: 0.01,
+    category: 'Other'
   });
 
   // Phase 1: Connect Accounts
@@ -399,6 +400,25 @@ const TokenLaunchpad: React.FC = () => {
               )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="md:col-span-2">
+                  <label className="block text-sm font-medium text-gray-400 mb-2">项目分类</label>
+                  <div className="flex flex-wrap gap-2">
+                    {['Gaming', 'DeFi', 'Social', 'AI', 'Music', 'Art', 'Other'].map((cat) => (
+                      <button
+                        key={cat}
+                        onClick={() => setTokenConfig({...tokenConfig, category: cat as ProjectCategory})}
+                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                          tokenConfig.category === cat 
+                            ? 'bg-blue-500 text-white border-blue-500' 
+                            : 'bg-white/5 text-gray-400 border-white/10 hover:border-white/20'
+                        }`}
+                      >
+                        {cat}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+
                 <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-gray-400 mb-1">代币名称</label>
