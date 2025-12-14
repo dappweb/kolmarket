@@ -1,11 +1,20 @@
 import React, { useState } from 'react';
-import { Youtube, Instagram, Twitter, CheckCircle, Lock, ArrowRight, BarChart3, Coins, Rocket, Loader2, Users } from 'lucide-react';
+import { Youtube, Instagram, Twitter, CheckCircle, Lock, ArrowRight, BarChart3, Coins, Rocket, Loader2, Users, Brain, X, Wallet } from 'lucide-react';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import { LaunchPhase, SocialAccount, TokenConfig } from '../types';
+import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
 
 const TokenLaunchpad: React.FC = () => {
+  const { connected } = useWallet();
   const [phase, setPhase] = useState<LaunchPhase>(1);
   const [loading, setLoading] = useState(false);
   
+  // Modal State
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [currentPlatform, setCurrentPlatform] = useState<string | null>(null);
+  const [handleInput, setHandleInput] = useState('');
+
   const [accounts, setAccounts] = useState<SocialAccount[]>([
     { platform: 'youtube', handle: '', connected: false, followers: 0, engagementRate: 0 },
     { platform: 'twitter', handle: '', connected: false, followers: 0, engagementRate: 0 },
@@ -13,6 +22,7 @@ const TokenLaunchpad: React.FC = () => {
   ]);
 
   const [valuation, setValuation] = useState<number>(0);
+  const [aiAnalysis, setAiAnalysis] = useState<ValuationResponse | null>(null);
   const [tokenConfig, setTokenConfig] = useState<TokenConfig>({
     name: '',
     symbol: '',
@@ -21,19 +31,31 @@ const TokenLaunchpad: React.FC = () => {
   });
 
   // Phase 1: Connect Accounts
-  const handleConnect = (platform: string) => {
+  const openConnectModal = (platform: string) => {
+    setCurrentPlatform(platform);
+    setHandleInput('');
+    setIsModalOpen(true);
+  };
+
+  const handleConnect = () => {
+    if (!currentPlatform || !handleInput) return;
+
     setLoading(true);
+    setIsModalOpen(false); // Close modal immediately to show loading on card
+
     // Simulate API call
     setTimeout(() => {
       setAccounts(prev => prev.map(acc => {
-        if (acc.platform === platform) {
-          // Mock data generation
-          const mockFollowers = Math.floor(Math.random() * 500000) + 50000;
-          const mockEngagement = Number((Math.random() * 5 + 1).toFixed(2));
+        if (acc.platform === currentPlatform) {
+          // Mock data generation based on handle length (deterministic mock)
+          const seed = handleInput.length;
+          const mockFollowers = (seed * 15000) + 50000; 
+          const mockEngagement = Number(((seed % 5) + 1.5).toFixed(2));
+          
           return {
             ...acc,
             connected: true,
-            handle: `@${platform}_user`,
+            handle: handleInput.startsWith('@') ? handleInput : `@${handleInput}`,
             followers: mockFollowers,
             engagementRate: mockEngagement
           };
@@ -41,33 +63,43 @@ const TokenLaunchpad: React.FC = () => {
         return acc;
       }));
       setLoading(false);
-    }, 1500);
+      setCurrentPlatform(null);
+    }, 1000);
   };
 
   // Phase 2: AVM Valuation
-  const calculateValuation = () => {
+  const calculateValuation = async () => {
     setLoading(true);
-    setTimeout(() => {
-      const totalScore = accounts.reduce((acc, curr) => {
-        if (curr.connected) {
-          return acc + (curr.followers * curr.engagementRate);
+    
+    // Find connected accounts
+    const connectedAccounts = accounts.filter(a => a.connected);
+    const mainAccount = connectedAccounts[0]; // Use the first one for main valuation context
+
+    if (mainAccount) {
+        try {
+            // Call AI Service
+            const result = await analyzeInfluence({
+                kolName: mainAccount.handle || "Unknown",
+                platform: mainAccount.platform,
+                followers: connectedAccounts.reduce((acc, curr) => acc + curr.followers, 0), // Aggregate followers
+                engagementRate: mainAccount.engagementRate // Use main account engagement
+            });
+            
+            setAiAnalysis(result);
+            setValuation(result.marketCap);
+            
+            // Auto-fill token price based on valuation
+            setTokenConfig(prev => ({
+                ...prev,
+                price: Number((result.marketCap / prev.supply).toFixed(4))
+            }));
+            
+            setPhase(3);
+        } catch (e) {
+            console.error("Valuation failed", e);
         }
-        return acc;
-      }, 0);
-      
-      // Simple mock formula: Score * Multiplier
-      const mockValuation = Math.floor(totalScore * 0.5); 
-      setValuation(mockValuation);
-      
-      // Auto-fill token price based on valuation
-      setTokenConfig(prev => ({
-        ...prev,
-        price: Number((mockValuation / prev.supply).toFixed(4))
-      }));
-      
-      setPhase(3);
-      setLoading(false);
-    }, 2000);
+    }
+    setLoading(false);
   };
 
   // Phase 3: Issue Token
@@ -138,7 +170,19 @@ const TokenLaunchpad: React.FC = () => {
                 <h3 className="text-2xl font-bold text-white mb-2">聚合您的社交影响力</h3>
                 <p className="text-gray-400">我们将通过安全 API 读取您的公开数据，并通过 AVM 模型评估市场价值。</p>
               </div>
-
+            
+            {!connected ? (
+                <div className="flex flex-col items-center justify-center py-12 bg-white/5 rounded-2xl border border-white/10 border-dashed">
+                    <div className="w-16 h-16 bg-yellow-500/20 rounded-full flex items-center justify-center mb-4 text-yellow-500">
+                        <Wallet size={32} />
+                    </div>
+                    <h4 className="text-xl font-bold text-white mb-2">请先连接钱包</h4>
+                    <p className="text-gray-400 mb-6 text-center max-w-sm">
+                        您需要连接 Solana 钱包以验证身份并进行后续的代币发行操作。
+                    </p>
+                    <WalletMultiButton className="!bg-gradient-to-r !from-yellow-500 !to-orange-600 !rounded-full !font-bold hover:!shadow-lg !transition-all" />
+                </div>
+            ) : (
               <div className="grid grid-cols-1 gap-4">
                 {accounts.map((acc) => (
                   <div key={acc.platform} className={`flex items-center justify-between p-4 rounded-xl border transition-all duration-300 ${acc.connected ? 'bg-blue-500/10 border-blue-500/50' : 'bg-white/5 border-white/10 hover:border-white/20'}`}>
@@ -166,7 +210,7 @@ const TokenLaunchpad: React.FC = () => {
                     </div>
                     
                     <button
-                      onClick={() => handleConnect(acc.platform)}
+                      onClick={() => openConnectModal(acc.platform)}
                       disabled={acc.connected || loading}
                       className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
                         acc.connected 
@@ -179,7 +223,9 @@ const TokenLaunchpad: React.FC = () => {
                   </div>
                 ))}
               </div>
+            )}
 
+            {connected && (
               <div className="pt-4 flex justify-end">
                 <button
                   onClick={() => setPhase(2)}
@@ -189,6 +235,7 @@ const TokenLaunchpad: React.FC = () => {
                   开始估值 <ArrowRight size={20} />
                 </button>
               </div>
+             )}
             </div>
           )}
 
@@ -251,6 +298,30 @@ const TokenLaunchpad: React.FC = () => {
                 <h3 className="text-2xl font-bold text-white mb-2">配置您的影响力代币</h3>
                 <p className="text-gray-400">定义代币参数，准备启动 TGE (Token Generation Event)</p>
               </div>
+
+              {aiAnalysis && (
+                <div className="bg-purple-500/10 border border-purple-500/30 rounded-xl p-6 text-left relative overflow-hidden">
+                    <div className="absolute top-0 right-0 p-4 opacity-10">
+                        <Brain size={64} className="text-purple-500" />
+                    </div>
+                    <h4 className="text-purple-400 font-bold mb-2 flex items-center gap-2">
+                        <Brain size={18} /> Cloudflare AI 估值报告
+                    </h4>
+                    <p className="text-gray-300 text-sm mb-4 leading-relaxed">
+                        {aiAnalysis.reasoning}
+                    </p>
+                    <div className="flex items-center gap-4 text-sm">
+                        <div className="bg-dark-bg/50 px-3 py-1.5 rounded-lg border border-white/10">
+                            <span className="text-gray-500 mr-2">AVM 评分:</span>
+                            <span className="text-white font-bold">{aiAnalysis.score}/100</span>
+                        </div>
+                        <div className="bg-dark-bg/50 px-3 py-1.5 rounded-lg border border-white/10">
+                            <span className="text-gray-500 mr-2">建议市值:</span>
+                            <span className="text-green-400 font-bold font-mono">{formatCurrency(aiAnalysis.marketCap)}</span>
+                        </div>
+                    </div>
+                </div>
+              )}
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-4">
@@ -354,6 +425,57 @@ const TokenLaunchpad: React.FC = () => {
               >
                 返回控制台
               </button>
+            </div>
+          )}
+
+          {/* Connect Modal */}
+          {isModalOpen && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm p-4">
+                <div className="bg-dark-card border border-white/10 rounded-2xl p-6 w-full max-w-md shadow-2xl relative animate-scale-in">
+                    <button 
+                        onClick={() => setIsModalOpen(false)}
+                        className="absolute top-4 right-4 text-gray-500 hover:text-white"
+                    >
+                        <X size={20} />
+                    </button>
+                    
+                    <h3 className="text-xl font-bold text-white mb-2 capitalize">
+                        连接 {currentPlatform}
+                    </h3>
+                    <p className="text-gray-400 text-sm mb-6">
+                        请输入您的社交媒体账号 Handle 以验证所有权。
+                    </p>
+                    
+                    <div className="space-y-4">
+                        <div>
+                            <label className="block text-sm font-medium text-gray-400 mb-1">
+                                {currentPlatform} Handle
+                            </label>
+                            <div className="relative">
+                                <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">@</span>
+                                <input 
+                                    type="text" 
+                                    value={handleInput}
+                                    onChange={(e) => setHandleInput(e.target.value.replace(/^@/, ''))}
+                                    placeholder="username"
+                                    className="w-full bg-black/50 border border-white/10 rounded-lg pl-8 pr-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
+                                    autoFocus
+                                    onKeyDown={(e) => e.key === 'Enter' && handleConnect()}
+                                />
+                            </div>
+                        </div>
+                        
+                        <div className="pt-2">
+                            <button
+                                onClick={handleConnect}
+                                disabled={!handleInput.trim()}
+                                className="w-full py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                            >
+                                确认连接
+                            </button>
+                        </div>
+                    </div>
+                </div>
             </div>
           )}
 
