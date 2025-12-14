@@ -5,8 +5,8 @@ import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
 import type { Transaction } from '@solana/web3.js';
 import toast from 'react-hot-toast';
 import { useTranslation, Trans } from 'react-i18next';
-import { useUser, SignInButton } from '../src/lib/auth';
-import { supabase } from '../src/services/supabase';
+import { useUser, SignInButton, useSession } from '../src/lib/auth';
+import { supabase, createAuthenticatedSupabaseClient } from '../src/services/supabase';
 import { LaunchPhase, SocialAccount, TokenConfig, ProjectCategory } from '../types';
 import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
 import { bindCreatorSoul } from '../src/services/soul_binding';
@@ -17,6 +17,7 @@ const TokenLaunchpad: React.FC = () => {
   const { t } = useTranslation();
   const { connected } = useWallet();
   const { isSignedIn, user } = useUser();
+  const { session } = useSession();
   const [phase, setPhase] = useState<LaunchPhase>(1);
   const [loading, setLoading] = useState(false);
   
@@ -80,7 +81,10 @@ const TokenLaunchpad: React.FC = () => {
                     setTrafficStats(mockTraffic);
 
                     // Save to Supabase
-                    supabase.from('social_accounts').upsert({
+                    const saveToSupabase = async () => {
+                      const client = session ? await createAuthenticatedSupabaseClient(session.getToken) : supabase;
+                      
+                      client.from('social_accounts').upsert({
                         user_id: user.id,
                         platform: 'youtube',
                         handle: handle,
@@ -90,9 +94,11 @@ const TokenLaunchpad: React.FC = () => {
                         total_views: mockTraffic.totalViews,
                         avg_views: mockTraffic.avgViews,
                         recent_videos_json: mockTraffic.recentVideos
-                    }, { onConflict: 'user_id, platform' }).then(({ error }) => {
+                      }, { onConflict: 'user_id, platform' }).then(({ error }) => {
                         if (error) console.error('Supabase auto-save error:', error);
-                    });
+                      });
+                    };
+                    saveToSupabase();
 
                     return prev.map(acc => {
                         if (acc.platform === 'youtube') {

@@ -17,6 +17,20 @@ const UserContext = createContext<UserContextType>({
 
 export const useUser = () => useContext(UserContext);
 
+export const useSession = () => {
+  const { isSignedIn } = useUser();
+  return {
+    isLoaded: true,
+    isSignedIn,
+    session: isSignedIn ? {
+      getToken: async ({ template }: { template?: string } = {}) => {
+        console.log(`[Mock Auth] Generating mock token for template: ${template}`);
+        return "mock-jwt-token";
+      }
+    } : null
+  };
+};
+
 interface ClerkProviderProps {
   children: ReactNode;
   publishableKey?: string;

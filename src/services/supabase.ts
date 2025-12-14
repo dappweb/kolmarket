@@ -12,6 +12,29 @@ export const supabase = createClient(
   supabaseAnonKey || 'placeholder_key'
 )
 
+export const createAuthenticatedSupabaseClient = async (
+  getToken: (options?: { template?: string }) => Promise<string | null>
+) => {
+  const token = await getToken({ template: 'supabase' });
+  
+  if (!token) {
+    console.warn('No Supabase token found, falling back to anon client');
+    return supabase;
+  }
+
+  return createClient(
+    supabaseUrl || 'https://placeholder.supabase.co',
+    supabaseAnonKey || 'placeholder_key',
+    {
+      global: {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      },
+    }
+  );
+};
+
 // SQL Schema for reference:
 /*
 -- Users table (synced from Clerk via webhook or client-side check)

@@ -24,3 +24,4 @@ export const SignedOut = isMock ? MockClerk.SignedOut : ClerkReact.SignedOut;
 export const SignInButton = isMock ? MockClerk.SignInButton : ClerkReact.SignInButton;
 export const UserButton = isMock ? MockClerk.UserButton : ClerkReact.UserButton;
 export const useUser = isMock ? MockClerk.useUser : ClerkReact.useUser;
+export const useSession = isMock ? MockClerk.useSession : ClerkReact.useSession;
