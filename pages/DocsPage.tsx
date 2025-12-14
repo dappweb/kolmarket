@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import { Book, Code, Terminal, FileText, ChevronRight } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const DocsPage: React.FC = () => {
   const [activeTab, setActiveTab] = useState('user-guide');
 
   return (
     <div className="pt-32 pb-20 bg-dark-bg min-h-screen flex">
+      <SEO 
+        title="Developer Documentation - KOLMarket API"
+        description="Integrate with KOLMarket smart contracts. API references, SDKs, and guides for building on the Digital Life Protocol."
+      />
       {/* Sidebar */}
       <div className="hidden lg:block w-64 fixed left-0 top-20 bottom-0 border-r border-white/10 bg-dark-bg overflow-y-auto px-6 py-8">
         <h3 className="text-xs font-bold text-gray-500 uppercase tracking-wider mb-4">Documentation</h3>

@@ -1,10 +1,16 @@
 import React from 'react';
 import { Bot, Cpu, Sparkles, ArrowRight } from 'lucide-react';
 import SoulPreview from '../components/SoulPreview';
+import SkillForge from '../components/SkillForge';
+import SEO from '../components/SEO';
 
 const FoundryPage: React.FC = () => {
   return (
     <section className="pt-32 pb-20 bg-dark-bg min-h-screen">
+      <SEO 
+        title="Digital Life Foundry - AI Agent Creation"
+        description="Train, mint, and evolve your autonomous digital twin. Crowdfund robot skills and earn from the embodied economy."
+      />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/10 text-purple-400 text-sm font-medium mb-8">
           <Bot size={16} />
@@ -19,6 +25,11 @@ const FoundryPage: React.FC = () => {
         {/* Soul Preview Section */}
         <div className="mb-20 animate-fade-in-up">
            <SoulPreview />
+        </div>
+
+        {/* Skill Forge Section */}
+        <div className="mb-20 animate-fade-in-up">
+            <SkillForge />
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 text-left">

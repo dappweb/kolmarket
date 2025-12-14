@@ -2,8 +2,11 @@ import React, { useState } from 'react';
 import { Youtube, Instagram, Twitter, CheckCircle, Lock, ArrowRight, BarChart3, Coins, Rocket, Loader2, Users, Brain, X, Wallet } from 'lucide-react';
 import { useWallet } from '@solana/wallet-adapter-react';
 import { WalletMultiButton } from '@solana/wallet-adapter-react-ui';
+import toast from 'react-hot-toast';
 import { LaunchPhase, SocialAccount, TokenConfig } from '../types';
 import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
+import { verifySocialAccount, saveAccounts, getStoredAccounts, clearAccounts } from '../src/services/social';
+import { generateDigitalLifePrompt, formatPromptForContract } from '../src/services/prompt_generator';
 
 const TokenLaunchpad: React.FC = () => {
   const { connected } = useWallet();
@@ -15,14 +18,27 @@ const TokenLaunchpad: React.FC = () => {
   const [currentPlatform, setCurrentPlatform] = useState<string | null>(null);
   const [handleInput, setHandleInput] = useState('');
 
-  const [accounts, setAccounts] = useState<SocialAccount[]>([
-    { platform: 'youtube', handle: '', connected: false, followers: 0, engagementRate: 0 },
-    { platform: 'twitter', handle: '', connected: false, followers: 0, engagementRate: 0 },
-    { platform: 'instagram', handle: '', connected: false, followers: 0, engagementRate: 0 },
-  ]);
+  // Initial accounts state (try loading from storage first)
+  const [accounts, setAccounts] = useState<SocialAccount[]>(() => {
+    const stored = getStoredAccounts();
+    if (stored) return stored;
+    return [
+      { platform: 'youtube', handle: '', connected: false, followers: 0, engagementRate: 0 },
+      { platform: 'twitter', handle: '', connected: false, followers: 0, engagementRate: 0 },
+      { platform: 'instagram', handle: '', connected: false, followers: 0, engagementRate: 0 },
+    ];
+  });
+
+  // Save to storage whenever accounts change
+  React.useEffect(() => {
+    if (accounts.some(a => a.connected)) {
+        saveAccounts(accounts);
+    }
+  }, [accounts]);
 
   const [valuation, setValuation] = useState<number>(0);
   const [aiAnalysis, setAiAnalysis] = useState<ValuationResponse | null>(null);
+  const [generatedPrompt, setGeneratedPrompt] = useState<string | null>(null);
   const [tokenConfig, setTokenConfig] = useState<TokenConfig>({
     name: '',
     symbol: '',
@@ -37,34 +53,53 @@ const TokenLaunchpad: React.FC = () => {
     setIsModalOpen(true);
   };
 
-  const handleConnect = () => {
+  const handleConnect = async () => {
     if (!currentPlatform || !handleInput) return;
 
     setLoading(true);
     setIsModalOpen(false); // Close modal immediately to show loading on card
 
-    // Simulate API call
-    setTimeout(() => {
-      setAccounts(prev => prev.map(acc => {
-        if (acc.platform === currentPlatform) {
-          // Mock data generation based on handle length (deterministic mock)
-          const seed = handleInput.length;
-          const mockFollowers = (seed * 15000) + 50000; 
-          const mockEngagement = Number(((seed % 5) + 1.5).toFixed(2));
+    try {
+        const verifiedAccount = await verifySocialAccount(currentPlatform, handleInput);
+        
+        setAccounts(prev => prev.map(acc => {
+            if (acc.platform === currentPlatform) {
+                return { ...acc, ...verifiedAccount };
+            }
+            return acc;
+        }));
+        toast.success(`Successfully connected ${currentPlatform}!`);
+    } catch (error) {
+        toast.error("Verification failed. Please check the handle.");
+    } finally {
+        setLoading(false);
+        setCurrentPlatform(null);
+    }
+  };
+
+  const handleDisconnect = (platform: string) => {
+      // toast.custom used for confirmation dialog could be an advanced usage, 
+      // but for now we stick to window.confirm or we could use a custom modal.
+      // Keeping window.confirm for simplicity as per previous implementation, but adding a success toast after.
+      if(!window.confirm(`Are you sure you want to disconnect ${platform}?`)) return;
+      
+      setAccounts(prev => {
+          const newAccounts = prev.map(acc => {
+              if (acc.platform === platform) {
+                  return { ...acc, connected: false, handle: '', followers: 0, engagementRate: 0 };
+              }
+              return acc;
+          });
           
-          return {
-            ...acc,
-            connected: true,
-            handle: handleInput.startsWith('@') ? handleInput : `@${handleInput}`,
-            followers: mockFollowers,
-            engagementRate: mockEngagement
-          };
-        }
-        return acc;
-      }));
-      setLoading(false);
-      setCurrentPlatform(null);
-    }, 1000);
+          // If no accounts connected, clear storage
+          if (!newAccounts.some(a => a.connected)) {
+              clearAccounts();
+          } else {
+              saveAccounts(newAccounts);
+          }
+          return newAccounts;
+      });
+      toast.success(`${platform} disconnected.`);
   };
 
   // Phase 2: AVM Valuation
@@ -88,6 +123,14 @@ const TokenLaunchpad: React.FC = () => {
             setAiAnalysis(result);
             setValuation(result.marketCap);
             
+            // Generate Digital Life Prompt
+            const prompt = generateDigitalLifePrompt({
+                name: mainAccount.handle || "Unknown",
+                accounts: accounts,
+                valuation: result
+            });
+            setGeneratedPrompt(formatPromptForContract(prompt));
+
             // Auto-fill token price based on valuation
             setTokenConfig(prev => ({
                 ...prev,
@@ -95,19 +138,26 @@ const TokenLaunchpad: React.FC = () => {
             }));
             
             setPhase(3);
+            toast.success("AI Valuation Complete! Digital Life Protocol Generated.");
         } catch (e) {
             console.error("Valuation failed", e);
+            toast.error("AI Valuation Service Unavailable.");
         }
     }
     setLoading(false);
   };
 
+  const [paymentAmount, setPaymentAmount] = useState<number>(0);
+  const MINT_FEE_KMT = 1000; // Fixed fee for simplicity for now
+
   // Phase 3: Issue Token
   const handleIssueToken = () => {
     setLoading(true);
+    // Simulate payment and minting
     setTimeout(() => {
       setPhase(4);
       setLoading(false);
+      toast.success("Token Issued & Digital Life Minted Successfully!", { duration: 5000 });
     }, 2500);
   };
 
@@ -209,17 +259,28 @@ const TokenLaunchpad: React.FC = () => {
                       </div>
                     </div>
                     
-                    <button
-                      onClick={() => openConnectModal(acc.platform)}
-                      disabled={acc.connected || loading}
-                      className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
-                        acc.connected 
-                          ? 'bg-transparent text-gray-500 cursor-default' 
-                          : 'bg-white text-black hover:bg-gray-200'
-                      }`}
-                    >
-                      {loading && !acc.connected ? <Loader2 className="animate-spin" size={16} /> : acc.connected ? '已授权' : '连接'}
-                    </button>
+                    <div className="flex items-center gap-2">
+                        <button
+                          onClick={() => openConnectModal(acc.platform)}
+                          disabled={acc.connected || loading}
+                          className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${
+                            acc.connected 
+                              ? 'bg-transparent text-gray-500 hidden' 
+                              : 'bg-white text-black hover:bg-gray-200'
+                          }`}
+                        >
+                          {loading && !acc.connected ? <Loader2 className="animate-spin" size={16} /> : '连接'}
+                        </button>
+                        
+                        {acc.connected && (
+                            <button 
+                                onClick={() => handleDisconnect(acc.platform)}
+                                className="px-4 py-2 rounded-lg text-sm font-medium border border-red-500/30 text-red-500 hover:bg-red-500/10 transition-all"
+                            >
+                                断开
+                            </button>
+                        )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -320,6 +381,20 @@ const TokenLaunchpad: React.FC = () => {
                             <span className="text-green-400 font-bold font-mono">{formatCurrency(aiAnalysis.marketCap)}</span>
                         </div>
                     </div>
+                    
+                    {generatedPrompt && (
+                        <div className="mt-4 pt-4 border-t border-purple-500/20">
+                            <h5 className="text-xs font-bold text-purple-300 mb-2 flex items-center gap-2">
+                                <Lock size={12} /> 数字生命链上协议 (LLM Prompt)
+                            </h5>
+                            <div className="bg-black/50 p-3 rounded-lg border border-white/5 font-mono text-[10px] text-gray-400 break-all h-20 overflow-y-auto custom-scrollbar">
+                                {generatedPrompt}
+                            </div>
+                            <div className="text-[10px] text-gray-500 mt-1">
+                                * 此 Prompt 将永久铸造在创世区块中，作为 Agent 的初始人格配置。
+                            </div>
+                        </div>
+                    )}
                 </div>
               )}
 
@@ -374,14 +449,56 @@ const TokenLaunchpad: React.FC = () => {
                 </div>
               </div>
 
+              <div className="bg-blue-500/10 border border-blue-500/20 rounded-xl p-6">
+                 <h4 className="text-white font-bold mb-4 flex items-center gap-2">
+                     <Coins className="text-blue-400" size={20} /> 粉丝共建铸造 (Crowd-Minting)
+                 </h4>
+                 <div className="flex flex-col md:flex-row justify-between items-center gap-6">
+                     <div className="text-sm text-gray-400 flex-1">
+                         <p className="mb-2">数字生命的诞生需要消耗算力与存储成本。您可以邀请粉丝支付 KMT 来共同完成铸造。</p>
+                         <p className="text-blue-300 bg-blue-500/10 inline-block px-2 py-1 rounded mb-2">
+                            ✨ 贡献者将成为“创世合伙人 (Genesis Partner)”，永久享有数字生命 5% 的运营分红。
+                         </p>
+                         <p>当前铸造费用: <strong className="text-white">{MINT_FEE_KMT} KMT</strong></p>
+                     </div>
+                     
+                     <div className="flex flex-col gap-2 w-full md:w-auto">
+                        <div className="flex items-center gap-2 bg-black/30 rounded-lg p-1 border border-white/10">
+                             <input 
+                                type="number" 
+                                value={paymentAmount}
+                                onChange={(e) => setPaymentAmount(Number(e.target.value))}
+                                placeholder="输入支付金额"
+                                className="bg-transparent text-white px-3 py-2 w-32 focus:outline-none text-right"
+                             />
+                             <span className="text-gray-500 pr-3 text-sm">KMT</span>
+                        </div>
+                        <button className="text-xs text-blue-400 hover:text-blue-300 underline text-right">
+                            余额: 5,420 KMT
+                        </button>
+                     </div>
+                 </div>
+                 
+                 {paymentAmount > 0 && paymentAmount < MINT_FEE_KMT && (
+                     <div className="mt-3 text-xs text-red-400 text-right">
+                         还需 {MINT_FEE_KMT - paymentAmount} KMT 才能完成铸造
+                     </div>
+                 )}
+                 {paymentAmount >= MINT_FEE_KMT && (
+                     <div className="mt-3 text-xs text-green-400 text-right flex items-center justify-end gap-1">
+                         <CheckCircle size={12} /> 费用已足额，准备铸造 (您将成为大股东)
+                     </div>
+                 )}
+              </div>
+
               <div className="pt-4 flex justify-center">
                 <button
                   onClick={handleIssueToken}
-                  disabled={!tokenConfig.name || !tokenConfig.symbol || loading}
+                  disabled={!tokenConfig.name || !tokenConfig.symbol || loading || paymentAmount < MINT_FEE_KMT}
                   className="px-8 py-3 rounded-full bg-gradient-to-r from-green-500 to-emerald-600 text-white font-bold hover:shadow-lg hover:shadow-green-500/25 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center gap-2"
                 >
                   {loading ? <Loader2 className="animate-spin" /> : <Rocket size={20} />}
-                  {loading ? '合约部署中...' : '立即铸造数字生命'}
+                  {loading ? '合约部署中...' : '支付 KMT 并铸造'}
                 </button>
               </div>
             </div>
@@ -440,10 +557,10 @@ const TokenLaunchpad: React.FC = () => {
                     </button>
                     
                     <h3 className="text-xl font-bold text-white mb-2 capitalize">
-                        连接 {currentPlatform}
+                        验证 {currentPlatform} 所有权
                     </h3>
                     <p className="text-gray-400 text-sm mb-6">
-                        请输入您的社交媒体账号 Handle 以验证所有权。
+                        由于当前处于演示模式，请输入您的账号 Handle，我们将模拟 OAuth 验证流程。
                     </p>
                     
                     <div className="space-y-4">
@@ -463,6 +580,9 @@ const TokenLaunchpad: React.FC = () => {
                                     onKeyDown={(e) => e.key === 'Enter' && handleConnect()}
                                 />
                             </div>
+                            <p className="text-xs text-gray-500 mt-2">
+                                * 验证通过后，系统将自动抓取公开的粉丝数据与互动指标。
+                            </p>
                         </div>
                         
                         <div className="pt-2">
@@ -471,7 +591,7 @@ const TokenLaunchpad: React.FC = () => {
                                 disabled={!handleInput.trim()}
                                 className="w-full py-3 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
                             >
-                                确认连接
+                                验证并连接
                             </button>
                         </div>
                     </div>
