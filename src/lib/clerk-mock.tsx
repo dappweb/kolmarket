@@ -32,7 +32,10 @@ export const ClerkProvider = ({ children }: ClerkProviderProps) => {
     setUser({
       id: 'mock-user-id',
       fullName: 'Demo User',
-      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix'
+      imageUrl: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Felix',
+      externalAccounts: [
+        { verification: { strategy: 'oauth_google' }, emailAddress: 'demo@gmail.com' }
+      ]
     });
   };
 

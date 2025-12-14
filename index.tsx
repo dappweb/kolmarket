@@ -26,7 +26,5 @@ const SafeApp = () => {
 };
 
 root.render(
-  <React.StrictMode>
-    <SafeApp />
-  </React.StrictMode>
+  <SafeApp />
 );

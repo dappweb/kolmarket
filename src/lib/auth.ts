@@ -5,7 +5,17 @@ const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
 const isMock = !PUBLISHABLE_KEY || PUBLISHABLE_KEY.includes('dummy') || PUBLISHABLE_KEY.includes('placeholder');
 
 if (isMock) {
-  console.log('Using Mock Clerk Provider because VITE_CLERK_PUBLISHABLE_KEY is missing or invalid.');
+  console.log('Using Mock Clerk Provider. Clearing potential Clerk pollution...');
+  // Clear Clerk-related items from LocalStorage to prevent conflicts
+  try {
+    Object.keys(localStorage).forEach(key => {
+      if (key.includes('clerk')) {
+        localStorage.removeItem(key);
+      }
+    });
+  } catch (e) {
+    console.warn('Failed to clear local storage:', e);
+  }
 }
 
 export const ClerkProvider = isMock ? MockClerk.ClerkProvider : ClerkReact.ClerkProvider;

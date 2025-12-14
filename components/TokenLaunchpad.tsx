@@ -53,9 +53,9 @@ const TokenLaunchpad: React.FC = () => {
   // Auto-check on mount if returning from OAuth
   React.useEffect(() => {
     const checkGoogleLink = async () => {
-      if (isSignedIn && user && !accounts.find(a => a.platform === 'youtube' && a.connected)) {
+      if (isSignedIn && user && user.externalAccounts && !accounts.find(a => a.platform === 'youtube' && a.connected)) {
          const googleAccount = user.externalAccounts.find(
-           (acc) => acc.verification?.strategy === 'oauth_google'
+           (acc: any) => acc.verification?.strategy === 'oauth_google'
          );
          
          if (googleAccount) {
