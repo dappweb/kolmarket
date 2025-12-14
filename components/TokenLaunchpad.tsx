@@ -6,6 +6,7 @@ import toast from 'react-hot-toast';
 import { useTranslation, Trans } from 'react-i18next';
 import { LaunchPhase, SocialAccount, TokenConfig, ProjectCategory } from '../types';
 import { analyzeInfluence, ValuationResponse } from '../src/services/valuation';
+import { bindCreatorSoul } from '../src/services/soul_binding';
 import { verifySocialAccount, saveAccounts, getStoredAccounts, clearAccounts } from '../src/services/social';
 import { generateDigitalLifePrompt, formatPromptForContract } from '../src/services/prompt_generator';
 
@@ -40,6 +41,7 @@ const TokenLaunchpad: React.FC = () => {
 
   const [valuation, setValuation] = useState<number>(0);
   const [aiAnalysis, setAiAnalysis] = useState<ValuationResponse | null>(null);
+  const [soulMint, setSoulMint] = useState<string | null>(null);
   const [generatedPrompt, setGeneratedPrompt] = useState<string | null>(null);
   const [tokenConfig, setTokenConfig] = useState<TokenConfig>({
     name: '',
@@ -172,6 +174,31 @@ const TokenLaunchpad: React.FC = () => {
     return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(num);
   };
 
+  const handleBindSoul = async () => {
+    try {
+      // @ts-ignore wallet provider
+      const provider = window.solana
+      if (!provider?.publicKey) {
+        return toast.error('请先连接钱包')
+      }
+      const { Connection, Transaction, PublicKey } = await import('@solana/web3.js')
+      const connection = new Connection('https://api.devnet.solana.com')
+      const res = await bindCreatorSoul(connection, new PublicKey(provider.publicKey.toBase58()), async (tx: Transaction) => {
+        tx.feePayer = provider.publicKey
+        tx.recentBlockhash = (await connection.getLatestBlockhash()).blockhash
+        const signed = await provider.signTransaction(tx)
+        const sig = await connection.sendRawTransaction(signed.serialize(), { skipPreflight: true })
+        await connection.confirmTransaction(sig, 'confirmed')
+        return sig
+      })
+      setSoulMint(res.soulMint.toBase58())
+      toast.success(`Soul 绑定成功: ${res.soulMint.toBase58()}`)
+    } catch (e) {
+      console.error(e)
+      toast.error('Soul 绑定失败')
+    }
+  }
+
   return (
     <section id="launchpad" className="py-24 bg-dark-bg relative overflow-hidden">
       {/* Background Glow */}
@@ -290,7 +317,13 @@ const TokenLaunchpad: React.FC = () => {
             )}
 
             {connected && (
-              <div className="pt-4 flex justify-end">
+              <div className="pt-4 flex justify-between items-center">
+                <button
+                  onClick={handleBindSoul}
+                  className="px-6 py-2 rounded-full border border-white/10 text-white hover:bg-white/10 transition-all"
+                >
+                  {soulMint ? `Soul 已绑定 (${soulMint.slice(0,4)}...${soulMint.slice(-4)})` : '绑定 Soul'}
+                </button>
                 <button
                   onClick={() => setPhase(2)}
                   disabled={!accounts.some(a => a.connected)}
