@@ -1,7 +1,9 @@
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 import { Network, Bot, HandMetal, ArrowUpRight } from 'lucide-react';
 
 const Features: React.FC = () => {
+  const { t } = useTranslation();
   return (
     <section id="features" className="py-24 bg-dark-bg relative overflow-hidden">
       {/* Decorative background */}
@@ -9,9 +11,9 @@ const Features: React.FC = () => {
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="text-center mb-20">
-          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">三大核心支柱</h2>
+          <h2 className="text-3xl md:text-5xl font-bold text-white mb-6 tracking-tight">{t('features.title')}</h2>
           <p className="mt-4 text-xl text-gray-400 max-w-2xl mx-auto">
-            我们不仅仅是在创造资产，更是在构建一个完整的数字生命经济闭环体系。
+            {t('features.desc')}
           </p>
         </div>
 
@@ -25,21 +27,21 @@ const Features: React.FC = () => {
                 <Network className="text-blue-400 h-9 w-9" />
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">价值交换引擎</h3>
-              <p className="text-xs font-bold text-blue-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">资产流通层</p>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-blue-400 transition-colors">{t('features.layer1_title')}</h3>
+              <p className="text-xs font-bold text-blue-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">{t('features.layer1_badge')}</p>
               
               <ul className="space-y-4 text-gray-400 flex-grow">
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-blue-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">影响力代币化:</strong> 基于 AI 估值的动态资产发行。</span>
+                  <span><strong className="text-gray-200">{t('features.layer1_item1_title')}:</strong> {t('features.layer1_item1_desc')}</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-blue-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">自动化做市:</strong> 智能流动性池确保交易顺畅。</span>
+                  <span><strong className="text-gray-200">{t('features.layer1_item2_title')}:</strong> {t('features.layer1_item2_desc')}</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-blue-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">社交投资网络:</strong> 跟单顶级策略，共享影响力红利。</span>
+                  <span><strong className="text-gray-200">{t('features.layer1_item3_title')}:</strong> {t('features.layer1_item3_desc')}</span>
                 </li>
               </ul>
             </div>
@@ -54,21 +56,21 @@ const Features: React.FC = () => {
                 <Bot className="text-purple-400 h-9 w-9" />
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">数字生命进化</h3>
-              <p className="text-xs font-bold text-purple-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">核心资产层</p>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">{t('features.layer2_title')}</h3>
+              <p className="text-xs font-bold text-purple-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">{t('features.layer2_badge')}</p>
               
               <ul className="space-y-4 text-gray-400 flex-grow">
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-purple-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">DLT 资产协议:</strong> 确权、可编程的数字生命 Token。</span>
+                  <span><strong className="text-gray-200">{t('features.layer2_item1_title')}:</strong> {t('features.layer2_item1_desc')}</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-purple-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">人格化 AI:</strong> 注入记忆、性格与专业技能的灵魂。</span>
+                  <span><strong className="text-gray-200">{t('features.layer2_item2_title')}:</strong> {t('features.layer2_item2_desc')}</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-purple-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">隐私计算:</strong> 联邦学习保障数据主权与安全。</span>
+                  <span><strong className="text-gray-200">{t('features.layer2_item3_title')}:</strong> {t('features.layer2_item3_desc')}</span>
                 </li>
               </ul>
             </div>
@@ -83,21 +85,21 @@ const Features: React.FC = () => {
                 <HandMetal className="text-yellow-400 h-9 w-9" />
               </div>
               
-              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">智能生产力</h3>
-              <p className="text-xs font-bold text-yellow-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">价值创造层</p>
+              <h3 className="text-2xl font-bold text-white mb-2 group-hover:text-yellow-400 transition-colors">{t('features.layer3_title')}</h3>
+              <p className="text-xs font-bold text-yellow-500 mb-6 uppercase tracking-widest border-b border-white/10 pb-4">{t('features.layer3_badge')}</p>
               
               <ul className="space-y-4 text-gray-400 flex-grow">
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-yellow-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">任务自动化:</strong> 7x24 小时全自动接单与交付。</span>
+                  <span><strong className="text-gray-200">{t('features.layer3_item1_title')}:</strong> {t('features.layer3_item1_desc')}</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-yellow-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">具身智能网关:</strong> 驱动物理世界的机器人执行任务。</span>
+                  <span><strong className="text-gray-200">{t('features.layer3_item2_title')}:</strong> {t('features.layer3_item2_desc')}</span>
                 </li>
                 <li className="flex items-start">
                   <ArrowUpRight className="mr-3 text-yellow-500 h-5 w-5 flex-shrink-0 mt-0.5" />
-                  <span><strong className="text-gray-200">收益回购:</strong> 劳动创造的价值自动回购代币。</span>
+                  <span><strong className="text-gray-200">{t('features.layer3_item3_title')}:</strong> {t('features.layer3_item3_desc')}</span>
                 </li>
               </ul>
             </div>

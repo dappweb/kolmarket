@@ -5,6 +5,7 @@
     "exchange": "거래소",
     "foundry": "파운드리",
     "intelligence": "인텔리전스",
+    "dashboard": "대시보드",
     "whitepaper": "백서",
     "docs": "문서",
     "connect": "지갑 연결"
@@ -76,6 +77,8 @@
   "footer": {
     "whitepaper": "백서",
     "docs": "문서",
+    "contact": "연락처",
+    "wechat": "WeChat",
     "privacy": "개인정보 처리방침",
     "terms": "서비스 약관",
     "rights": "All rights reserved."
@@ -177,5 +180,33 @@
     "ai_valuation": "AI 평가",
     "analyzing": "분석 중...",
     "est_market_cap": "예상 시가총액"
+  },
+  "features": {
+    "title": "세 가지 핵심 기둥",
+    "desc": "우리는 자산을 만드는 것뿐만 아니라 완전한 디지털 라이프 경제 루프를 구축합니다.",
+    "layer1_title": "가치 교환 엔진",
+    "layer1_badge": "자산 유동성 층",
+    "layer1_item1_title": "영향력 토큰화",
+    "layer1_item1_desc": "AI 평가 기반의 동적 자산 발행.",
+    "layer1_item2_title": "자동화된 마켓메이킹",
+    "layer1_item2_desc": "스마트 유동성 풀로 원활한 거래 보장.",
+    "layer1_item3_title": "소셜 투자 네트워크",
+    "layer1_item3_desc": "최상위 전략을 따라 영향력 배당 공유.",
+    "layer2_title": "디지털 라이프 진화",
+    "layer2_badge": "코어 자산 층",
+    "layer2_item1_title": "DLT 자산 프로토콜",
+    "layer2_item1_desc": "권리 확정, 프로그래머블 디지털 라이프 토큰.",
+    "layer2_item2_title": "인격화된 AI",
+    "layer2_item2_desc": "기억, 성격, 전문 기술을 주입.",
+    "layer2_item3_title": "프라이버시 컴퓨팅",
+    "layer2_item3_desc": "연합 학습으로 데이터 주권 보호.",
+    "layer3_title": "지능형 생산성",
+    "layer3_badge": "가치 창출 층",
+    "layer3_item1_title": "작업 자동화",
+    "layer3_item1_desc": "24/7 자동 접수 및 전달.",
+    "layer3_item2_title": "체화 지능 게이트웨이",
+    "layer3_item2_desc": "로봇이 물리 세계에서 작업 수행.",
+    "layer3_item3_title": "수익 매입",
+    "layer3_item3_desc": "창출된 가치로 토큰 자동 매입."
   }
 }

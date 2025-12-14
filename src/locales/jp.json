@@ -5,6 +5,7 @@
     "exchange": "取引所",
     "foundry": "ファウンドリ",
     "intelligence": "インテリジェンス",
+    "dashboard": "ダッシュボード",
     "whitepaper": "ホワイトペーパー",
     "docs": "ドキュメント",
     "connect": "ウォレット接続"
@@ -76,6 +77,8 @@
   "footer": {
     "whitepaper": "ホワイトペーパー",
     "docs": "ドキュメント",
+    "contact": "連絡先",
+    "wechat": "WeChat",
     "privacy": "プライバシーポリシー",
     "terms": "利用規約",
     "rights": "All rights reserved."
@@ -177,5 +180,33 @@
     "ai_valuation": "AI評価",
     "analyzing": "分析中...",
     "est_market_cap": "推定時価総額"
+  },
+  "features": {
+    "title": "3つのコアピラー",
+    "desc": "私たちは資産を創造するだけでなく、完全なデジタルライフ経済ループを構築しています。",
+    "layer1_title": "価値交換エンジン",
+    "layer1_badge": "資産流動層",
+    "layer1_item1_title": "影響力のトークン化",
+    "layer1_item1_desc": "AI評価に基づく動的な資産発行。",
+    "layer1_item2_title": "自動マーケットメイク",
+    "layer1_item2_desc": "スマート流動性プールにより取引を円滑化。",
+    "layer1_item3_title": "ソーシャル投資ネットワーク",
+    "layer1_item3_desc": "トップ戦略をフォローし、影響力の配当を共有。",
+    "layer2_title": "デジタルライフの進化",
+    "layer2_badge": "コア資産層",
+    "layer2_item1_title": "DLT資産プロトコル",
+    "layer2_item1_desc": "権利確定・プログラム可能なデジタルライフトークン。",
+    "layer2_item2_title": "人格化AI",
+    "layer2_item2_desc": "記憶・性格・専門スキルを注入。",
+    "layer2_item3_title": "プライバシー計算",
+    "layer2_item3_desc": "フェデレーションラーニングでデータ主権を保護。",
+    "layer3_title": "インテリジェント生産性",
+    "layer3_badge": "価値創造層",
+    "layer3_item1_title": "タスク自動化",
+    "layer3_item1_desc": "24/7の自動受注と納品。",
+    "layer3_item2_title": "身体化インテリジェンスゲートウェイ",
+    "layer3_item2_desc": "物理世界でロボットがタスクを実行。",
+    "layer3_item3_title": "収益の買い戻し",
+    "layer3_item3_desc": "創出された価値でトークンを自動買い戻し。"
   }
 }

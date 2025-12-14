@@ -5,6 +5,7 @@
     "exchange": "Exchange",
     "foundry": "Foundry",
     "intelligence": "Intelligence",
+    "dashboard": "Dashboard",
     "whitepaper": "Whitepaper",
     "docs": "Docs",
     "connect": "Connect Wallet"
@@ -76,6 +77,8 @@
   "footer": {
     "whitepaper": "Whitepaper",
     "docs": "Docs",
+    "contact": "Contact",
+    "wechat": "WeChat",
     "privacy": "Privacy Policy",
     "terms": "Terms of Service",
     "rights": "All rights reserved."
@@ -177,5 +180,33 @@
     "ai_valuation": "AI Valuation",
     "analyzing": "Analyzing...",
     "est_market_cap": "Est. Market Cap"
+  },
+  "features": {
+    "title": "Three Core Pillars",
+    "desc": "We are not only creating assets — we are building a complete digital life economic loop.",
+    "layer1_title": "Value Exchange Engine",
+    "layer1_badge": "Asset Liquidity Layer",
+    "layer1_item1_title": "Influence Tokenization",
+    "layer1_item1_desc": "Dynamic asset issuance based on AI valuation.",
+    "layer1_item2_title": "Automated Market Making",
+    "layer1_item2_desc": "Smart liquidity pools ensure smooth trading.",
+    "layer1_item3_title": "Social Investment Network",
+    "layer1_item3_desc": "Follow top strategies and share influence dividends.",
+    "layer2_title": "Digital Life Evolution",
+    "layer2_badge": "Core Asset Layer",
+    "layer2_item1_title": "DLT Asset Protocol",
+    "layer2_item1_desc": "Rights-confirmed, programmable Digital Life tokens.",
+    "layer2_item2_title": "Personified AI",
+    "layer2_item2_desc": "Inject memory, personality, and professional skills.",
+    "layer2_item3_title": "Privacy Computing",
+    "layer2_item3_desc": "Federated learning safeguards data sovereignty.",
+    "layer3_title": "Intelligent Productivity",
+    "layer3_badge": "Value Creation Layer",
+    "layer3_item1_title": "Task Automation",
+    "layer3_item1_desc": "24/7 automated order-taking and delivery.",
+    "layer3_item2_title": "Embodied Intelligence Gateway",
+    "layer3_item2_desc": "Robots execute tasks in the physical world.",
+    "layer3_item3_title": "Revenue Buyback",
+    "layer3_item3_desc": "Automatically buy back tokens with created value."
   }
 }

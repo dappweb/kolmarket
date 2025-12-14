@@ -5,6 +5,7 @@
     "exchange": "交易市场",
     "foundry": "数字铸造",
     "intelligence": "智能工作台",
+    "dashboard": "控制台",
     "whitepaper": "白皮书",
     "docs": "文档",
     "connect": "连接钱包"
@@ -76,6 +77,8 @@
   "footer": {
     "whitepaper": "白皮书",
     "docs": "文档",
+    "contact": "联系",
+    "wechat": "微信",
     "privacy": "隐私政策",
     "terms": "服务条款",
     "rights": "版权所有。"
@@ -177,5 +180,33 @@
     "ai_valuation": "AI 估值",
     "analyzing": "分析中...",
     "est_market_cap": "预计市值"
+  },
+  "features": {
+    "title": "三大核心支柱",
+    "desc": "我们不仅仅是在创造资产，更是在构建一个完整的数字生命经济闭环体系。",
+    "layer1_title": "价值交换引擎",
+    "layer1_badge": "资产流通层",
+    "layer1_item1_title": "影响力代币化",
+    "layer1_item1_desc": "基于 AI 估值的动态资产发行。",
+    "layer1_item2_title": "自动化做市",
+    "layer1_item2_desc": "智能流动性池确保交易顺畅。",
+    "layer1_item3_title": "社交投资网络",
+    "layer1_item3_desc": "跟单顶级策略，共享影响力红利。",
+    "layer2_title": "数字生命进化",
+    "layer2_badge": "核心资产层",
+    "layer2_item1_title": "DLT 资产协议",
+    "layer2_item1_desc": "确权、可编程的数字生命 Token。",
+    "layer2_item2_title": "人格化 AI",
+    "layer2_item2_desc": "注入记忆、性格与专业技能的灵魂。",
+    "layer2_item3_title": "隐私计算",
+    "layer2_item3_desc": "联邦学习保障数据主权与安全。",
+    "layer3_title": "智能生产力",
+    "layer3_badge": "价值创造层",
+    "layer3_item1_title": "任务自动化",
+    "layer3_item1_desc": "7x24 小时全自动接单与交付。",
+    "layer3_item2_title": "具身智能网关",
+    "layer3_item2_desc": "驱动物理世界的机器人执行任务。",
+    "layer3_item3_title": "收益回购",
+    "layer3_item3_desc": "劳动创造的价值自动回购代币。"
   }
 }
