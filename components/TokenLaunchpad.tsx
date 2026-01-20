@@ -711,10 +711,12 @@ const TokenLaunchpad: React.FC = () => {
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="md:col-span-2">
                   <label className="block text-sm font-medium text-gray-400 mb-2">{t('launchpad.phase3.category')}</label>
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2" role="radiogroup" aria-label={t('launchpad.phase3.category')}>
                     {['Gaming', 'DeFi', 'Social', 'AI', 'Music', 'Art', 'Other'].map((cat) => (
                       <button
                         key={cat}
+                        role="radio"
+                        aria-checked={tokenConfig.category === cat}
                         onClick={() => setTokenConfig({...tokenConfig, category: cat as ProjectCategory})}
                         className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
                           tokenConfig.category === cat 
@@ -730,8 +732,9 @@ const TokenLaunchpad: React.FC = () => {
 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.token_name')}</label>
+                    <label htmlFor="token-name" className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.token_name')}</label>
                     <input 
+                      id="token-name"
                       type="text" 
                       value={tokenConfig.name}
                       onChange={(e) => setTokenConfig({...tokenConfig, name: e.target.value})}
@@ -740,8 +743,9 @@ const TokenLaunchpad: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.token_symbol')}</label>
+                    <label htmlFor="token-symbol" className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.token_symbol')}</label>
                     <input 
+                      id="token-symbol"
                       type="text" 
                       value={tokenConfig.symbol}
                       onChange={(e) => setTokenConfig({...tokenConfig, symbol: e.target.value.toUpperCase()})}
@@ -753,8 +757,9 @@ const TokenLaunchpad: React.FC = () => {
                 
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.total_supply')}</label>
+                    <label htmlFor="token-supply" className="block text-sm font-medium text-gray-400 mb-1">{t('launchpad.phase3.total_supply')}</label>
                     <input 
+                      id="token-supply"
                       type="number" 
                       value={tokenConfig.supply}
                       disabled
@@ -795,6 +800,7 @@ const TokenLaunchpad: React.FC = () => {
                         <div className="flex items-center gap-2 bg-black/30 rounded-lg p-1 border border-white/10">
                              <input 
                                 type="number" 
+                                aria-label={t('launchpad.phase3.input_amount')}
                                 value={paymentAmount}
                                 onChange={(e) => setPaymentAmount(Number(e.target.value))}
                                 placeholder={t('launchpad.phase3.input_amount')}
@@ -885,6 +891,7 @@ const TokenLaunchpad: React.FC = () => {
                     <button 
                         onClick={() => setIsModalOpen(false)}
                         className="absolute top-4 right-4 text-gray-500 hover:text-white"
+                        aria-label="Close modal"
                     >
                         <X size={20} />
                     </button>
@@ -898,12 +905,13 @@ const TokenLaunchpad: React.FC = () => {
                     
                     <div className="space-y-4">
                         <div>
-                            <label className="block text-sm font-medium text-gray-400 mb-1">
+                            <label htmlFor="handle-input" className="block text-sm font-medium text-gray-400 mb-1">
                                 {t('launchpad.modal.handle_label', { platform: currentPlatform })}
                             </label>
                             <div className="relative">
                                 <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500">@</span>
                                 <input 
+                                    id="handle-input"
                                     type="text" 
                                     value={handleInput}
                                     onChange={(e) => setHandleInput(e.target.value.replace(/^@/, ''))}
