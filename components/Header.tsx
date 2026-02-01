@@ -137,6 +137,9 @@ const Header: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-300 hover:text-white p-2"
+              aria-label={isOpen ? t('nav.menu_close') : t('nav.menu_open')}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -148,6 +151,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
