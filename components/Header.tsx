@@ -53,7 +53,7 @@ const Header: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           <div className="flex items-center">
-            <Link to="/" className="flex-shrink-0 flex items-center gap-2 group">
+            <Link to="/" className="flex-shrink-0 flex items-center gap-2 group" aria-label={t('nav.home') || "Home"}>
               <div className="bg-yellow-500 p-1.5 rounded-lg group-hover:scale-110 transition-transform duration-300">
                 <span className="font-bold text-black text-xl">K</span>
               </div>
@@ -88,8 +88,11 @@ const Header: React.FC = () => {
                 <button 
                   onClick={() => setLangMenuOpen(!langMenuOpen)}
                   className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2"
+                  aria-expanded={langMenuOpen}
+                  aria-haspopup="true"
+                  aria-label={t('nav.select_language') || "Select language"}
                 >
-                  <Globe size={18} />
+                  <Globe size={18} aria-hidden="true" />
                   <span className="uppercase text-sm">{i18n.language}</span>
                 </button>
                 <AnimatePresence>
@@ -137,8 +140,10 @@ const Header: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-300 hover:text-white p-2"
+              aria-label={isOpen ? t('nav.close_menu') || "Close menu" : t('nav.open_menu') || "Open menu"}
+              aria-expanded={isOpen}
             >
-              {isOpen ? <X size={24} /> : <Menu size={24} />}
+              {isOpen ? <X size={24} aria-hidden="true" /> : <Menu size={24} aria-hidden="true" />}
             </button>
           </div>
         </div>
