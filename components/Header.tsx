@@ -87,7 +87,10 @@ const Header: React.FC = () => {
               <div className="relative">
                 <button 
                   onClick={() => setLangMenuOpen(!langMenuOpen)}
-                  className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2"
+                  className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+                  aria-label="Select language"
+                  aria-haspopup="true"
+                  aria-expanded={langMenuOpen}
                 >
                   <Globe size={18} />
                   <span className="uppercase text-sm">{i18n.language}</span>
@@ -136,7 +139,10 @@ const Header: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white p-2"
+              className="text-gray-300 hover:text-white p-2 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+              aria-label={isOpen ? "Close main menu" : "Open main menu"}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
@@ -148,6 +154,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
