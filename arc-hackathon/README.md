@@ -18,6 +18,7 @@ The Arc pilot focuses on:
 
 - Reviewer status: [`reviewer-status.md`](./reviewer-status.md)
 - Operator runbook: [`arc-operator-runbook.md`](./arc-operator-runbook.md)
+- External action confirmation prompts: [`arc-external-action-confirmation-prompts.md`](./arc-external-action-confirmation-prompts.md)
 - Goal completion audit checklist: [`arc-goal-completion-audit-checklist.md`](./arc-goal-completion-audit-checklist.md)
 - Outreach readiness matrix: [`arc-outreach-readiness-matrix.md`](./arc-outreach-readiness-matrix.md)
 - Encode checkpoint submit decision memo: [`encode-checkpoint-submit-decision-memo.md`](./encode-checkpoint-submit-decision-memo.md)
