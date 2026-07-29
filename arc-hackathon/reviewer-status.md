@@ -39,6 +39,7 @@ Confirm: send Encode Programme Manager message.
 - Programme manager outreach draft
 - Final submission production plan
 - Arc Testnet tx evidence template
+- Fresh Arc tx collection steps
 - Demo video shot list
 - Demo video teleprompter
 - Public engagement target tracker
@@ -73,7 +74,7 @@ Confirm: send Encode Programme Manager message.
 1. Confirm and submit the prefilled Encode checkpoint.
 2. Capture the Encode checkpoint receipt using `encode-checkpoint-submission-receipt-template.md`.
 3. Produce a 3-minute demo video using `arc-demo-video-shot-list.md` and `arc-demo-video-teleprompter.md`.
-4. Collect fresh Arc Testnet transaction evidence using `arc-testnet-tx-evidence-template.md`.
+4. Collect fresh Arc Testnet transaction evidence using `arc-fresh-tx-collection-steps.md` and record it in `arc-testnet-tx-evidence-template.md`.
 5. Use `arc-public-engagement-targets.md` only after action-time confirmation for any public comment/reply.
 
 ## Fast Links
@@ -84,6 +85,7 @@ Confirm: send Encode Programme Manager message.
 - Checkpoint decision memo: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/encode-checkpoint-submit-decision-memo.md
 - Demo shot list: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-demo-video-shot-list.md
 - Demo teleprompter: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-demo-video-teleprompter.md
+- Fresh tx collection steps: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-fresh-tx-collection-steps.md
 - Tx evidence template: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-testnet-tx-evidence-template.md
 - Public engagement targets: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-public-engagement-targets.md
 
@@ -100,5 +102,6 @@ This status page is evidence of preparation and observed outreach state. It is n
 - Encode checkpoint submission
 - Encode final submission
 - production mainnet settlement
+- fresh Arc Testnet transaction execution
 
-Those claims require direct official-channel evidence.
+Those claims require direct official-channel or onchain evidence.
