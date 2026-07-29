@@ -5,9 +5,17 @@
   "baseProjectUrl": "https://kolmarket.ai",
   "publicArcPackageUrl": "https://github.com/dappweb/kolmarket/tree/main/arc-hackathon",
   "reviewerStatusUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/reviewer-status.md",
+  "operatorRunbookUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-operator-runbook.md",
+  "readinessMatrixUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-outreach-readiness-matrix.md",
+  "checkpointDecisionMemoUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/encode-checkpoint-submit-decision-memo.md",
+  "checkpointReceiptTemplateUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/encode-checkpoint-submission-receipt-template.md",
   "publicBriefUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/public-brief.md",
   "submissionDraftUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/submission.md",
   "deckUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/deck.md",
+  "demoShotListUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-demo-video-shot-list.md",
+  "demoTeleprompterUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-demo-video-teleprompter.md",
+  "txEvidenceTemplateUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-testnet-tx-evidence-template.md",
+  "publicEngagementTargetsUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-public-engagement-targets.md",
   "xReplyUrl": "https://x.com/KOLMARKET/status/2082565862381507059",
   "arcHackathonPackagePublished": true,
   "encodeRegisteredObserved": true,
@@ -29,9 +37,10 @@
   "circleQuestbookProposalFormVisibleObserved": false,
   "circleGrantSubmittedConfirmed": false,
   "publicEngagementTargetsPrepared": true,
-  "publicEngagementTargetsUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-public-engagement-targets.md",
   "encodeProgrammeManagerOutreachPrepared": true,
   "encodeProgrammeManagerOutreachSentConfirmed": false,
+  "demoPlanningPrepared": true,
+  "operatorRunbookPrepared": true,
   "arcOfficialListingConfirmed": false,
   "arcOfficialRepostConfirmed": false,
   "arcOfficialSpotlightConfirmed": false,
@@ -55,5 +64,5 @@
     "Collect fresh Arc Testnet tx evidence",
     "Use public engagement targets only after action-time confirmation"
   ],
-  "boundary": "This public package is evidence of prepared Arc review materials and observed prefill/outreach states, not official Arc/Circle/Encode acceptance, checkpoint submission, final submission, or official spotlight."
+  "boundary": "This public package is evidence of prepared Arc review materials and observed prefill/outreach states, not official Arc/Circle/Encode acceptance, checkpoint submission, final submission, grant approval, official listing, official repost, or official spotlight."
 }
