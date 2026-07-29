@@ -28,8 +28,8 @@
   "freshTxCollectionStepsUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-fresh-tx-collection-steps.md",
   "publicEngagementTargetsUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-public-engagement-targets.md",
   "xReplyUrl": "https://x.com/KOLMARKET/status/2082565862381507059",
-  "currentSingleNextCommand": "Confirm: collect fresh Arc Testnet tx evidence.",
-  "fallbackCommand": "Confirm: record Arc demo video.",
+  "currentSingleNextCommand": "Confirm: record Arc demo video.",
+  "fallbackCommand": "Confirm: prepare final Encode submission using checkpoint receipt and fresh Arc tx evidence.",
   "externalOutreachFallbackCommand": "Confirm: send Encode Programme Manager message.",
   "arcHackathonPackagePublished": true,
   "currentStateSummaryPublished": true,
@@ -66,15 +66,34 @@
   "demoPlanningPrepared": true,
   "demoVideoPublishedConfirmed": false,
   "freshArcTxEvidenceCollectionPrepared": true,
-  "freshArcTxEvidenceCollectedConfirmed": false,
+  "freshArcTxEvidenceCollectedConfirmed": true,
+  "freshArcTxEvidenceCollectedAt": "2026-07-30T23:59:59+08:00",
+  "freshArcTxEvidenceOutcome": "success_receipt_captured",
   "arcOfficialListingConfirmed": false,
   "arcOfficialRepostConfirmed": false,
   "arcOfficialSpotlightConfirmed": false,
   "arcSpecificDemoUrl": "TBD",
   "demoVideoUrl": "TBD",
-  "freshArcTxEvidence": [],
+  "freshArcTxEvidence": [
+    {
+      "dateObserved": "2026-07-30",
+      "chain": "Arc Testnet",
+      "chainId": 5042002,
+      "walletAddress": "0xbdE7EaDb8b0e3c918A656853d6F1AFA9dF6dEd88",
+      "contractAddress": "0x9469fE1A5349E99536Aa6723FB9EBeaB4a86Be19",
+      "functionAction": "faucet",
+      "tokenAsset": "KOLMarket Test WETH (tWETH)",
+      "txHash": "0x229c38ee946e4bd757866ff49630e11cf9ba2d4e0a73a8a98b2a810298bb2707",
+      "explorerUrl": "https://testnet.arcscan.app/tx/0x229c38ee946e4bd757866ff49630e11cf9ba2d4e0a73a8a98b2a810298bb2707",
+      "status": "success",
+      "blockNumber": "54331758",
+      "gasUsed": "21160",
+      "screenshot": "public/arc/arc-testnet-tweth-faucet-tx-2026-07-30.png",
+      "relatedProductFlow": "KOLMarket Creator Token V3 modal on Arc Testnet - Claim test tWETH faucet",
+      "boundary": "KOLMarket showed a post-transaction predictLaunchAddresses no-data refresh error; treat that as a product refresh issue, not as a failed faucet transaction."
+    }
+  ],
   "remainingHardGaps": [
-    "Fresh Arc Testnet transaction hash and explorer URL",
     "Arc-specific demo URL or recorded demo path",
     "3-minute demo video URL",
     "Final Encode submission receipt",
@@ -83,10 +102,10 @@
     "Arc official response/listing/repost/spotlight evidence"
   ],
   "bestNextActions": [
-    "Collect fresh Arc Testnet tx evidence after wallet-action confirmation",
-    "Produce demo video",
+    "Record Arc demo video using checkpoint receipt and fresh tx evidence",
     "Prepare final Encode submission receipt path",
-    "Use public engagement targets only after action-time confirmation"
+    "Use public engagement targets only after action-time confirmation",
+    "Fix or document the predictLaunchAddresses refresh error before final demo"
   ],
-  "boundary": "Checkpoint submission is confirmed from visible Encode Success feedback, but this is not final Encode submission, Arc/Circle acceptance, grant approval, official listing, official repost, official spotlight, demo video publication, or fresh Arc transaction execution."
+  "boundary": "Checkpoint submission and one fresh Arc Testnet faucet transaction are confirmed. This is not final Encode submission, Arc/Circle acceptance, grant approval, official listing, official repost, official spotlight, demo video publication, or production Arc settlement."
 }
