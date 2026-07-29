@@ -11,8 +11,10 @@ Track what is ready, what is blocked, and what direct evidence is needed before 
 | Workstream | Current readiness | Current evidence | Missing proof | Next action |
 | --- | --- | --- | --- | --- |
 | Public Arc review package | Ready | https://github.com/dappweb/kolmarket/tree/main/arc-hackathon | None for package publication | Share package with reviewers |
-| Encode checkpoint | Prefilled, not submitted | Checkpoint form observed with package/deck links and DeFi + Agentic tracks selected | Submit receipt | Confirm and click `Submit Checkpoint` |
-| Encode final submission | Prepared, not ready | Final submission production plan exists | Demo video, fresh Arc tx evidence, final receipt | Produce video and tx evidence |
+| Encode checkpoint | Submit-enabled, not submitted | `restored_prefilled_submit_enabled_not_clicked`; package/deck links and DeFi + Agentic tracks observed | Submit receipt or status change | Confirm and click `Submit Checkpoint` |
+| Fresh Arc Testnet tx evidence | Plan ready, not executed | https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-fresh-tx-collection-steps.md | Successful Arc explorer tx URL | Collect after wallet-action confirmation |
+| Encode final submission | Prepared, not ready | Final submission production plan exists | Checkpoint receipt, demo video, fresh Arc tx evidence, final receipt | Submit checkpoint, collect tx evidence, produce video |
+| Demo video | Planned, not produced | Shot list and teleprompter exist | Public/reviewer-accessible video URL | Record after tx/demo path is ready |
 | Arc House Showcase | Blocked | Page shows restricted access | Published post URL | Regain access or ask Arc team for intake path |
 | Arc House Builder Thread | Blocked | Page shows restricted access | Published comment URL | Regain access or use alternate channels |
 | Arc Discord | Ready to draft, not sent | Discord copy prepared; Encode connect button visible | Message URL/screenshot | Connect Discord and send after confirmation |
@@ -27,55 +29,62 @@ Track what is ready, what is blocked, and what direct evidence is needed before 
 The highest-leverage next move is Encode checkpoint submission because:
 
 - account and project are already observed,
-- checkpoint form is already prefilled,
+- checkpoint form is already restored, prefilled, and submit-enabled,
 - tracks are already selected,
 - public package and deck links are ready,
-- submission would create an official platform receipt.
+- submission would create the next official-platform receipt.
 
-Required boundary:
+Required confirmation:
 
 ```text
-Clicking Submit Checkpoint is an external submission and requires action-time confirmation.
+Confirm: click Encode Submit Checkpoint now.
 ```
 
 ## Second-Best Next Move
 
-Send the Encode Programme Manager question if the user does not want to submit checkpoint yet.
+Collect fresh Arc Testnet transaction evidence.
+
+Reason:
+
+- fresh Arc tx evidence is the strongest remaining technical proof for final submission and Arc/Circle review,
+- collection steps are already published,
+- it can strengthen demo video, Circle Grants, and Arc spotlight credibility.
+
+Required confirmation:
+
+```text
+Confirm: collect fresh Arc Testnet tx evidence.
+```
+
+Hard boundary:
+
+```text
+Wallet signing and broadcasting must remain user-controlled. A quote, wallet prompt, simulation, or prepared collection plan is not tx evidence.
+```
+
+## External Outreach Fallback
+
+Send the Encode Programme Manager question only if the user confirms sending external communication.
+
+Required confirmation:
+
+```text
+Confirm: send Encode Programme Manager message.
+```
 
 Reason:
 
 - it asks for official operational guidance without claiming completion,
-- it may clarify whether public review package is enough for checkpoint,
+- it may clarify whether the public review package is enough for checkpoint,
 - it creates a direct path to a human programme manager.
-
-Required boundary:
-
-```text
-Sending the question is external communication and requires action-time confirmation.
-```
-
-## Third-Best Next Move
-
-Prepare and record the final demo video.
-
-Reason:
-
-- required for final submission,
-- does not depend on Arc House access,
-- improves Circle Grants and Arc spotlight credibility.
-
-Still needed:
-
-- video recording,
-- public video URL,
-- fresh Arc Testnet tx evidence,
-- final submission receipt.
 
 ## Claim Rules
 
 Only claim a channel is complete when direct evidence exists:
 
 - Encode checkpoint: visible receipt or status change after submit.
+- Fresh Arc tx evidence: successful Arc explorer transaction URL with matching wallet, contract/action, product flow, timestamp, and screenshot.
+- Demo video: public or reviewer-accessible video URL.
 - Encode final: final submission receipt.
 - Arc House: public post/comment URL.
 - Discord: message URL or screenshot.
