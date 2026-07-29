@@ -27,6 +27,7 @@ The Arc pilot focuses on:
 - Encode programme manager outreach: [`encode-program-manager-outreach.md`](./encode-program-manager-outreach.md)
 - Final submission production plan: [`encode-final-submission-production-plan.md`](./encode-final-submission-production-plan.md)
 - Arc Testnet tx evidence template: [`arc-testnet-tx-evidence-template.md`](./arc-testnet-tx-evidence-template.md)
+- Public engagement targets: [`arc-public-engagement-targets.md`](./arc-public-engagement-targets.md)
 
 ## Why Arc
 
