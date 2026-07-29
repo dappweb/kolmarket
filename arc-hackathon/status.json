@@ -4,6 +4,7 @@
   "updatedAt": "2026-07-30",
   "baseProjectUrl": "https://kolmarket.ai",
   "publicArcPackageUrl": "https://github.com/dappweb/kolmarket/tree/main/arc-hackathon",
+  "reviewerStatusUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/reviewer-status.md",
   "publicBriefUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/public-brief.md",
   "submissionDraftUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/submission.md",
   "deckUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/deck.md",
@@ -27,11 +28,32 @@
   "circleQuestbookCohort2ObservedProposals": 572,
   "circleQuestbookProposalFormVisibleObserved": false,
   "circleGrantSubmittedConfirmed": false,
+  "publicEngagementTargetsPrepared": true,
+  "publicEngagementTargetsUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-public-engagement-targets.md",
+  "encodeProgrammeManagerOutreachPrepared": true,
+  "encodeProgrammeManagerOutreachSentConfirmed": false,
   "arcOfficialListingConfirmed": false,
   "arcOfficialRepostConfirmed": false,
   "arcOfficialSpotlightConfirmed": false,
   "arcSpecificDemoUrl": "TBD",
   "demoVideoUrl": "TBD",
   "freshArcTxEvidence": [],
-  "boundary": "This public package is evidence of prepared Arc review materials and observed prefill/outreach states, not official Arc/Circle/Encode acceptance or final submission."
+  "remainingHardGaps": [
+    "Encode checkpoint submission receipt",
+    "Arc-specific demo URL or recorded demo path",
+    "Fresh Arc Testnet transaction evidence",
+    "3-minute demo video URL",
+    "Final Encode submission receipt",
+    "Circle Questbook proposal form or direct application route",
+    "Arc House access or alternate Arc team intake",
+    "Arc official response/listing/repost/spotlight evidence"
+  ],
+  "bestNextActions": [
+    "Confirm and submit the prefilled Encode checkpoint",
+    "Capture checkpoint receipt",
+    "Produce demo video",
+    "Collect fresh Arc Testnet tx evidence",
+    "Use public engagement targets only after action-time confirmation"
+  ],
+  "boundary": "This public package is evidence of prepared Arc review materials and observed prefill/outreach states, not official Arc/Circle/Encode acceptance, checkpoint submission, final submission, or official spotlight."
 }
