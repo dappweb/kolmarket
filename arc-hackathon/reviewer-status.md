@@ -13,6 +13,10 @@ https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
 ## What Is Ready
 
 - Public Arc review package
+- Reviewer status page
+- Operator runbook
+- Outreach readiness matrix
+- Encode checkpoint submit decision memo
 - Public brief
 - Hackathon submission draft
 - Deck outline
@@ -22,7 +26,10 @@ https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
 - Programme manager outreach draft
 - Final submission production plan
 - Arc Testnet tx evidence template
+- Demo video shot list
+- Demo video teleprompter
 - Public engagement target tracker
+- Status metadata
 
 ## Observed External State
 
@@ -52,9 +59,19 @@ https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
 
 1. Confirm and submit the prefilled Encode checkpoint.
 2. Capture the Encode checkpoint receipt using `encode-checkpoint-submission-receipt-template.md`.
-3. Produce a 3-minute demo video following `encode-final-submission-production-plan.md`.
+3. Produce a 3-minute demo video using `arc-demo-video-shot-list.md` and `arc-demo-video-teleprompter.md`.
 4. Collect fresh Arc Testnet transaction evidence using `arc-testnet-tx-evidence-template.md`.
 5. Use `arc-public-engagement-targets.md` only after action-time confirmation for any public comment/reply.
+
+## Fast Links
+
+- Operator runbook: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-operator-runbook.md
+- Readiness matrix: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-outreach-readiness-matrix.md
+- Checkpoint decision memo: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/encode-checkpoint-submit-decision-memo.md
+- Demo shot list: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-demo-video-shot-list.md
+- Demo teleprompter: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-demo-video-teleprompter.md
+- Tx evidence template: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-testnet-tx-evidence-template.md
+- Public engagement targets: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-public-engagement-targets.md
 
 ## Boundary
 
