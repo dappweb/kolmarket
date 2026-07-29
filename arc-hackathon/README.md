@@ -14,6 +14,14 @@ The Arc pilot focuses on:
 - creator-token market infrastructure,
 - evidence boundaries for configured, pending, claimable, and settled states.
 
+## Review Package Index
+
+- Public brief: [`public-brief.md`](./public-brief.md)
+- Hackathon submission draft: [`submission.md`](./submission.md)
+- Review deck outline: [`deck.md`](./deck.md)
+- Evidence boundary: [`evidence-boundary.md`](./evidence-boundary.md)
+- Status metadata: [`status.json`](./status.json)
+
 ## Why Arc
 
 Arc is a strong fit for KOLMarket because creator campaign budgets and KOL rewards are naturally stablecoin-denominated.
@@ -52,7 +60,7 @@ Creator campaigns can evolve into agent-assisted campaign planning, KOL task rou
 - Public app: https://kolmarket.ai
 - Docs: https://kolmarket.ai/docs
 - X: https://x.com/KOLMARKET
-- Deck: `arc-hackathon/deck.md`
+- Deck: [`deck.md`](./deck.md)
 - Video: TBD
 - Fresh Arc Testnet tx evidence: TBD
 
