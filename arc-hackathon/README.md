@@ -9,6 +9,7 @@ This is the public Arc review package for KOLMarket.
 Prepared and public:
 
 - Arc review package and reviewer status,
+- current-state summary,
 - public brief, submission draft, and review deck,
 - operator runbook and next-action queue,
 - external action confirmation prompts,
@@ -47,6 +48,7 @@ The Arc pilot focuses on:
 
 ## Review Package Index
 
+- Current state summary: [`arc-current-state-summary.md`](./arc-current-state-summary.md)
 - Reviewer status: [`reviewer-status.md`](./reviewer-status.md)
 - Public brief: [`public-brief.md`](./public-brief.md)
 - Hackathon submission draft: [`submission.md`](./submission.md)
