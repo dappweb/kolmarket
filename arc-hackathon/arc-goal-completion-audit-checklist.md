@@ -17,7 +17,9 @@ This checklist prevents prepared materials from being mistaken for official exte
 | Requirement | Completion evidence required | Current known state |
 | --- | --- | --- |
 | Public Arc review package prepared | Public GitHub package URL | Complete: https://github.com/dappweb/kolmarket/tree/main/arc-hackathon |
-| Public package reviewer-ready | Reviewer status, readiness matrix, runbook, status metadata | Complete as preparation evidence only |
+| Public package reviewer-ready | Reviewer status, readiness matrix, runbook, status metadata, next-action queue | Complete as preparation evidence only |
+| Fresh tx collection plan prepared | Public collection steps and evidence template | Complete as preparation evidence only: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-fresh-tx-collection-steps.md |
+| Encode checkpoint form prepared | Form contains review package link, deck link, access instructions, and selected tracks | Prepared; observed as `restored_prefilled_submit_enabled_not_clicked` |
 | Encode checkpoint submitted | Encode success message, status change, receipt, screenshot, or platform confirmation | Not complete |
 | Encode final submission submitted | Final submission receipt from Encode | Not complete |
 | Demo video produced | Public or reviewer-accessible video URL and duration evidence | Not complete |
@@ -33,11 +35,13 @@ This checklist prevents prepared materials from being mistaken for official exte
 ## Current Verified Progress
 
 - Public Arc package exists.
-- Encode project exists and checkpoint form was observed prefilled.
-- One public X reply to Arc/Hibachi exists.
+- Reviewer status, status metadata, next-action queue, runbook, readiness matrix, and decision memo are public.
+- Fresh Arc tx collection steps are public, but no fresh Arc transaction has been executed or verified.
+- Encode project exists and checkpoint form was observed restored, prefilled, and submit-enabled, but the submit button was not clicked.
+- One public X reply to Arc/Hibachi exists: https://x.com/KOLMARKET/status/2082565862381507059
 - Arc House access is restricted in current session.
 - Circle Questbook Cohort 2 was observed Open, but no proposal form was visible.
-- Public materials now include runbook, reviewer status, readiness matrix, decision memo, demo plan, tx evidence template, and engagement targets.
+- Public materials include demo planning, tx evidence template, external action confirmation prompts, and engagement targets.
 
 ## Not Enough To Mark Complete
 
@@ -45,8 +49,9 @@ The following are not enough:
 
 - GitHub package exists.
 - Browser page loaded.
-- Form is prefilled.
+- Form is prefilled or submit-enabled.
 - Draft copy exists.
+- Fresh tx collection steps exist without an explorer-confirmed transaction.
 - Public reply was posted but no official engagement occurred.
 - Arc/Circle/Encode public pages are visible.
 - A checklist, runbook, or status page says what to do next.
@@ -68,11 +73,19 @@ And the active external submission path should have receipts:
 ## Next Evidence To Collect
 
 1. Encode checkpoint receipt.
-2. Demo video URL.
-3. Fresh Arc Testnet tx URL.
+2. Fresh Arc Testnet tx URL.
+3. Demo video URL.
 4. Arc/Circle/Encode public message or application receipts.
 5. Arc official reply/repost/listing/spotlight URL.
 
+## Current Shortest Path
+
+1. Confirm and click `Submit Checkpoint` in the restored Encode checkpoint form.
+2. Capture the checkpoint receipt or status change.
+3. Collect fresh Arc Testnet tx evidence with explicit wallet-action confirmation.
+4. Produce the 3-minute demo video.
+5. Use official Arc/Circle/Encode channels for outreach only after action-time confirmation.
+
 ## Audit Rule
 
-Do not mark the goal complete unless current evidence proves the actual requested outcome. Prepared materials and internal status pages are progress, not completion.
+Do not mark the goal complete unless current evidence proves the actual requested outcome. Prepared materials, submit-enabled forms, and internal status pages are progress, not completion.
