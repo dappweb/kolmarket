@@ -16,6 +16,7 @@ The Arc pilot focuses on:
 
 ## Review Package Index
 
+- Reviewer status: [`reviewer-status.md`](./reviewer-status.md)
 - Public brief: [`public-brief.md`](./public-brief.md)
 - Hackathon submission draft: [`submission.md`](./submission.md)
 - Review deck outline: [`deck.md`](./deck.md)
