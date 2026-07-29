@@ -18,6 +18,7 @@ The Arc pilot focuses on:
 
 - Reviewer status: [`reviewer-status.md`](./reviewer-status.md)
 - Outreach readiness matrix: [`arc-outreach-readiness-matrix.md`](./arc-outreach-readiness-matrix.md)
+- Encode checkpoint submit decision memo: [`encode-checkpoint-submit-decision-memo.md`](./encode-checkpoint-submit-decision-memo.md)
 - Demo video shot list: [`arc-demo-video-shot-list.md`](./arc-demo-video-shot-list.md)
 - Demo video teleprompter: [`arc-demo-video-teleprompter.md`](./arc-demo-video-teleprompter.md)
 - Public brief: [`public-brief.md`](./public-brief.md)
