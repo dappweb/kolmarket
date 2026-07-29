@@ -8,7 +8,15 @@ Length: 2:30 to 3:00
 
 Tone: concise, product-led, evidence-aware.
 
-Do not claim Arc official listing, repost, spotlight, Circle grant acceptance, Encode checkpoint submission, or final submission unless direct receipt evidence exists.
+Do not claim Arc official listing, repost, spotlight, Circle grant acceptance, Encode checkpoint submission, final submission, or fresh Arc transaction execution unless direct evidence exists.
+
+## Current Safe State To Keep Accurate
+
+- Public Arc package is ready.
+- Encode checkpoint form was observed as `restored_prefilled_submit_enabled_not_clicked`.
+- Fresh Arc tx collection steps are ready, but no fresh Arc Testnet tx hash has been verified.
+- Demo video URL is not published yet.
+- Arc official response/repost/listing/spotlight is not confirmed.
 
 ## Script
 
@@ -92,7 +100,7 @@ KOLMarket fits the DeFi Track through stablecoin campaign budgets, reward accoun
 It also fits the Agentic Economy Track because creator campaigns can evolve into agent-assisted task routing, automated creator reward workflows, and USDC-native job settlement.
 ```
 
-### 1:45-2:10 - Circle / App Kit Path
+### 1:45-2:05 - Circle / App Kit Path
 
 Screen:
 
@@ -108,23 +116,37 @@ The integration path aligns with Arc and Circle tools: App Kit for Bridge, Swap,
 The current package is a testnet pilot and review package, not a claim of production settlement.
 ```
 
-### 2:10-2:35 - Evidence
+### 2:05-2:22 - Current Submission State
 
 Screen:
 
 ```text
-Arc Testnet transaction evidence template or explorer transaction when available
+README, reviewer status, or status.json
 ```
 
 Voice:
 
 ```text
-For final submission, we will attach fresh Arc Testnet transaction evidence using the public evidence template.
-
-We will only count confirmed Arc explorer transactions as valid evidence, not wallet prompts, quotes, simulations, or transactions on another chain.
+The public Arc review package is ready. The Encode checkpoint form was observed as submit-enabled with the package, deck, and selected tracks, but checkpoint receipt is still pending.
 ```
 
-### 2:35-2:50 - Public Review Package
+### 2:22-2:40 - Evidence
+
+Screen:
+
+```text
+Fresh tx collection steps, tx evidence template, or explorer transaction when available
+```
+
+Voice:
+
+```text
+Fresh Arc transaction collection steps are prepared. We will only count successful Arc explorer transactions as valid evidence, not wallet prompts, quotes, simulations, or transactions on another chain.
+
+Until that explorer-confirmed transaction is captured, fresh Arc tx evidence remains pending.
+```
+
+### 2:40-2:52 - Public Review Package
 
 Screen:
 
@@ -138,7 +160,7 @@ Voice:
 The public Arc package includes the reviewer status page, public brief, submission draft, deck outline, readiness matrix, official channel snapshot, and evidence boundary.
 ```
 
-### 2:50-3:00 - Ask
+### 2:52-3:00 - Ask
 
 Screen:
 
@@ -159,10 +181,15 @@ We are looking for Arc builder feedback, ecosystem review guidance, and the righ
 - https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/reviewer-status.md
 - https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-outreach-readiness-matrix.md
 - https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/deck.md
+- https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-fresh-tx-collection-steps.md
+- https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/evidence-boundary.md
 
 ## Recording Safety
 
 - Hide wallet seed phrases, private keys, browser passwords, admin dashboards, API keys, and unpublished partner data.
 - If a page shows a failed or unsupported state, describe it as a boundary, not success.
 - Do not show token price claims as Arc/Circle endorsement.
-- Do not call a route, UI, or GitHub package a final submission receipt.
+- Do not call a route, UI, GitHub package, prefilled form, or submit-enabled form a final submission receipt.
+- Do not call collection steps a transaction.
+- Do not say checkpoint submitted unless receipt is visible.
+- Do not say fresh Arc tx executed unless explorer success is visible.
