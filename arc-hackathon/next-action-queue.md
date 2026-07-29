@@ -9,11 +9,16 @@ Move KOLMarket from prepared materials to official Arc/Circle/Encode review surf
 ## Current Evidence
 
 - Public Arc package: https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
+- Reviewer status: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/reviewer-status.md
 - Public brief: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/public-brief.md
 - Public submission draft: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/submission.md
 - Public deck: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/deck.md
+- Fresh tx collection steps: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-fresh-tx-collection-steps.md
+- Arc Testnet tx evidence template: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-testnet-tx-evidence-template.md
+- Status metadata: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/status.json
 - X reply already posted: https://x.com/KOLMARKET/status/2082565862381507059
 - Encode Hackathon registration/project creation observed.
+- Encode checkpoint form observed restored, prefilled, and submit-enabled, but not clicked.
 
 ## Not Yet Proven
 
@@ -25,15 +30,21 @@ Move KOLMarket from prepared materials to official Arc/Circle/Encode review surf
 - Circle grant application submitted
 - Encode checkpoint submitted
 - Encode final submission submitted
+- Fresh Arc Testnet transaction executed and confirmed
+- 3-minute demo video published
 
 ## Priority 1 - Encode Checkpoint
 
-Use when the checkpoint form asks for repo/project/demo fields.
-
-Project URL:
+Current required confirmation:
 
 ```text
-https://kolmarket.ai
+Confirm: click Encode Submit Checkpoint now.
+```
+
+Observed checkpoint form state:
+
+```text
+restored_prefilled_submit_enabled_not_clicked
 ```
 
 Repository or review package URL:
@@ -42,27 +53,50 @@ Repository or review package URL:
 https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
 ```
 
+Presentation URL:
+
+```text
+https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/deck.md
+```
+
 Access instructions:
 
 ```text
-Open https://kolmarket.ai and review the Arc package at https://github.com/dappweb/kolmarket/tree/main/arc-hackathon. The package includes public brief, submission draft, deck outline, evidence boundary, status metadata, next-action queue, and official-channel snapshot. The current package documents the Arc Testnet pilot and review scope; fresh Arc transaction evidence and demo video are still being prepared.
+Open https://kolmarket.ai and review the Arc package at https://github.com/dappweb/kolmarket/tree/main/arc-hackathon. The package includes reviewer status, public brief, submission draft, deck outline, evidence boundary, status metadata, next-action queue, official-channel snapshot, fresh tx collection steps, and tx evidence template. The current package documents the Arc Testnet pilot and review scope; fresh Arc transaction evidence and demo video are still being prepared.
 ```
 
-Track:
+Selected tracks observed:
 
 ```text
-DeFi / programmable money
+DeFi Track
+Agentic Economy Track
 ```
 
-Secondary fit:
+Do not click `Submit Checkpoint` until the user confirms at action time.
+
+## Priority 2 - Fresh Arc Testnet Transaction Evidence
+
+Current required confirmation:
 
 ```text
-Agentic economy / creator economy payments
+Confirm: collect fresh Arc Testnet tx evidence.
 ```
 
-Do not click final submit until the user confirms at action time.
+Use:
 
-## Priority 2 - Arc House Showcase
+```text
+https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-fresh-tx-collection-steps.md
+```
+
+Record results in:
+
+```text
+https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-testnet-tx-evidence-template.md
+```
+
+Do not sign, broadcast, or claim a transaction was collected until the user controls and confirms the wallet action and explorer success is captured.
+
+## Priority 3 - Arc House Showcase
 
 Title:
 
@@ -86,9 +120,11 @@ https://kolmarket.ai
 We are looking for Arc builder feedback, ecosystem review guidance, and the right path for official Arc/Circle review.
 ```
 
-Do not publish until the user confirms at action time.
+Current observed state: Arc House Showcase and Builder Thread were restricted in the browser session.
 
-## Priority 3 - Arc Discord
+Do not publish until the user confirms at action time and the page allows posting.
+
+## Priority 4 - Arc Discord
 
 First message:
 
@@ -100,7 +136,7 @@ Is there a recommended channel or form for ecosystem review / builder spotlight 
 
 Do not send until the user confirms at action time and channel rules are visible.
 
-## Priority 4 - Arc X Follow-up
+## Priority 5 - Arc X Follow-up
 
 Short reply:
 
@@ -130,7 +166,7 @@ https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
 We are building USDC-native creator growth markets and campaign settlement infrastructure on Arc, with DeFi and Agentic Economy track fit.
 ```
 
-## Priority 5 - Circle Grants / Questbook
+## Priority 6 - Circle Grants / Questbook
 
 Use when Questbook exposes an application form.
 
@@ -158,5 +194,8 @@ Update:
 - `public/arc/arc-evidence-pack-template.md`
 - `public/arc/arc-follow-up-log.md`
 - `public/arc/chrome-arc-handoff.md`
+- public `arc-hackathon/status.json`
+- public `arc-hackathon/reviewer-status.md`
+- public `arc-hackathon/next-action-queue.md`
 
 Only set official flags to true with direct official-channel evidence.
