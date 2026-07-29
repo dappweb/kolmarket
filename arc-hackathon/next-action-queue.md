@@ -45,7 +45,7 @@ https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
 Access instructions:
 
 ```text
-Open https://kolmarket.ai and review the Arc package at https://github.com/dappweb/kolmarket/tree/main/arc-hackathon. The package includes public brief, submission draft, deck outline, evidence boundary, and status metadata. The current package documents the Arc Testnet pilot and review scope; fresh Arc transaction evidence and demo video are still being prepared.
+Open https://kolmarket.ai and review the Arc package at https://github.com/dappweb/kolmarket/tree/main/arc-hackathon. The package includes public brief, submission draft, deck outline, evidence boundary, status metadata, next-action queue, and official-channel snapshot. The current package documents the Arc Testnet pilot and review scope; fresh Arc transaction evidence and demo video are still being prepared.
 ```
 
 Track:
@@ -114,6 +114,21 @@ Would appreciate Arc builder feedback and the right path for ecosystem review.
 ```
 
 Use only on relevant Arc builder, hackathon, or ecosystem posts. Avoid mass-tagging affiliates.
+
+Follow-up rule:
+
+```text
+Do not post a second generic reply to the same Arc thread unless Arc or an Arc/Circle affiliate engages first, or a new high-signal Arc builder/hackathon/grants post appears.
+```
+
+If a new high-signal post appears, use:
+
+```text
+KOLMarket's Arc package is now public for builder review:
+https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
+
+We are building USDC-native creator growth markets and campaign settlement infrastructure on Arc, with DeFi and Agentic Economy track fit.
+```
 
 ## Priority 5 - Circle Grants / Questbook
 
