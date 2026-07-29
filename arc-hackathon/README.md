@@ -21,6 +21,8 @@ The Arc pilot focuses on:
 - Review deck outline: [`deck.md`](./deck.md)
 - Evidence boundary: [`evidence-boundary.md`](./evidence-boundary.md)
 - Status metadata: [`status.json`](./status.json)
+- Next action queue: [`next-action-queue.md`](./next-action-queue.md)
+- Official channel snapshot: [`official-channel-snapshot.md`](./official-channel-snapshot.md)
 
 ## Why Arc
 
