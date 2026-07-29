@@ -1,0 +1,20 @@
+{
+  "project": "KOLMarket",
+  "preparedAt": "2026-07-30",
+  "baseProjectUrl": "https://kolmarket.ai",
+  "publicArcPackageUrl": "https://github.com/dappweb/kolmarket/tree/main/arc-hackathon",
+  "publicBriefUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/public-brief.md",
+  "xReplyUrl": "https://x.com/KOLMARKET/status/2082565862381507059",
+  "arcHackathonPackagePublished": true,
+  "encodeRegisteredObserved": true,
+  "encodeProjectCreatedObserved": true,
+  "encodeCheckpointSubmittedConfirmed": false,
+  "encodeFinalSubmissionSubmittedConfirmed": false,
+  "arcOfficialListingConfirmed": false,
+  "arcOfficialRepostConfirmed": false,
+  "arcOfficialSpotlightConfirmed": false,
+  "arcSpecificDemoUrl": "TBD",
+  "demoVideoUrl": "TBD",
+  "freshArcTxEvidence": [],
+  "boundary": "This public package is evidence of prepared Arc review materials, not official Arc/Circle/Encode acceptance."
+}
