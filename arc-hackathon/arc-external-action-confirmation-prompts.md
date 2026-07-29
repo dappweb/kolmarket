@@ -8,6 +8,22 @@ Provide exact confirmation prompts for external actions that move KOLMarket towa
 
 Do not execute any action below unless the user provides the matching action-time confirmation.
 
+## Current Safe State
+
+The public Arc review package is prepared and visible:
+
+```text
+https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
+```
+
+The Encode checkpoint form was last observed as:
+
+```text
+restored_prefilled_submit_enabled_not_clicked
+```
+
+This means the form was ready to submit, but no checkpoint submission receipt has been captured.
+
 ## 1. Encode Checkpoint Submission
 
 User confirmation:
@@ -20,6 +36,9 @@ Action:
 
 - Open https://www.encodeclub.com/my-programmes/arc-hackathon
 - Confirm fields are still prefilled
+- Confirm code/review package URL is `https://github.com/dappweb/kolmarket/tree/main/arc-hackathon`
+- Confirm presentation URL is `https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/deck.md`
+- Confirm tracks are `DeFi Track` and `Agentic Economy Track`
 - Click `Submit Checkpoint`
 - Capture receipt/success state
 
@@ -32,7 +51,33 @@ Evidence to capture:
 - screenshot,
 - any email/platform receipt.
 
-## 2. Encode Programme Manager Message
+## 2. Fresh Arc Testnet Transaction Evidence
+
+User confirmation:
+
+```text
+Confirm: collect fresh Arc Testnet tx evidence.
+```
+
+Action:
+
+- Use `public/arc/arc-fresh-tx-collection-steps.md`
+- Record results in `public/arc/arc-testnet-tx-evidence-template.md`
+- Only count successful explorer-confirmed Arc Testnet transactions
+- Keep wallet signing and broadcasting user-controlled
+
+Evidence to capture:
+
+- tx hash,
+- explorer URL,
+- wallet,
+- contract,
+- product flow,
+- timestamp,
+- screenshot,
+- explicit boundary if a wallet prompt or simulation does not broadcast.
+
+## 3. Encode Programme Manager Message
 
 User confirmation:
 
@@ -52,7 +97,7 @@ Evidence to capture:
 - recipient/channel,
 - reply if any.
 
-## 3. Discord Authorization / Message
+## 4. Discord Authorization / Message
 
 User confirmation:
 
@@ -73,7 +118,7 @@ Evidence to capture:
 - message URL or screenshot,
 - timestamp.
 
-## 4. X Reply To Encode Hackathon Post
+## 5. X Reply To Encode Hackathon Post
 
 User confirmation:
 
@@ -93,7 +138,7 @@ Evidence to capture:
 - visible account,
 - any reply/engagement.
 
-## 5. LinkedIn Circle Grants Comment
+## 6. LinkedIn Circle Grants Comment
 
 User confirmation:
 
@@ -113,7 +158,7 @@ Evidence to capture:
 - visible account,
 - any reply/engagement.
 
-## 6. LinkedIn Arc Builders Fund Comment
+## 7. LinkedIn Arc Builders Fund Comment
 
 User confirmation:
 
@@ -133,7 +178,7 @@ Evidence to capture:
 - visible account,
 - any reply/engagement.
 
-## 7. Demo Video Recording
+## 8. Demo Video Recording
 
 User confirmation:
 
@@ -154,32 +199,9 @@ Evidence to capture:
 - access setting,
 - screenshot.
 
-## 8. Fresh Arc Testnet Transaction Evidence
-
-User confirmation:
-
-```text
-Confirm: collect fresh Arc Testnet tx evidence.
-```
-
-Action:
-
-- Use `public/arc/arc-testnet-tx-evidence-template.md`
-- Only count successful explorer-confirmed Arc Testnet transactions
-
-Evidence to capture:
-
-- tx hash,
-- explorer URL,
-- wallet,
-- contract,
-- product flow,
-- timestamp,
-- screenshot.
-
 ## Global Rule
 
-Prepared copy, prefilled forms, and checklists are not completion evidence.
+Prepared copy, prefilled forms, submit-enabled forms, and checklists are not completion evidence.
 
 After any confirmed external action, update:
 
@@ -189,4 +211,5 @@ After any confirmed external action, update:
 - `public/arc/chrome-arc-handoff.md`
 - public `arc-hackathon/status.json`
 - public `arc-hackathon/reviewer-status.md`
+- public `arc-hackathon/next-action-queue.md`
 - public `arc-hackathon/arc-goal-completion-audit-checklist.md`, if completion state changes.
