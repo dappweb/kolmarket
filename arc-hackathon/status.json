@@ -26,12 +26,15 @@
   "encodeProjectCreatedObserved": true,
   "encodeCurrentStageObserved": "Mid-submission checkpoint",
   "encodeCheckpointFormPrefilledObserved": true,
+  "encodeCheckpointFormLastRecheckedAt": "2026-07-30",
+  "encodeCheckpointFormLastObservedState": "restored_prefilled_submit_enabled_not_clicked",
   "encodeCheckpointPrefilledCodeUrl": "https://github.com/dappweb/kolmarket/tree/main/arc-hackathon",
   "encodeCheckpointPrefilledPresentationUrl": "https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/deck.md",
   "encodeCheckpointSelectedTracks": [
     "DeFi Track",
     "Agentic Economy Track"
   ],
+  "encodeCheckpointSubmitButtonObserved": "visible_enabled_not_clicked",
   "encodeCheckpointSubmittedConfirmed": false,
   "encodeFinalSubmissionSubmittedConfirmed": false,
   "arcHouseShowcaseAccessObserved": "restricted",
@@ -63,7 +66,7 @@
     "Arc official response/listing/repost/spotlight evidence"
   ],
   "bestNextActions": [
-    "Confirm and submit the prefilled Encode checkpoint",
+    "Confirm and submit the restored prefilled Encode checkpoint",
     "Capture checkpoint receipt",
     "Produce demo video",
     "Collect fresh Arc Testnet tx evidence",
