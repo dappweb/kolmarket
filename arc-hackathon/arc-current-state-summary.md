@@ -4,7 +4,7 @@ Updated: 2026-07-30
 
 ## One-Line Status
 
-KOLMarket has a public Arc review package ready, but the goal is not complete because checkpoint receipt, fresh Arc tx evidence, demo video, final submission receipt, Circle receipt, and Arc official response/repost/listing/spotlight evidence are still missing.
+KOLMarket has a public Arc review package ready and the Encode mid-submission checkpoint has been submitted successfully, but the goal is not complete because fresh Arc tx evidence, demo video, final submission receipt, Circle receipt, and Arc official response/repost/listing/spotlight evidence are still missing.
 
 ## Current Prepared Evidence
 
@@ -22,11 +22,19 @@ KOLMarket has a public Arc review package ready, but the goal is not complete be
 - Demo shot list: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-demo-video-shot-list.md
 - Demo teleprompter: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-demo-video-teleprompter.md
 
+## Confirmed Progress
+
+- Encode mid-submission checkpoint was submitted after user instruction.
+- Submission outcome: `success_receipt_captured`
+- Visible platform state: `Success!`
+- Submitted at: `2026-07-30T23:59:45+08:00`
+- Encode URL: https://www.encodeclub.com/my-programmes/arc-hackathon
+- Local screenshot evidence: `public/arc/encode-checkpoint-success-2026-07-30.png`
+
 ## Observed External State
 
 - Encode registration and KOLMarket project creation were observed.
 - Encode stage was observed as `Mid-submission checkpoint`.
-- Encode checkpoint form was observed as `restored_prefilled_submit_enabled_not_clicked`.
 - Selected tracks were observed as `DeFi Track` and `Agentic Economy Track`.
 - One public X reply exists: https://x.com/KOLMARKET/status/2082565862381507059
 - Arc House Showcase and Builder Thread were observed as restricted in the current session.
@@ -35,7 +43,6 @@ KOLMarket has a public Arc review package ready, but the goal is not complete be
 
 ## Missing Evidence
 
-- Encode checkpoint receipt or status change
 - Fresh Arc Testnet tx hash and explorer URL
 - Arc-specific demo path or recorded demo URL
 - 3-minute demo video URL
@@ -46,25 +53,18 @@ KOLMarket has a public Arc review package ready, but the goal is not complete be
 ## Current Best Next Action
 
 ```text
-Confirm: click Encode Submit Checkpoint now.
-```
-
-Expected output after action:
-
-- success receipt,
-- validation error,
-- platform error,
-- or session/login issue.
-
-Any of those outcomes is useful because it creates direct evidence and removes ambiguity.
-
-## Second-Best Action
-
-```text
 Confirm: collect fresh Arc Testnet tx evidence.
 ```
 
 This requires wallet-action confirmation. Wallet signing and broadcasting remain user-controlled.
+
+## Second-Best Action
+
+```text
+Confirm: record Arc demo video.
+```
+
+The shot list and teleprompter are prepared, but no video has been recorded or uploaded yet.
 
 ## Communication Fallback
 
@@ -72,13 +72,12 @@ This requires wallet-action confirmation. Wallet signing and broadcasting remain
 Confirm: send Encode Programme Manager message.
 ```
 
-This is external communication and does not prove checkpoint submission or official Arc/Circle review.
+This is external communication and does not prove final submission or official Arc/Circle review.
 
 ## Boundary
 
 Do not claim any of the following until direct evidence exists:
 
-- Encode checkpoint submitted,
 - fresh Arc Testnet tx executed,
 - demo video published,
 - Encode final submission completed,
@@ -87,3 +86,5 @@ Do not claim any of the following until direct evidence exists:
 - Arc official repost,
 - Arc official spotlight,
 - production Arc settlement.
+
+The checkpoint receipt proves only the Encode mid-submission checkpoint action, not the final submission or any official Arc/Circle acceptance.
