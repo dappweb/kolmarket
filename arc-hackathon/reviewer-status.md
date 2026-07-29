@@ -10,11 +10,24 @@ Public package:
 
 https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
 
+## Current Single Next Command
+
+```text
+Confirm: click Encode Submit Checkpoint now.
+```
+
+If the checkpoint should wait, use:
+
+```text
+Confirm: send Encode Programme Manager message.
+```
+
 ## What Is Ready
 
 - Public Arc review package
 - Reviewer status page
 - Operator runbook
+- Next command brief
 - Outreach readiness matrix
 - Encode checkpoint submit decision memo
 - Public brief
@@ -65,6 +78,7 @@ https://github.com/dappweb/kolmarket/tree/main/arc-hackathon
 
 ## Fast Links
 
+- Next command brief: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-next-command-brief.md
 - Operator runbook: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-operator-runbook.md
 - Readiness matrix: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/arc-outreach-readiness-matrix.md
 - Checkpoint decision memo: https://github.com/dappweb/kolmarket/blob/main/arc-hackathon/encode-checkpoint-submit-decision-memo.md
