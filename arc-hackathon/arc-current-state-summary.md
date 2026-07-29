@@ -31,6 +31,7 @@ KOLMarket has a public Arc review package ready, but the goal is not complete be
 - One public X reply exists: https://x.com/KOLMARKET/status/2082565862381507059
 - Arc House Showcase and Builder Thread were observed as restricted in the current session.
 - Circle Questbook Cohort 2 was observed open, but no usable proposal form was visible in the current view.
+- Read-only public search found no reliable Arc official listing, repost, reply, or spotlight evidence for KOLMarket.
 
 ## Missing Evidence
 
