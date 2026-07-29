@@ -24,6 +24,9 @@ The Arc pilot focuses on:
 - Next action queue: [`next-action-queue.md`](./next-action-queue.md)
 - Official channel snapshot: [`official-channel-snapshot.md`](./official-channel-snapshot.md)
 - Encode checkpoint receipt template: [`encode-checkpoint-submission-receipt-template.md`](./encode-checkpoint-submission-receipt-template.md)
+- Encode programme manager outreach: [`encode-program-manager-outreach.md`](./encode-program-manager-outreach.md)
+- Final submission production plan: [`encode-final-submission-production-plan.md`](./encode-final-submission-production-plan.md)
+- Arc Testnet tx evidence template: [`arc-testnet-tx-evidence-template.md`](./arc-testnet-tx-evidence-template.md)
 
 ## Why Arc
 
