@@ -4,7 +4,7 @@ Updated: 2026-07-30
 
 ## One-Line Status
 
-KOLMarket has a public Arc review package ready and the Encode mid-submission checkpoint has been submitted successfully, but the goal is not complete because fresh Arc tx evidence, demo video, final submission receipt, Circle receipt, and Arc official response/repost/listing/spotlight evidence are still missing.
+KOLMarket has a public Arc review package, a successful Encode mid-submission checkpoint receipt, and one confirmed fresh Arc Testnet faucet transaction. The goal is not complete because demo video, final Encode submission receipt, Circle receipt, and Arc official response/repost/listing/spotlight evidence are still missing.
 
 ## Current Prepared Evidence
 
@@ -31,6 +31,23 @@ KOLMarket has a public Arc review package ready and the Encode mid-submission ch
 - Encode URL: https://www.encodeclub.com/my-programmes/arc-hackathon
 - Local screenshot evidence: `public/arc/encode-checkpoint-success-2026-07-30.png`
 
+## Fresh Arc Testnet Transaction Evidence
+
+- Product flow: KOLMarket Creator Token V3 modal on Arc Testnet - Claim test tWETH faucet
+- Transaction hash: `0x229c38ee946e4bd757866ff49630e11cf9ba2d4e0a73a8a98b2a810298bb2707`
+- Explorer URL: https://testnet.arcscan.app/tx/0x229c38ee946e4bd757866ff49630e11cf9ba2d4e0a73a8a98b2a810298bb2707
+- Chain: Arc Testnet
+- Chain ID: `5042002`
+- Wallet: `0xbdE7EaDb8b0e3c918A656853d6F1AFA9dF6dEd88`
+- Contract: `0x9469fE1A5349E99536Aa6723FB9EBeaB4a86Be19`
+- Method: `faucet`
+- Status: `success`
+- Block: `54331758`
+- Gas used: `21160`
+- Local screenshot evidence: `public/arc/arc-testnet-tweth-faucet-tx-2026-07-30.png`
+
+Boundary: after the faucet transaction, KOLMarket showed a post-refresh error: `predictLaunchAddresses` returned no data (`0x`). Treat this as a product refresh issue to fix or document before the final demo. It does not invalidate the confirmed faucet transaction.
+
 ## Observed External State
 
 - Encode registration and KOLMarket project creation were observed.
@@ -43,7 +60,6 @@ KOLMarket has a public Arc review package ready and the Encode mid-submission ch
 
 ## Missing Evidence
 
-- Fresh Arc Testnet tx hash and explorer URL
 - Arc-specific demo path or recorded demo URL
 - 3-minute demo video URL
 - Final Encode submission receipt
@@ -53,18 +69,18 @@ KOLMarket has a public Arc review package ready and the Encode mid-submission ch
 ## Current Best Next Action
 
 ```text
-Confirm: collect fresh Arc Testnet tx evidence.
+Confirm: record Arc demo video.
 ```
 
-This requires wallet-action confirmation. Wallet signing and broadcasting remain user-controlled.
+The shot list and teleprompter are prepared. The recording should show the Arc Testnet selected state, the confirmed explorer transaction, and the refresh-error boundary if the app still displays it.
 
 ## Second-Best Action
 
 ```text
-Confirm: record Arc demo video.
+Confirm: prepare final Encode submission using the checkpoint receipt and fresh Arc tx evidence.
 ```
 
-The shot list and teleprompter are prepared, but no video has been recorded or uploaded yet.
+Do not submit final Encode until the demo/video URL is ready or the user explicitly accepts a partial-evidence submission.
 
 ## Communication Fallback
 
@@ -78,7 +94,6 @@ This is external communication and does not prove final submission or official A
 
 Do not claim any of the following until direct evidence exists:
 
-- fresh Arc Testnet tx executed,
 - demo video published,
 - Encode final submission completed,
 - Circle grant submitted or accepted,
@@ -87,4 +102,4 @@ Do not claim any of the following until direct evidence exists:
 - Arc official spotlight,
 - production Arc settlement.
 
-The checkpoint receipt proves only the Encode mid-submission checkpoint action, not the final submission or any official Arc/Circle acceptance.
+The checkpoint receipt proves the Encode mid-submission checkpoint action. The Arcscan transaction proves one successful Arc Testnet faucet transaction. Neither proves final submission or any official Arc/Circle acceptance.
