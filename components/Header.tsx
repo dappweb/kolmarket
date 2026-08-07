@@ -88,6 +88,9 @@ const Header: React.FC = () => {
                 <button 
                   onClick={() => setLangMenuOpen(!langMenuOpen)}
                   className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2"
+                  aria-label={t('nav.select_language') || 'Select language'}
+                  aria-expanded={langMenuOpen}
+                  aria-haspopup="true"
                 >
                   <Globe size={18} />
                   <span className="uppercase text-sm">{i18n.language}</span>
@@ -99,12 +102,14 @@ const Header: React.FC = () => {
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
                       className="absolute right-0 mt-2 w-32 bg-dark-card border border-white/10 rounded-lg shadow-xl overflow-hidden"
+                      role="menu"
                     >
                       {languages.map((lang) => (
                         <button
                           key={lang.code}
                           onClick={() => changeLanguage(lang.code)}
                           className={`w-full text-left px-4 py-2 text-sm hover:bg-white/10 ${i18n.language === lang.code ? 'text-yellow-500' : 'text-gray-300'}`}
+                          role="menuitem"
                         >
                           {lang.label}
                         </button>
@@ -137,6 +142,8 @@ const Header: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-300 hover:text-white p-2"
+              aria-label={isOpen ? (t('nav.close_menu') || 'Close menu') : (t('nav.open_menu') || 'Open menu')}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
