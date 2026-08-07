@@ -67,6 +67,7 @@ const Header: React.FC = () => {
                 <Link
                   key={item.href}
                   to={item.href}
+                  aria-current={location.pathname === item.href ? 'page' : undefined}
                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     location.pathname === item.href
                       ? 'text-yellow-500' 
@@ -87,6 +88,9 @@ const Header: React.FC = () => {
               <div className="relative">
                 <button 
                   onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  aria-expanded={langMenuOpen}
+                  aria-haspopup="true"
+                  aria-label={t('nav.select_language')}
                   className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2"
                 >
                   <Globe size={18} />
@@ -136,6 +140,9 @@ const Header: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-expanded={isOpen}
+              aria-controls="mobile-menu"
+              aria-label={isOpen ? t('nav.close_menu') : t('nav.open_menu')}
               className="text-gray-300 hover:text-white p-2"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -148,6 +155,7 @@ const Header: React.FC = () => {
       <AnimatePresence>
         {isOpen && (
           <motion.div 
+            id="mobile-menu"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
