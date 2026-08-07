@@ -67,6 +67,7 @@ const Header: React.FC = () => {
                 <Link
                   key={item.href}
                   to={item.href}
+                  aria-current={location.pathname === item.href ? 'page' : undefined}
                   className={`relative px-3 py-2 rounded-md text-sm font-medium transition-colors ${
                     location.pathname === item.href
                       ? 'text-yellow-500' 
@@ -87,6 +88,9 @@ const Header: React.FC = () => {
               <div className="relative">
                 <button 
                   onClick={() => setLangMenuOpen(!langMenuOpen)}
+                  aria-label="Select language"
+                  aria-expanded={langMenuOpen}
+                  aria-haspopup="true"
                   className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2"
                 >
                   <Globe size={18} />
@@ -98,11 +102,13 @@ const Header: React.FC = () => {
                       initial={{ opacity: 0, y: 10 }}
                       animate={{ opacity: 1, y: 0 }}
                       exit={{ opacity: 0, y: 10 }}
+                      role="menu"
                       className="absolute right-0 mt-2 w-32 bg-dark-card border border-white/10 rounded-lg shadow-xl overflow-hidden"
                     >
                       {languages.map((lang) => (
                         <button
                           key={lang.code}
+                          role="menuitem"
                           onClick={() => changeLanguage(lang.code)}
                           className={`w-full text-left px-4 py-2 text-sm hover:bg-white/10 ${i18n.language === lang.code ? 'text-yellow-500' : 'text-gray-300'}`}
                         >
@@ -136,6 +142,8 @@ const Header: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-label={isOpen ? "Close menu" : "Open menu"}
+              aria-expanded={isOpen}
               className="text-gray-300 hover:text-white p-2"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
