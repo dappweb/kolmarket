@@ -39,7 +39,9 @@
     "dashboard": "控制台",
     "whitepaper": "白皮书",
     "docs": "文档",
-    "connect": "连接钱包"
+    "connect": "连接钱包",
+    "menu_open": "打开菜单",
+    "menu_close": "关闭菜单"
   },
   "hero": {
     "badge": "下一代数字生命经济体",

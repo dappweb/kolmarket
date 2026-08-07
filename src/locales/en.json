@@ -39,7 +39,9 @@
     "dashboard": "Dashboard",
     "whitepaper": "Whitepaper",
     "docs": "Docs",
-    "connect": "Connect Wallet"
+    "connect": "Connect Wallet",
+    "menu_open": "Open menu",
+    "menu_close": "Close menu"
   },
   "hero": {
     "badge": "Next Gen Digital Life Economy",
