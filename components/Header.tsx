@@ -87,7 +87,10 @@ const Header: React.FC = () => {
               <div className="relative">
                 <button 
                   onClick={() => setLangMenuOpen(!langMenuOpen)}
-                  className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2"
+                  className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+                  aria-label={t('nav.toggle_language')}
+                  aria-expanded={langMenuOpen}
+                  aria-haspopup="true"
                 >
                   <Globe size={18} />
                   <span className="uppercase text-sm">{i18n.language}</span>
@@ -136,7 +139,9 @@ const Header: React.FC = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="text-gray-300 hover:text-white p-2"
+              className="text-gray-300 hover:text-white p-2 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-yellow-500"
+              aria-label={t('nav.toggle_menu')}
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
