@@ -88,6 +88,9 @@ const Header: React.FC = () => {
                 <button 
                   onClick={() => setLangMenuOpen(!langMenuOpen)}
                   className="flex items-center gap-1 text-gray-300 hover:text-white px-3 py-2"
+                  aria-label="Select language"
+                  aria-haspopup="true"
+                  aria-expanded={langMenuOpen}
                 >
                   <Globe size={18} />
                   <span className="uppercase text-sm">{i18n.language}</span>
@@ -137,6 +140,8 @@ const Header: React.FC = () => {
             <button
               onClick={() => setIsOpen(!isOpen)}
               className="text-gray-300 hover:text-white p-2"
+              aria-label="Toggle navigation menu"
+              aria-expanded={isOpen}
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
             </button>
